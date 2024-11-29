@@ -1,35 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import './App.css';
+import HomeLayout from './Layouts/HomeLayout.jsx';
+import CreateLayout from './Layouts/CreateLayout.jsx';
+import PanelLayout from './Layouts/PanelLaout.jsx'
+import SignInLayout from './Layouts/SignInLayout.jsx';
+import Home from './Pages/Home.jsx'
+import Mangas from './Pages/Mangas.jsx';
+import NotFound from './Pages/NotFound.jsx';
+import MangasId from './Pages/MangasId.jsx';
+import EditAuthor from './Pages/EditAuthor.jsx'
+import EditChapter from './Pages/EditChapter.jsx'
+import EditCompany from './Pages/EditCompany.jsx'
+import AdminPanel from './Pages/AdminPanel.jsx'
+import SignInLayout from './Pages/SignInLayout.jsx'
+import EditChapter from './Pages/EditChapter.jsx'
+import Register from './Pages/Register.jsx'
+import Profile from './Pages/Profile.jsx'
+import ReadManga from './Pages/ReadManga.jsx'
+ 
+
+const router = createBrowserRouter([
+  {
+    element: <HomeLayout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "home", element: <Home /> },
+      { path: "/*", element: <NotFound /> }
+    ],
+  },
+  {
+    element: < CreateLayout />,
+    children: [
+      { path: "editauthor", element: <EditAuthor /> },
+      { path: "editchapter", element: <EditChapter /> },
+      { path: "editcompany", element: <EditCompany /> },
+    ]
+  },
+  {
+    element: <PanelLayout />,
+    children: [
+      { path: "adminpanel", element: <AdminPanel /> },
+      { path: "mangas", element: <Mangas /> },
+      { path: "profile", element: <Profile /> },
+      { path: "mangas/:id", element: <MangasId /> },
+      { path: "manager", element: <Manager /> },
+      { path: "readmanga", element: <ReadManga /> },
+      
+   
+    ],
+  },
+  {
+    element: <SignInLayout />,
+    children: [
+      { path: "register", element: <Register /> },
+    ],
+  },
+]);
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <RouterProvider router={router} />
+    </div>
+  );
 }
 
-export default App
+export default App;
