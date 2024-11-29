@@ -2,7 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import HomeLayout from './Layouts/HomeLayout.jsx';
 import CreateLayout from './Layouts/CreateLayout.jsx';
-import PanelLayout from './Layouts/PanelLaout.jsx'
+import PanelLayout from './Layouts/PanelLayout.jsx'
 import SignInLayout from './Layouts/SignInLayout.jsx';
 import Home from './Pages/Home.jsx'
 import Mangas from './Pages/Mangas.jsx';
@@ -44,9 +44,7 @@ const router = createBrowserRouter([
       { path: "profile", element: <Profile /> },
       { path: "mangas/:id", element: <MangasId /> },
       { path: "manager", element: <Manager /> },
-      { path: "readmanga", element: <ReadManga /> },
-      
-   
+      { path: "readmanga", element: <ReadManga /> },   
     ],
   },
   {
