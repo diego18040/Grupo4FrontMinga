@@ -7,8 +7,10 @@ export default function Home() {
     <>
       <main className="flex flex-col items-center">
     This is Home
+    
       </main>
       <section className="py-10 max-w-screen-xl mx-auto">
+    
         <div className="">
      
         </div>
@@ -16,3 +18,5 @@ export default function Home() {
     </>
   );
 }
+
+
