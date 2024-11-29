@@ -16,6 +16,7 @@ import Register from './Pages/Register.jsx'
 import Profile from './Pages/Profile.jsx'
 import ReadManga from './Pages/ReadManga.jsx'
 import Manager from './Pages/Manager.jsx';
+import Test from './Pages/Test.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,9 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "home", element: <Home /> },
-      { path: "/*", element: <NotFound /> }
+      { path: "/*", element: <NotFound /> },
+      { path: "/test", element: <Test /> },
+      
     ],
   },
   {
