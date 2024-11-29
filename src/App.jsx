@@ -9,15 +9,14 @@ import Mangas from './Pages/Mangas.jsx';
 import NotFound from './Pages/NotFound.jsx';
 import MangasId from './Pages/MangasId.jsx';
 import EditAuthor from './Pages/EditAuthor.jsx'
-import EditChapter from './Pages/EditChapter.jsx'
 import EditCompany from './Pages/EditCompany.jsx'
 import AdminPanel from './Pages/AdminPanel.jsx'
-import SignInLayout from './Pages/SignInLayout.jsx'
 import EditChapter from './Pages/EditChapter.jsx'
 import Register from './Pages/Register.jsx'
 import Profile from './Pages/Profile.jsx'
 import ReadManga from './Pages/ReadManga.jsx'
- 
+import Manager from './Pages/Manager.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -44,7 +43,7 @@ const router = createBrowserRouter([
       { path: "profile", element: <Profile /> },
       { path: "mangas/:id", element: <MangasId /> },
       { path: "manager", element: <Manager /> },
-      { path: "readmanga", element: <ReadManga /> },   
+      { path: "readmanga", element: <ReadManga /> },
     ],
   },
   {
