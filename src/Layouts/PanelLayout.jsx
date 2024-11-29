@@ -8,6 +8,7 @@ export default function PanelLayout() {
     return (
         <>
             <div className="min-h-screen flex flex-col bg-yellow-400">
+            PanelLayout
                 <div className="bg-black">
 
 

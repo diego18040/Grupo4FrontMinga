@@ -6,7 +6,7 @@ export default function AdminPanel() {
   return (
     <>
       <main className="flex flex-col items-center">
-    
+      This is Admin Panel
       </main>
       <section className="py-10 max-w-screen-xl mx-auto">
         <div className="">

@@ -8,6 +8,7 @@ export default function SignInLayout() {
     return (
         <>
             <div className="min-h-screen flex flex-col bg-yellow-400">
+            SignIn Layout
                 <div className="bg-black">
 
 

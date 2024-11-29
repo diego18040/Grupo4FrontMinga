@@ -17,7 +17,6 @@ import Profile from './Pages/Profile.jsx'
 import ReadManga from './Pages/ReadManga.jsx'
 import Manager from './Pages/Manager.jsx';
 
-
 const router = createBrowserRouter([
   {
     element: <HomeLayout />,
@@ -54,11 +53,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-
-
 function App() {
-
-
 
   return (
     <div className="App">
