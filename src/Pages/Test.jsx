@@ -1,5 +1,5 @@
 import React from "react";
-
+import Footer from "../Components/Footer";
 
 export default function Test() {
   
@@ -13,6 +13,8 @@ export default function Test() {
      
         </div>
       </section>
+      <Footer></Footer>
+
     </>
   );
 }
