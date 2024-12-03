@@ -25,6 +25,7 @@
 // }
 
 import React from "react";
+import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import Hero from "../Components/Hero";
 import SearchBar from "../Components/SearchBar"; // Importa la barra de búsqueda
@@ -46,6 +47,13 @@ export default function Test() {
       <main className="flex flex-col items-center py-10">
         {/* Contenido adicional */}
       </main>
+      <section className="py-10 max-w-screen-xl mx-auto">
+        <div className="">
+     
+        </div>
+      </section>
+      <Footer></Footer>
+
     </>
   );
 }
