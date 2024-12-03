@@ -1,18 +1,25 @@
 import React from "react";
+import Header from "../Components/Header";
+import Hero from "../Components/Hero";
+import SearchBar from "../Components/SearchBar"; 
+import '../App.css'; 
 
-
-export default function Mangas() {
-  
+export default function mangas() {
   return (
     <>
-      <main className="flex flex-col items-center">
-      This is Mangas
+      <Header />
+    
+      <Hero 
+        backgroundImage='./public/mangas.jpg'
+        title="MANGAS"
+      />
+      
+    
+      <SearchBar /> 
+
+      <main className="flex flex-col items-center py-10">
+       
       </main>
-      <section className="py-10 max-w-screen-xl mx-auto">
-        <div className="">
-     
-        </div>
-      </section>
     </>
   );
 }

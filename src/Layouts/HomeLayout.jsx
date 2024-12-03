@@ -7,8 +7,8 @@ import { Outlet } from "react-router-dom";
 export default function HomeLayout() {
     return (
         <>
-            <div className="min-h-screen flex flex-col bg-yellow-400">
-            HomeLayout
+            <div className="min-h-screen flex flex-col">
+          
                 <div className="bg-black">
 
 
