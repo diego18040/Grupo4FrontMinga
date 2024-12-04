@@ -1,20 +1,26 @@
 import React from "react";
 import Header from "../Components/Header";
 import Hero from "../Components/Hero";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
-const PanelLayout = ({ title, backgroundImage, children }) => {
+const PanelLayout = () => {
+  const location = useLocation();
+  const { state } = location; 
+
   return (
     <div>
-      <Header />
-      <Hero backgroundImage = {backgroundImage} title={title} />
+      <Header logo={state?.logo} />
+      {state && (
+        <Hero backgroundImage={state.backgroundImage} title={state.title} />
+      )}
       <div>
-      <Outlet />
+        <Outlet />
       </div>
-      <main className="flex flex-col items-center py-10">{children}</main>
+      <main className="flex flex-col items-center py-10">
+        {state && state.children}
+      </main>
     </div>
   );
 };
 
 export default PanelLayout;
-

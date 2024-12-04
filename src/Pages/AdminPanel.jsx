@@ -1,13 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import adminpanel from "../assets/adminpanel.jpg"; 
 
 
+const AdminPanel = () => {
+  const navigate = useNavigate();
 
-const Panel = () => {
-  return (
-<h1>Panel</h1>
+  React.useEffect(() => {
+    navigate('/adminpanel', {
+      state: {
+        backgroundImage: adminpanel,
+        title: "Panel",
+      }
+    });
+  }, [navigate]);
 
-  );
+  return null;
 };
 
-export default Panel;
-
+export default AdminPanel;
