@@ -25,6 +25,8 @@
 // }
 
 import React from "react";
+import Carousel from "../Components/Carousel.jsx";
+
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import Hero from "../Components/Hero";
@@ -49,6 +51,7 @@ export default function Test() {
       </main>
       <section className="py-10 max-w-screen-xl mx-auto">
         <div className="">
+          <Carousel></Carousel>
      
         </div>
       </section>
