@@ -1,25 +1,26 @@
 import React from "react";
-import Header from "../Components/Header";
-import Hero from "../Components/Hero";
-import SearchBar from "../Components/SearchBar"; 
-import '../App.css'; 
+import { useNavigate } from "react-router-dom";
+import mangas from "../assets/mangas.jpg";
+import SearchBar from "../Components/SearchBar"
+const Mangas = () => {
+  const navigate = useNavigate();
 
-export default function mangas() {
+  React.useEffect(() => {
+    navigate('/mangas', {
+      state: {
+        backgroundImage: mangas,
+        title: "Mangas",
+      }
+    });
+  }, [navigate]);
+
   return (
-    <>
-      <Header />
-    
-      <Hero 
-        backgroundImage='./public/mangas.jpg'
-        title="MANGAS"
-      />
-      
+    <div className="mangas-container">
     
       <SearchBar /> 
-
-      <main className="flex flex-col items-center py-10">
-       
-      </main>
-    </>
+      
+    </div>
   );
-}
+};
+
+export default Mangas;
