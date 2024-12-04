@@ -49,11 +49,11 @@ export default function Test() {
       <main className="flex flex-col items-center py-10">
         {/* Contenido adicional */}
       </main>
-      <section className="py-10 max-w-screen-xl mx-auto">
-        <div className="">
-          <Carousel></Carousel>
-     
+      <section >
+        <div className="h-[20vh]">
+    
         </div>
+        <Carousel></Carousel>
       </section>
       <Footer></Footer>
 
