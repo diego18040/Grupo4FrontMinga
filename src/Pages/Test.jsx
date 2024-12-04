@@ -10,10 +10,10 @@ export default function Test() {
       This is Test. Diviertanse :D
       </main>
       <section >
-        <div className="">
-          <Carousel></Carousel>
-     
+        <div className="h-[20vh]">
+    
         </div>
+        <Carousel></Carousel>
       </section>
     </>
   );
