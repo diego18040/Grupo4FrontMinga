@@ -9,7 +9,7 @@ export default function Test() {
       <main className="flex flex-col items-center">
       This is Test. Diviertanse :D
       </main>
-      <section className="py-10 max-w-screen-xl mx-auto">
+      <section >
         <div className="">
           <Carousel></Carousel>
      
