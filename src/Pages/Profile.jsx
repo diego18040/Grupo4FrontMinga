@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import profile from "../assets/profile.jpg";  // Asegúrate de tener la ruta correcta
-import ProfileForm from "../Components/ProfilePanel";  // Componente del formulario
+import profile from "../assets/profile.jpg";
+import ProfileForm from "../Components/ProfilePanel";  
   
 const ProfilePanel = () => {
   const navigate = useNavigate();
 
-  // Redirigir con el estado
+
   React.useEffect(() => {
     navigate('/profile', {
       state: {

@@ -1,18 +1,16 @@
+// src/pages/EditChapter.jsx
+
 import React from "react";
+import CreateLayout from "../layouts/CreateLayout";  // Asegúrate de que la ruta sea correcta
+import EditChapterForm from "../components/EditChapterForm"; // Asegúrate de que la ruta sea correcta
 
-
-export default function EditChapter() {
-  
+const EditChapter = () => {
   return (
-    <>
-      <main className="flex flex-col items-center">
-    This is EditChapter
-      </main>
-      <section className="py-10 max-w-screen-xl mx-auto">
-        <div className="">
-     
-        </div>
-      </section>
-    </>
+    <CreateLayout>
+      {/* Aquí solo se renderiza una vez el formulario */}
+      <EditChapterForm />
+    </CreateLayout>
   );
-}
+};
+
+export default EditChapter;
