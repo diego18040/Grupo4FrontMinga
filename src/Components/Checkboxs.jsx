@@ -5,7 +5,7 @@ import { fetchGenres, fetchMangas } from '../store/actions/CardActions.js';
 export default function Checkboxs() {
     const dispatch = useDispatch();
     const { genres, error } = useSelector(state => state.cards);
-    const selectedTitle = useSelector(state => state.cards.selectedTitle); // Suponiendo que tienes el título seleccionado en el estado
+    const selectedTitle = useSelector(state => state.cards.selectedTitle);
 
     useEffect(() => {
         dispatch(fetchGenres());
@@ -13,10 +13,19 @@ export default function Checkboxs() {
 
     const handleGenreClick = (genre) => {
         dispatch(fetchMangas(selectedTitle, genre));
-        dispatch({ type: 'SET_SELECTED_GENRE', payload: genre }); // Actualiza el estado con el género seleccionado
+        dispatch({ type: 'SET_SELECTED_GENRE', payload: genre });
+    };
+
+    const handleAllClick = () => {
+        dispatch(fetchMangas(selectedTitle, ''));
+        dispatch({ type: 'SET_SELECTED_GENRE', payload: '' });
     };
 
     const genreColors = {
+        all: {
+            bg: 'bg-gray-200',
+            text: 'text-gray-500'
+        },
         shonen: {
             bg: 'bg-rose-200',
             text: 'text-rose-300'
@@ -41,6 +50,12 @@ export default function Checkboxs() {
     return (
         <div className='flex'>
             <div className="flex flex-wrap gap-2 p-4 justify-center">
+                <button
+                    className={`py-2 px-4 rounded-full font-roboto font-bold ${genreColors.all.bg} ${genreColors.all.text}`}
+                    onClick={handleAllClick}
+                >
+                    All
+                </button>
                 {genres.map(genre => (
                     <button
                         key={genre._id}

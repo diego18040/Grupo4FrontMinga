@@ -6,7 +6,7 @@ import { fetchMangas } from '../store/actions/CardActions.js';
 export default function SearchBar() {
   const [title, setTitle] = useState('');
   const dispatch = useDispatch();
-  const selectedGenre = useSelector(state => state.cards.selectedGenre); // Suponiendo que tienes el género seleccionado en el estado
+  const selectedGenre = useSelector(state => state.cards.selectedGenre);
 
   useEffect(() => {
     dispatch(fetchMangas(title, selectedGenre));
@@ -14,6 +14,7 @@ export default function SearchBar() {
 
   const handleChange = (e) => {
     setTitle(e.target.value);
+    dispatch({ type: 'SET_SELECTED_TITLE', payload: e.target.value });
   };
 
   return (
