@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchMangas } from '../store/actions/CardActions.js';
+import Checkboxs from './Checkboxs';
 
 
 export default function Cards() {
@@ -12,16 +13,6 @@ export default function Cards() {
   useEffect(() => {
     dispatch(fetchMangas(selectedTitle, selectedGenre));
   }, [selectedTitle, selectedGenre, dispatch]);
-
-  if (loading) return <p>Loading...</p>;
-
-  if (error) {
-    return <p>Error: {error.message || "No Mangas Found."}</p>;
-  }
-
-  if (!mangas || mangas.length === 0) {
-    return <p>No Mangas Found.</p>;
-  }
 
   const genreColors = {
     shonen: 'bg-rose-300',
@@ -39,8 +30,14 @@ export default function Cards() {
 
   return (
     <div>
-   
+      <Checkboxs />
 
+
+      {loading && <p>Loading...</p>}
+      {error && <p> { "No mangas Found."}</p>}
+      {!loading && !error && mangas.length === 0 && <p>No Mangas Found.</p>}
+
+      <div className="container mx-auto bg-white rounded-xl lg:p-20 xl:p-40 md:p-0">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
           {mangas.map(manga => (
             <div key={manga._id} className="m-2 flex rounded-xl border">
@@ -53,7 +50,7 @@ export default function Cards() {
                   </p>
                 </div>
                 <div className='w-[80%] flex'>
-                  <button className="mt-4 bg-teal-200 text-white text-teal-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">Read</button>
+                  <button className="mt-4 bg-teal-200 text-teal-500 text-teal-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">Read</button>
                 </div>
               </div>
               <div className="w-[60%] flex justify-right overflow-hidden">
@@ -67,6 +64,6 @@ export default function Cards() {
           ))}
         </div>
       </div>
-
+    </div>
   );
 }

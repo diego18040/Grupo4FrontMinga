@@ -7,12 +7,12 @@ export const FETCH_GENRES_REQUEST = 'FETCH_GENRES_REQUEST';
 export const FETCH_GENRES_SUCCESS = 'FETCH_GENRES_SUCCESS';
 export const FETCH_GENRES_FAILURE = 'FETCH_GENRES_FAILURE';
 
-export const fetchMangas = (title = '', genre = '') => {
+export const fetchMangas = (title = '', genres = []) => {
   return async dispatch => {
     dispatch({ type: FETCH_MANGAS_REQUEST });
     try {
       const response = await axios.get(`http://localhost:8080/api/mangas/all`, {
-        params: { title, category: genre }
+        params: { title, category: genres.join(',') } // Join genres array into a comma-separated string
       });
       dispatch({ type: FETCH_MANGAS_SUCCESS, payload: response.data.response });
     } catch (error) {

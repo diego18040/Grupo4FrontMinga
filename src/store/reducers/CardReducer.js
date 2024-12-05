@@ -9,7 +9,7 @@ const initialState = {
   mangas: [],
   genres: [],
   selectedTitle: '',
-  selectedGenre: '',
+  selectedGenre: [],
   error: ''
 };
 
