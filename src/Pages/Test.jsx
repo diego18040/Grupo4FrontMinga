@@ -1,20 +1,25 @@
 import React from "react";
-import Carousel from "../Components/Carousel.jsx";
+import Cards from "../Components/Cards.jsx";
+import SearchBar from "../Components/SearchBar.jsx";
+import Checkboxs from "../Components/Checkboxs.jsx";
+
 
 
 export default function Test() {
-  
   return (
     <>
       <main className="flex flex-col items-center">
-      This is Test. Diviertanse :D
+        This is Test. Diviértanse :D
       </main>
-      <section >
+      <section>
         <div className="h-[20vh]">
-    
+          <SearchBar />
+
+          <Cards />
+
         </div>
-        <Carousel></Carousel>
       </section>
+
     </>
   );
 }
