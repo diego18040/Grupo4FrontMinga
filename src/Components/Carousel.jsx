@@ -54,7 +54,7 @@ const Carousel = () => {
   const currentManga = mangas[currentIndex];
 
   return (
-    <div className="w-[90%] mx-auto">
+    <div className="w-[100%] mx-auto">
       <div className="hidden md:flex w-full h-[30vh] md:h-[25vh] bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 items-center rounded-xl">
         <button onClick={handlePrev} className="bg-white p-2 rounded-full mx-4">←</button>
         <div className="flex-1 flex">
