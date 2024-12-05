@@ -1,18 +1,15 @@
+// src/pages/EditChapter.jsx
+
 import React from "react";
+import CreateLayout from "../Layouts/CreateLayout";
+import EditChapterForm from "../components/EditChapterForm";
 
-
-export default function EditChapter() {
-  
+const EditChapter = () => {
   return (
-    <>
-      <main className="flex flex-col items-center">
-    This is EditChapter
-      </main>
-      <section className="py-10 max-w-screen-xl mx-auto">
-        <div className="">
-     
-        </div>
-      </section>
-    </>
+    <CreateLayout>
+      <EditChapterForm />
+    </CreateLayout>
   );
-}
+};
+
+export default EditChapter;

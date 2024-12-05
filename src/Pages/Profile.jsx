@@ -6,7 +6,7 @@ import ProfileForm from "../Components/ProfilePanel";
 const ProfilePanel = () => {
   const navigate = useNavigate();
 
-  // Redirigir con el estado
+
   React.useEffect(() => {
     navigate('/profile', {
       state: {
