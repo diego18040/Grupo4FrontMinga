@@ -10,8 +10,6 @@ export default function CreateLayout() {
             <div className="min-h-screen flex flex-col bg-yellow-400">
                 CreateLayout
                 <div className="bg-black">
-
-
                 </div>
                 <main className="flex-1 mt-1">
                     <Outlet />
