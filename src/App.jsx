@@ -4,6 +4,7 @@ import HomeLayout from './Layouts/HomeLayout.jsx';
 import CreateLayout from './layouts/CreateLayout.jsx';
 import PanelLayout from './Layouts/PanelLayout.jsx'
 import SignInLayout from './Layouts/SignInLayout.jsx';
+import RolesLayaut from './Layouts/RolesLayaut.jsx'
 import Home from './Pages/Home.jsx'
 import Mangas from './Pages/Mangas.jsx';
 import NotFound from './Pages/NotFound.jsx';
@@ -15,6 +16,7 @@ import Profile from './Pages/Profile.jsx'
 import ReadManga from './Pages/ReadManga.jsx'
 import Manager from './Pages/Manager.jsx';
 import Test from './Pages/Test.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,13 @@ const router = createBrowserRouter([
       { path: "/mangas/:id", element: <MangasId /> },
       { path: "/manager", element: <Manager /> },
       { path: "/readmanga", element: <ReadManga /> },
+    ],
+  },
+
+  {
+    element: <RolesLayaut />,
+    children: [
+      { path: "/newrole", element: <RolesLayaut /> },
     ],
   },
   {
