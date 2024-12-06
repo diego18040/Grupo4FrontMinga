@@ -4,7 +4,7 @@ import { fetchMangas } from '../store/actions/CardActions.js';
 import Checkboxs from './Checkboxs';
 
 
-export default function Cards() {
+export default function CardsEdit() {
   const dispatch = useDispatch();
   const { loading, mangas, error } = useSelector(state => state.cards);
   const selectedTitle = useSelector(state => state.cards.selectedTitle);
@@ -50,7 +50,10 @@ export default function Cards() {
                   </p>
                 </div>
                 <div className='w-[80%] flex'>
-                  <button className="mt-4 bg-teal-200 text-teal-500 text-teal-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">Read</button>
+                  <button className="mt-4 bg-teal-200 text-teal-500 text-teal-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">EDIT</button>
+                </div>
+                <div className='w-[80%] flex'>
+                  <button className="mt-4 bg-purple-400 text-purple-400 text-teal-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">DELETE</button>
                 </div>
               </div>
               <div className="w-[60%] flex justify-right overflow-hidden">

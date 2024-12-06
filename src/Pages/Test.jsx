@@ -25,37 +25,35 @@
 // }
 
 import React from "react";
-import Carousel from "../Components/Carousel.jsx";
+import CardsEdit from "../Components/CardsEdit";
 
-import Footer from "../Components/Footer";
-import Header from "../Components/Header";
-import Hero from "../Components/Hero";
-import SearchBar from "../Components/SearchBar"; // Importa la barra de búsqueda
-import '../App.css'; 
+
 
 export default function Test() {
   return (
     <>
-      <Header />
-    
-      <Hero 
-        backgroundImage='./public/mangas.jpg'
-        title="MANGAS"
-      />
-      
-      {/* Barra de búsqueda debajo del título */}
-      <SearchBar /> 
-
-      <main className="flex flex-col items-center py-10">
-        {/* Contenido adicional */}
+      <main className="flex flex-col items-center">
+        This is Test. Diviértanse :D
       </main>
-      <section >
-        <div className="h-[20vh]">
-    
+      <section>
+
+        <div className=" border">
+
         </div>
-        <Carousel></Carousel>
+
+
+
+        <div className="container mx-auto bg-white rounded-xl lg:p-20 xl:p-40 md:p-0">
+
+          <CardsEdit></CardsEdit>
+
+        </div>
+
       </section>
-      <Footer></Footer>
+
+      <div>
+
+      </div>
 
     </>
   );
