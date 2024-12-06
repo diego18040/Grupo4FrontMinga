@@ -1,7 +1,5 @@
 import React from "react";
-import Cards from "../Components/Cards.jsx";
-import SearchBar from "../Components/SearchBar.jsx";
-import Carousel from "../Components/Carousel.jsx";
+import CardsEdit from "../Components/CardsEdit";
 
 
 
@@ -14,21 +12,22 @@ export default function Test() {
       <section>
 
         <div className=" border">
-          <SearchBar />
+
         </div>
 
 
 
         <div className="container mx-auto bg-white rounded-xl lg:p-20 xl:p-40 md:p-0">
-        
-          <Cards />
+
+          <CardsEdit></CardsEdit>
+
         </div>
 
       </section>
 
       <div>
-   <Carousel/>
-         </div>
+
+      </div>
 
     </>
   );
