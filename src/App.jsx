@@ -32,9 +32,9 @@ const router = createBrowserRouter([
   {
     element: < CreateLayout />,
     children: [
-      { path: "editauthor", element: <EditAuthor /> },
-      { path: "editchapter", element: <EditChapter /> },
-      { path: "editcompany", element: <EditCompany /> },
+      { path: "editauthor/:id", element: <EditAuthor /> },
+      { path: "editchapter/:id", element: <EditChapter /> },
+      { path: "editcompany/:id", element: <EditCompany /> },
     ]
   },
   {
