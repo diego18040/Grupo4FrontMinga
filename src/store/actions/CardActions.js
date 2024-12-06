@@ -12,7 +12,7 @@ export const fetchMangas = (title = '', genres = []) => {
     dispatch({ type: FETCH_MANGAS_REQUEST });
     try {
       const response = await axios.get(`http://localhost:8080/api/mangas/all`, {
-        params: { title, category: genres.join(',') } // Join genres array into a comma-separated string
+        params: { title, category: genres.join(',') }
       });
       dispatch({ type: FETCH_MANGAS_SUCCESS, payload: response.data.response });
     } catch (error) {
