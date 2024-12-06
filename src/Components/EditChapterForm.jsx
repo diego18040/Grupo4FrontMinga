@@ -19,7 +19,7 @@ const EditChapterForm = () => {
   return (
     <div className="flex w-full h-screen ">
       {/* Contenedor del formulario */}
-      <div className="flex justify-center ml-[90px] items-center w-2/3 p-4 ">
+      <div className="flex justify-center ml-[90px] items-center w-2/3 p-6 ">
         <div className="w-full max-w-sm ">
           <h2 className="text-3xl text-center p-10 flex ">Edit Chapter</h2>
           

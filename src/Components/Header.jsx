@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import logo from "../assets/logo.png"; 
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false); 
@@ -24,9 +25,9 @@ const Header = () => {
       
         <div>
           <img
-            src="https://media.discordapp.net/attachments/1283412538482233413/1312193501609459752/image.png?ex=674b9aee&is=674a496e&hm=2c299bc96ee51404584ccce835e2730ba871ed0fc358a8e9ddd76d4065c80ff8&=&format=webp&quality=lossless"
+           src={logo}
             alt="Logo"
-            className="h-14"
+            className="h-20"
           />
         </div>
 
