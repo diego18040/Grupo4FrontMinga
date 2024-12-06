@@ -17,6 +17,7 @@ import ReadManga from './Pages/ReadManga.jsx'
 import Manager from './Pages/Manager.jsx';
 import Test from './Pages/Test.jsx';
 import SignIn from './Pages/SignIn.jsx'
+import Comments from './Pages/Coments.jsx'
 
 
 const router = createBrowserRouter([
@@ -46,7 +47,8 @@ const router = createBrowserRouter([
       { path: "/profile", element: <Profile /> },
       { path: "/mangas/:id", element: <MangasId /> },
       { path: "/manager", element: <Manager /> },
-      { path: "/readmanga", element: <ReadManga /> },
+      { path: "/readmanga/:id", element: <ReadManga /> },
+      {path: "/comments/:id", element: <Comments />},
     ],
   },
 
