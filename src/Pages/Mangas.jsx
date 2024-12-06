@@ -1,18 +1,28 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import mangas from "../assets/mangas.jpg";
+import SearchBar from "../Components/SearchBar"
+import Cards from "../Components/Cards.jsx";
+const Mangas = () => {
+  const navigate = useNavigate();
 
+  React.useEffect(() => {
+    navigate('/mangas', {
+      state: {
+        backgroundImage: mangas,
+        title: "Mangas",
+      }
+    });
+  }, [navigate]);
 
-export default function Mangas() {
-  
   return (
-    <>
-      <main className="flex flex-col items-center">
-      This is Mangas
-      </main>
-      <section className="py-10 max-w-screen-xl mx-auto">
-        <div className="">
-     
-        </div>
-      </section>
-    </>
+    <div className="mangas-container">
+    
+      <SearchBar /> 
+      <Cards/>
+      
+    </div>
   );
-}
+};
+
+export default Mangas;

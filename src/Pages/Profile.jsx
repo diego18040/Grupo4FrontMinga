@@ -1,18 +1,26 @@
 import React from "react";
-
-
-export default function Profile() {
+import { useNavigate } from "react-router-dom";
+import profile from "../assets/profile.jpg";  
+import ProfileForm from "../Components/ProfilePanel"; 
   
+const ProfilePanel = () => {
+  const navigate = useNavigate();
+
+
+  React.useEffect(() => {
+    navigate('/profile', {
+      state: {
+        backgroundImage: profile,
+        title: "Profile",
+      }
+    });
+  }, [navigate]);
+
   return (
-    <>
-      <main className="flex flex-col items-center">
-      This is Profile
-      </main>
-      <section className="py-10 max-w-screen-xl mx-auto">
-        <div className="">
-     
-        </div>
-      </section>
-    </>
+    <div className="profile-panel-container">
+      <ProfileForm />
+    </div>
   );
-}
+};
+
+export default ProfilePanel;

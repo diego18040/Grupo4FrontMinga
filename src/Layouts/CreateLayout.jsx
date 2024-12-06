@@ -1,23 +1,18 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import Header from "../Components/Header";
+import EditChapterForm from "../components/EditChapterForm";
 
+const CreateLayout = ({ children }) => {
+  return (
+    <div className="min-h-screen bg-gray-100">
+     
+      <Header />
 
+      <main className="p-6">{children}</main>
 
+      <EditChapterForm />
+    </div>
+  );
+};
 
-export default function CreateLayout() {
-    return (
-        <>
-            <div className="min-h-screen flex flex-col bg-yellow-400">
-                CreateLayout
-                <div className="bg-black">
-
-
-                </div>
-                <main className="flex-1 mt-1">
-                    <Outlet />
-                </main>
-
-            </div>
-        </>
-    );
-}
+export default CreateLayout;

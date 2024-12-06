@@ -6,28 +6,31 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif']
+      },
       colors: {
         rose: {
-          200: '#FFE0DF',  // Color base
-          300: '#EF8481',  // Color más intenso
+          200: '#FFE0DF',
+          300: '#EF8481',
         },
         orange: {
-          300: '#FFDFC8',  // Color base
-          400: '#FC9C57',  // Color más intenso
+          300: '#FFDFC8',
+          400: '#FC9C57',
         },
         teal: {
-          200: '#D1FBF0',  // Color base
-          300: '#00BA88',  // Color más intenso
+          200: '#D1FBF0',
+          300: '#00BA88',
         },
         purple: {
-          300: '#E0DBFF',  // Color base
-          400: '#8883F0',  // Color más intenso
+          300: '#E0DBFF',
+          400: '#8883F0',
         }
       },
-    },
+      fontSize: {
+        '16px': '16px',
+      }
+    }
   },
   plugins: [],
-}
-
-
-
+ }
