@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import mangas from "../assets/mangas.jpg";
 import SearchBar from "../Components/SearchBar"
+import Cards from "../Components/Cards.jsx";
 const Mangas = () => {
   const navigate = useNavigate();
 
@@ -18,6 +19,7 @@ const Mangas = () => {
     <div className="mangas-container">
     
       <SearchBar /> 
+      <Cards/>
       
     </div>
   );

@@ -25,7 +25,7 @@ export default function MangasId() {
   // id desde la ruta
   useEffect(() => {
     if (id) {
-      dispatch(fetchChaptersByMangaId("674a843ed193ce153022f432"));
+      dispatch(fetchChaptersByMangaId(id));
     }
   }, [dispatch, id]);
 
