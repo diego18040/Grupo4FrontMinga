@@ -38,11 +38,11 @@ export default function CardsEdit() {
             {error && <p> {"No mangas Found."}</p>}
             {!loading && !error && mangas.length === 0 && <p>No Mangas Found.</p>}
 
-            <div className="container mx-auto bg-white rounded-xl lg:p-20 xl:p-40 md:p-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            <div className="container mx-auto bg-white rounded-xl lg:p-20 xl:p-40 md:p-0 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 ">
                     {mangas.map(manga => (
-                        <div key={manga._id} className="m-2 flex rounded-xl border">
-                            <div className={`w-2 h-40 rounded-t-xl ${genreColors[manga.category_id.name.toLowerCase()] || 'bg-gray-500'}`}></div>
+                        <div key={manga._id} className="m-2 flex rounded-xl border ">
+                            <div className={`w-2 h-40 rounded-t-md ${genreColors[manga.category_id.name.toLowerCase()] || 'bg-gray-500'}`}></div>
                             <div className=" grid place-items-center w-[50%]">
                                 <div className='w-[100%]'>
                                     <div className=' w-[50%] flex  '>
@@ -71,11 +71,11 @@ export default function CardsEdit() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-[60%] flex justify-right overflow-hidden">
+                            <div className="w-[50%] flex justify-right overflow-hidden">
                                 <img
                                     src={manga.cover_photo}
                                     alt={manga.title}
-                                    className="w-full h-[200px] object-cover rounded-l-[50%] rounded-xl"
+                                    className="w-full h-[100%] object-cover rounded-l-[50%] rounded-xl"
                                 />
                             </div>
                         </div>
@@ -85,3 +85,6 @@ export default function CardsEdit() {
         </div>
     );
 }
+
+
+
