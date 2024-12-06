@@ -1,117 +1,174 @@
+import '../App.css'; 
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-const RegisterForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    lastName: "",
-    location: "",
-    birthdate: "",
-    profileUrl: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+const LoginForm = () => {
+    const [formData, setFormData] = useState({
+      email: "",
+      photoURL: "",
+      password: "",
     });
+  
+    const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const formattedData = {
+        email: formData.email,
+        password: formData.password,
+        photo:
+          formData.photoURL ||"https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png",
+      };
+  
+      try {
+        await dispatch(signUp(formattedData)).unwrap();
+        setIsSuccessModalOpen(true);
+      } catch (error) {
+        console.error("Error en el registro:", error);
+        alert("Hubo un error en el registro, por favor intenta nuevamente.");
+      }
+    };
+  
+    const handleCloseModal = () => {
+      setIsSuccessModalOpen(false);
+      navigate("/");
+    };
+    
+  const signUpWithGoogle = () => {
+    window.location.href = "http://localhost:8080/api/auth/signin/google/";
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-  };
-
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-semibold text-gray-900">New Author</h2>
-
-          {/* Avatar placeholder */}
-          <div className="mt-6 mx-auto w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center">
-            <svg
-              className="w-12 h-12 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
+ <>
+      <div className="w-full max-w-md  p-6 rounded">
+        <h2 className="text-2xl text-32px font-Montserrat text-gray-800 text-center mb-4">
+          Welcome!
+        </h2>
+        <p className="text-center font-Montserrat text-gray-600 mb-6">
+          Discover manga and comics, track your progress, have fun, read manga.
+        </p>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-start text-gray-700 mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+              placeholder="DragonballZ@Krowl.com"
+            />
           </div>
-        </div>
-
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="space-y-6">
-            <div className="border-b border-gray-300">
-              <input
-                name="name"
-                type="text"
-                required
-                value={formData.name}
-                onChange={handleChange}
-                className="block w-full px-0 py-2 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-400"
-                placeholder="Lucas Ezequiel"
-              />
-            </div>
-
-            <div className="border-b border-gray-300">
-              <input
-                name="lastName"
-                type="text"
-                required
-                value={formData.lastName}
-                onChange={handleChange}
-                className="block w-full px-0 py-2 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-400"
-                placeholder="Silva"
-              />
-            </div>
-
-            <div className="border-b border-gray-300">
-              <input
-                name="location"
-                type="text"
-                required
-                value={formData.location}
-                onChange={handleChange}
-                className="block w-full px-0 py-2 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-400"
-                placeholder="Buenos Aires, Argentina"
-              />
-            </div>
-
-            <div className="border-b border-gray-300">
-              <input
-                name="birthdate"
-                type="date"
-                required
-                value={formData.birthdate}
-                onChange={handleChange}
-                className="block w-full px-0 py-2 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-400"
-              />
-            </div>
-
-            <div className="border-b border-gray-300">
-              <input
-                name="profileUrl"
-                type="text"
-                required
-                value={formData.profileUrl}
-                onChange={handleChange}
-                className="block w-full px-0 py-2 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-gray-400"
-                placeholder="URL Profile Image"
-              />
-            </div>
+          <div className="mb-4">
+            <label htmlFor="photoURL" className="block text-start text-gray-700 mb-2">
+              URL
+            </label>
+            <input
+              type="url"
+              id="photoURL"
+              name="photoURL"
+              value={formData.photoURL}
+              onChange={handleChange}
+              className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+              placeholder="URL"
+            />
           </div>
-
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-start text-gray-700 mb-2">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
+              placeholder="...................."
+            />
+          </div>
+            <div className="flex items-center mb-4">
+                  <input
+                    type="checkbox"
+                    value=""
+                    id="disabled-checkbox"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  />
+                  Send notification to my email
+                <label for="disabled-checkbox"  class="ms-2 text-sm text-Montserrat text-12px font-medium text-gray-400 dark:text-gray-500"></label>
+                
+              
+            </div>
           <button
             type="submit"
-            className="w-full py-3 px-4 rounded-full bg-pink-500 hover:bg-pink-600 text-white font-medium transition-colors"
+            className="w-full py-3 font-medium  bg-pink-500 text-white py-2 rounded hover:bg-pink-600 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
           >
-            Send
+            Register
           </button>
+           {/* Register with Google */}
+           <button
+              onClick={signUpWithGoogle}
+              className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150"
+            >
+              <img
+                src="https://www.svgrepo.com/show/355037/google.svg"
+                className="w-6 h-6"
+                alt="Google Logo"
+              />
+              <span>Register with Google</span>
+            </button>
         </form>
+        <p className="text-center mt-4">
+          Already have an account?{" "}
+          <NavLink
+            to = "/signin"
+            className="text-indigo-600 font-medium inline-flex space-x-1 items-center"
+          >
+            <span className="text-pink-500">Log in </span>
+            </NavLink>
+        </p>
+        <p className="text-center mt-4">
+          Go back to{" "}
+          <NavLink
+            to = "/"
+            className="text-indigo-600 font-medium inline-flex space-x-1 items-center"
+          >
+            <span className="text-pink-500">home page </span>
+            </NavLink>
+        </p>
       </div>
-    </div>
+      {isSuccessModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-bold text-green-600">Success!</h2>
+            <p className="mt-4 text-gray-700">Your account has been successfully created.</p>
+            <button
+              onClick={handleCloseModal}
+              className="mt-6 bg-indigo-600 text-white px-4 py-2 rounded-lg"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      )}
+
+      </>
   );
 };
 
-export default RegisterForm;
+export default LoginForm;

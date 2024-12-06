@@ -16,6 +16,7 @@ import Profile from './Pages/Profile.jsx'
 import ReadManga from './Pages/ReadManga.jsx'
 import Manager from './Pages/Manager.jsx';
 import Test from './Pages/Test.jsx';
+import SignIn from './Pages/SignIn.jsx'
 
 
 const router = createBrowserRouter([
@@ -59,6 +60,7 @@ const router = createBrowserRouter([
     element: <SignInLayout />,
     children: [
       { path: "register", element: <Register /> },
+      { path: "signin", element: <SignIn/>}
     ],
   },
 ]);

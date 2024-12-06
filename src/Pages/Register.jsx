@@ -1,20 +1,30 @@
 import React from "react";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
+import LoginForm from "../Components/RegisterForm";
+import backgroundImg from "../assets/register.jpg";
 
 
-export default function Register() {
-  
+const Register = () => {
+  const handleFormSubmit = () => {
+    
+  };
+
   return (
-    <>
-      <main className="flex flex-col items-center">
-      This is Register
-      </main>
-      <section className="py-10 max-w-screen-xl mx-auto">
-        <div className="">
-     
-        </div>
-      </section>
-    </>
+    <div className="h-screen flex">
+      {/* Imagen en la mitad izquierda */}
+
+      {/* Contenedor del formulario en la mitad derecha */}
+      <div className="w-full lg:w-1/2 flex justify-center items-center bg-gray-50">
+        <LoginForm onSubmit={handleFormSubmit} />
+      </div>
+      <div className="hidden lg:block w-1/2">
+        <img
+          src={backgroundImg}
+          alt="Background"
+          className="w-full h-full object-cover"
+        />
+      </div>
+    </div>
   );
-}
+};
+
+export default Register;

@@ -1,23 +1,19 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import Header from "../Components/Header";
 
+const SignInLayout = () => {
+  const location = useLocation();
+  const { state } = location; 
 
-
-
-export default function SignInLayout() {
     return (
-        <>
-            <div className="min-h-screen flex flex-col bg-yellow-400">
-            SignIn Layout
-                <div className="bg-black">
-
-
-                </div>
-                <main className="flex-1 mt-1">
-                    <Outlet />
-                </main>
-
-            </div>
-        </>
+      <div>
+      <Header logo={state?.logo} />
+      <div>
+        <Outlet />
+      </div>
+    </div>
     );
-}
+};
+
+export default SignInLayout
