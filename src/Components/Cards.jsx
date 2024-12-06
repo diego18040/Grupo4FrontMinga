@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchMangas } from '../store/actions/CardActions.js';
 import Checkboxs from './Checkboxs';
-
+import { NavLink } from 'react-router-dom';
 
 export default function Cards() {
   const dispatch = useDispatch();
@@ -32,9 +32,8 @@ export default function Cards() {
     <div>
       <Checkboxs />
 
-
       {loading && <p>Loading...</p>}
-      {error && <p> { "No mangas Found."}</p>}
+      {error && <p>{ "No mangas Found."}</p>}
       {!loading && !error && mangas.length === 0 && <p>No Mangas Found.</p>}
 
       <div className="container mx-auto bg-white rounded-xl lg:p-20 xl:p-40 md:p-0">
@@ -50,7 +49,9 @@ export default function Cards() {
                   </p>
                 </div>
                 <div className='w-[80%] flex'>
-                  <button className="mt-4 bg-teal-200 text-teal-500 text-teal-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">Read</button>
+                  <NavLink to={`/mangas/${manga._id}`} className="mt-4 bg-teal-200 text-teal-500 text-teal-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10 flex items-center justify-center">
+                    Read
+                  </NavLink>
                 </div>
               </div>
               <div className="w-[60%] flex justify-right overflow-hidden">
