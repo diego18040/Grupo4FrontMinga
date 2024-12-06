@@ -71,7 +71,7 @@ export default function Checkboxs() {
                 {genres.map(genre => (
                     <button
                         key={genre._id}
-                        className={`py-2 px-4 rounded-full font-roboto font-bold ${genreColors[genre.name.toLowerCase()].bg || 'bg-gray-500'} ${genreColors[genre.name.toLowerCase()].text || 'text-white'} ${genreColors[genre.name.toLowerCase()].hover} ${activeGenres.includes(genre.name) ? 'bg-blue-500 text-white' : ''}`}
+                        className={`py-2 px-4 rounded-full font-roboto font-bold ${genreColors[genre.name.toLowerCase()].bg || 'bg-gray-500'} ${genreColors[genre.name.toLowerCase()].text || 'text-white'} ${genreColors[genre.name.toLowerCase()].hover} ${activeGenres.includes(genre.name) ? 'bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-white' : ''}`}
                         onClick={() => handleGenreClick(genre.name)}
                     >
                         {genre.name}
