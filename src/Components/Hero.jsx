@@ -14,7 +14,7 @@ const Hero = ({ title, backgroundImage }) => {
           className="h-full w-full object-cover"
         />
         
-        <h1 className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-white text-center z-20">
+        <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl md:text-[64px] font-bold text-white text-center z-20">
           {title}
         </h1>
       </div>
