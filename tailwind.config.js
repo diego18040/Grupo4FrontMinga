@@ -29,8 +29,18 @@ export default {
       },
       fontSize: {
         '16px': '16px',
-      }
-    }
+      },
+      keyframes: {
+        'kamui': {
+          '0%': { transform: 'scale(0) rotate(0deg)', opacity: '0', filter: 'blur(10px)' },
+          '50%': { transform: 'scale(0.5) rotate(360deg)', opacity: '0.5', filter: 'blur(5px)' },
+          '100%': { transform: 'scale(1) rotate(720deg)', opacity: '1', filter: 'blur(0)' },
+        },
+      },
+      animation: {
+        'kamui': 'kamui 0.7s ease-out forwards',
+      },
+    },
   },
   plugins: [],
- }
+}

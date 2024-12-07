@@ -18,7 +18,8 @@ import Manager from './Pages/Manager.jsx';
 import Test from './Pages/Test.jsx';
 import SignIn from './Pages/SignIn.jsx'
 import Comments from './Pages/Coments.jsx'
-
+import EditAuthor from './Pages/EditAuthor.jsx';
+import EditCompany from './Pages/EditCompany'
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       { path: "home", element: <Home /> },
       { path: "/*", element: <NotFound /> },
       { path: "/test", element: <Test /> },
-     
+
     ],
   },
   {
@@ -37,21 +38,21 @@ const router = createBrowserRouter([
       { path: "editauthor/:id", element: <EditAuthor /> },
       { path: "editchapter/:id", element: <EditChapter /> },
       { path: "editcompany/:id", element: <EditCompany /> },
-           { path: "editchapter", element: <EditChapter /> },
-     
+      { path: "editchapter", element: <EditChapter /> },
+
     ]
   },
   {
     element: <PanelLayout />,
     children: [
-      
+
       { path: "/mangas", element: <Mangas /> },
       { path: "/adminpanel", element: <AdminPanel /> },
       { path: "/profile", element: <Profile /> },
       { path: "/mangas/:id", element: <MangasId /> },
       { path: "/manager", element: <Manager /> },
       { path: "/readmanga/:id", element: <ReadManga /> },
-      {path: "/comments/:id", element: <Comments />},
+      { path: "/comments/:id", element: <Comments /> },
     ],
   },
 
@@ -65,7 +66,7 @@ const router = createBrowserRouter([
     element: <SignInLayout />,
     children: [
       { path: "register", element: <Register /> },
-      { path: "signin", element: <SignIn/>}
+      { path: "signin", element: <SignIn /> }
     ],
   },
 ]);
