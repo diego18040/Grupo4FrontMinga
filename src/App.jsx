@@ -18,6 +18,9 @@ import Manager from './Pages/Manager.jsx';
 import Test from './Pages/Test.jsx';
 import SignIn from './Pages/SignIn.jsx'
 import Comments from './Pages/Coments.jsx'
+import NewRoleForm from './Components/NewRoleForm.jsx';
+import CreateRoles from './Layouts/CreateRoles.jsx'
+
 
 
 const router = createBrowserRouter([
@@ -35,8 +38,18 @@ const router = createBrowserRouter([
     element: < CreateLayout />,
     children: [
            { path: "editchapter", element: <EditChapter /> },
+          
      
     ]
+  },
+
+  {
+    element: <CreateRoles />,
+    children: [
+      { path: "/newroleform", element: <NewRoleForm /> },
+      {}
+    
+    ],
   },
   {
     element: <PanelLayout />,
@@ -56,6 +69,7 @@ const router = createBrowserRouter([
     element: <RolesLayaut />,
     children: [
       { path: "/newrole", element: <RolesLayaut /> },
+      
     ],
   },
   {

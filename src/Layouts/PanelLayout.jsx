@@ -1,7 +1,8 @@
 import React from "react";
-import Header from "../Components/Header";
+import Header from "../components/Header";
 import Hero from "../Components/Hero";
 import { Outlet, useLocation } from "react-router-dom";
+import '../App.css'
 
 const PanelLayout = () => {
   const location = useLocation();
