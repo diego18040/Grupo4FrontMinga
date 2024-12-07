@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../components/Header";
+import Header from "../Components/Header";
 import Hero from "../Components/Hero";
 import { Outlet, useLocation } from "react-router-dom";
 import '../App.css'

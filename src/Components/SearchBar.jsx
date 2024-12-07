@@ -18,15 +18,20 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="relative flex items-center justify-center">
+    <div className="absolute top-[43%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 z-20">
+    <div className="relative">
       <input
+
         type="text"
+          value={title}
+ onChange={handleChange}
         placeholder="Find your manga here..."
-        value={title}
-        onChange={handleChange}
-        className="w-full py-2 px-4 pl-10 rounded-full border border-gray-300 shadow-md focus:outline-none"
+        className="w-full py-2 px-4 pl-10 rounded-full border border-gray-300 shadow-md focus:outline-none "
       />
       <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
     </div>
+  </div>
   );
 }
+
+

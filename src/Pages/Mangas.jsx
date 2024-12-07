@@ -16,9 +16,11 @@ const Mangas = () => {
   }, [navigate]);
 
   return (
-    <div className="mangas-container">
     
-      <SearchBar /> 
+   
+    <div className="mangas-container">
+    <SearchBar /> 
+  
       <Cards/>
       
     </div>
