@@ -14,3 +14,32 @@
 body {
   font-family: 'Montserrat';
 }
+
+
+@keyframes leaf-fall {
+  0% {
+    transform: translateY(-200%) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%) rotate(360deg);
+    opacity: 0;
+  }
+}
+.leaf-fall {
+  animation: leaf-fall 5s linear infinite;
+}
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}

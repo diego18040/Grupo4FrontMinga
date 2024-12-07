@@ -49,9 +49,7 @@ const Hero = ({ title, backgroundImage }) => {
       </div>
 
      
-      <div className="absolute top-[60%] left-1/2 transform -translate-x-1/2 w-[95%] max-w-screen-lg md:max-w-screen-xl bg-white p-8 rounded-lg shadow-lg">
-       
-      </div>
+ 
     </div>
   );
 };
