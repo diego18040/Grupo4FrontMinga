@@ -11,6 +11,7 @@ Este proyecto es una aplicación web construida con React, utilizando varias bib
 
 ## Dependencias Principales
 Estas son las bibliotecas principales que el proyecto necesita para funcionar correctamente:
+- **@react-oauth/google**: "^0.12.1"
 - **@reduxjs/toolkit**: ^2.4.0
 - **axios**: ^1.7.8
 - **react**: ^18.3.1
@@ -38,3 +39,4 @@ Estas bibliotecas son necesarias para el entorno de desarrollo:
 Para instalar todas las dependencias necesarias, ejecuta el siguiente comando:
 ```bash
 npm install
+npm install @react-oauth/google@latest

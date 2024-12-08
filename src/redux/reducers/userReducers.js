@@ -12,7 +12,7 @@ export const userSignUpReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(userSignUp.fulfilled, (store, action) => {
       localStorageFn.set("token", action.payload.token);
-      console.log("Welcome to MyTynerary, " + action.payload.response.name); // Mensaje en consola
+      console.log("Welcome to Mangas, " + action.payload.response.name); // Mensaje en consola
       return {
         ...store,
         user: action.payload.response,
