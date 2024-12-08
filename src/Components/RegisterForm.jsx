@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import {signUp} from "../../store/actions/authActions";
+import usericon from "../assets/usericon.png"
 
 const LoginForm = () => {
     const [formData, setFormData] = useState({
@@ -17,19 +19,16 @@ const LoginForm = () => {
   
     const handleChange = (e) => {
       const { name, value } = e.target;
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
+      setFormData({ ...formData, [name]: value,});
     };
   
     const handleSubmit = async (e) => {
       e.preventDefault();
+
       const formattedData = {
         email: formData.email,
         password: formData.password,
-        photo:
-          formData.photoURL ||"https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png",
+        photo: formData.photoURL || usericon,
       };
   
       try {
@@ -110,7 +109,7 @@ const LoginForm = () => {
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   Send notification to my email
-                <label for="disabled-checkbox"  class="ms-2 text-sm text-Montserrat text-12px font-medium text-gray-400 dark:text-gray-500"></label>
+                <label htmlFor="disabled-checkbox"  class="ms-2 text-sm text-Montserrat text-12px font-medium text-gray-400 dark:text-gray-500"></label>
                 
               
             </div>

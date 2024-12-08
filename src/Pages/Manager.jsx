@@ -1,18 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import manager from "../assets/companyauthor.jpg";
 
+const Manager = () => {
+  const navigate = useNavigate();
 
-export default function Manager() {
-  
-  return (
-    <>
-      <main className="flex flex-col items-center">
-      This is Manager
-      </main>
-      <section className="py-10 max-w-screen-xl mx-auto">
-        <div className="">
-     
-        </div>
-      </section>
-    </>
-  );
-}
+  React.useEffect(() => {
+    navigate('/manager', {
+      state: {
+        backgroundImage: manager,
+        title: "CompanyName or AuthorName",
+
+      }
+    });
+  }, [navigate]);
+
+  return null
+};
+
+export default Manager;
