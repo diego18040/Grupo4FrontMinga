@@ -1,12 +1,11 @@
 import { MessageSquareMore, MessageSquare } from "lucide-react";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchChaptersByMangaId } from "../store/actions/chaptersActions";
 import { fetchMangas } from "../store/actions/CardActions";
 import { addFavorite } from "../store/actions/FavActions";
 import { createSelector } from "@reduxjs/toolkit";
-import { NavLink } from "react-router-dom";
 import FavoritesModal from "../Components/FavoritesModals";
 
 export default function MangasId() {
@@ -31,7 +30,6 @@ export default function MangasId() {
   const favorites = useSelector(state => state.favorites.favorites);
   useEffect(() => {
     if (id) {
-      console.log("id recibido:", id);
       dispatch(fetchMangas());
       dispatch(fetchChaptersByMangaId(id));
     }
@@ -64,6 +62,7 @@ export default function MangasId() {
     <div className="max-w-full mx-auto mt-16">
       <FavoritesModal />
       <div className="flex flex-col md:flex-row gap-8 p-4 md:p-8">
+        {/* Sección izquierda - Imagen y stats */}
         <div className="md:w-1/2 lg:w-2/5">
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="h-[400px] md:h-[500px]">
@@ -80,7 +79,8 @@ export default function MangasId() {
               </h1>
 
               <div className="flex justify-center gap-6 mb-6">
-                <button className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-100 hover:bg-gray-200" onClick={handleAddFavorite}>
+                <button className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-100 hover:bg-gray-200"
+                 onClick={handleAddFavorite}>
                   👍Fav
                 </button>
                 <button className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-100 hover:bg-gray-200">
@@ -119,7 +119,9 @@ export default function MangasId() {
           </div>
         </div>
 
+        {/* Sección derecha - Tabs y contenido */}
         <div className="md:w-1/2 lg:w-3/5 space-y-6 lg:mt-10">
+          {/* Tabs para desktop */}
           <div className="hidden md:flex gap-4 justify-center">
             <button
               className={`px-8 py-3 rounded-full ${activeTab === "manga" ? "bg-pink-500 text-white" : "bg-gray-200"} hover:bg-pink-600`}
@@ -128,6 +130,8 @@ export default function MangasId() {
               Manga
             </button>
             <button
+              className={`px-6 py-2 rounded-full text-sm ${activeTab === "chapters" ? "bg-pink-500 text-white" : "bg-gray-200"
+                } hover:bg-gray-300`}
               className={`px-8 py-3 rounded-full ${activeTab === "chapters" ? "bg-pink-500 text-white" : "bg-gray-200"} hover:bg-gray-300`}
               onClick={() => setActiveTab("chapters")}
             >
@@ -135,6 +139,7 @@ export default function MangasId() {
             </button>
           </div>
 
+          {/* Contenido según el tab activo */}
           {activeTab === "manga" ? (
             <div className="bg-white rounded-lg p-6 shadow-lg">
               <p className="text-gray-600 leading-relaxed">
@@ -165,18 +170,24 @@ export default function MangasId() {
                             {chapter.pages?.length || 0} pages
                           </p>
                         </div>
-                        <div className="md:hidden">
+                        <NavLink
+                          to={`/comments/${chapter._id}`}
+                          className="md:hidden"
+                        >
                           <MessageSquareMore className="w-5 h-5 text-black" />
-                        </div>
+                        </NavLink>
                       </div>
 
                       <div className="flex items-center gap-4">
-                        <button className="hidden md:flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-800">
+                        <NavLink
+                          to={`/comments/${chapter._id}`}
+                          className="hidden md:flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-800"
+                        >
                           <MessageSquare className="w-5 h-5" />
                           <span>Comments</span>
-                        </button>
+                        </NavLink>
                         <NavLink
-                          to={`/readmanga/${chapter._id}`} // Redirige al capítulo específico
+                          to={`/readmanga/${chapter._id}`}
                           className="px-8 py-2 rounded-full bg-pink-500 text-white hover:bg-pink-600"
                         >
                           Read

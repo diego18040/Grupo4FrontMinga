@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink,useNavigate } from 'react-router-dom';
 import logo from "../assets/logo.png";
+import {logout} from "../store/actions/authActions";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const token = useSelector((state) => state.authStore?.token); // Token del usuario
+  const user = useSelector((state) => state.authStore?.users);
+  const userEmail = user?.email || localStorage.getItem("userEmail");
+  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
+  const handleSignOut = () => {
+    dispatch( logout()); // Acción de logout
+    navigate("/"); // Redirige al login tras cerrar sesión
+  };
+  
   return (
     <header className="bg-transparent p-4 fixed w-full top-0 left-0 z-50">
       <nav className="flex items-center justify-between relative">
@@ -41,6 +53,7 @@ const Header = () => {
             ✕
           </button>
           <ul className="space-y-4 p-4 text-xs">
+        
             <li>
               <NavLink
                 to="/"
@@ -59,7 +72,27 @@ const Header = () => {
                 Register
               </NavLink>
             </li>
-            <li>
+            {token ? (
+            <div className="flex items-center space-x-4">
+              <span className="text-gray-900 dark:text-white">
+              Welcome, {userEmail || "User"}
+              </span>
+              <button
+                onClick={handleSignOut}
+                className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+              >
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <NavLink
+              to="/signin"
+              className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+            >
+              Sign In
+            </NavLink>
+          )}
+            {/*<li>
               <NavLink
                 to="/signin"
                 className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
@@ -67,7 +100,7 @@ const Header = () => {
               >
                 Sign In
               </NavLink>
-            </li>
+            </li>*/}
           </ul>
         </div>
       </nav>

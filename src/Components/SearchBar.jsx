@@ -9,7 +9,11 @@ export default function SearchBar() {
   const selectedGenre = useSelector(state => state.cards.selectedGenre);
 
   useEffect(() => {
-    dispatch(fetchMangas(title, selectedGenre));
+    const timer = setTimeout(() => {
+      dispatch(fetchMangas(title, selectedGenre));
+    }, 500); 
+
+    return () => clearTimeout(timer); 
   }, [title, selectedGenre, dispatch]);
 
   const handleChange = (e) => {
