@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMangas } from '../../store/actions/CardActions.js';
+import { fetchMangas } from '../store/actions/CardActions.js';
 
 export default function SearchBar() {
   const [title, setTitle] = useState('');
@@ -18,9 +18,13 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="relative flex items-center justify-center">
+    <div className="absolute top-[43%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 z-20">
+    <div className="relative">
       <input
+
         type="text"
+          value={title}
+ onChange={handleChange}
         placeholder="Find your manga here..."
         value={title}
         onChange={handleChange}

@@ -8,7 +8,7 @@ const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const authStore = useSelector((state) => state.authStore);
+  const { loading = false, error = null } = useSelector((state) => state.authStore || {});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,8 +19,8 @@ const SignInForm = () => {
     window.location.href = "http://localhost:8080/api/auth/signin/google/";
   };
 
-  const loading = authStore.loading;
-  const error = authStore.error;
+/*   const loading = authStore.loading;
+  const error = authStore.error; */
 
 
   return (

@@ -7,25 +7,11 @@ const Footer = () => {
     <div>
       {/* Contenedor principal para la imagen con margen */}
       <div className="relative w-full h-auto bg-white overflow-hidden">
-        {/* Margen generado con la misma imagen */}
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            display: "flex",
-            backgroundImage: `url(${frame})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            clipPath: "ellipse(65% 110% at 50% 0%)",
-            zIndex: -1,
-          }}
-        ></div>
-
         {/* Imagen principal con curva */}
         <img
           src={frame}
           alt="Curved"
-          className="w-full h-auto object-cover"
+          className="w-full h-auto object-cover md:h-[200px]"
           style={{
             clipPath: "ellipse(60% 100% at 50% 0%)",
           }}
@@ -34,18 +20,18 @@ const Footer = () => {
 
       {/* Footer */}
       <footer class="bg-white border-gray-200">
-       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:py-2">
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
        <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src= {logo} class="h-24 w-24" alt="Logo" />
+      <img src= {logo} class="h-24 w-24 md:h-16 md:w-16" alt="Logo" />
        </a>
        </div>
       <div class="flex md:order-3 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <div className="flex flex-col items-start w-56 h-20">
+      <div className="flex flex-col items-start w-56 h-30">
                 <div className="max-w-sm  bg-white  rounded-lg">
                    {/* Redes sociales */}
                 <div className="flex space-x-8 mt-4 w-52 h-6 justify-center">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="24" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.8192 24H1.32462C0.592836 24 0 23.4068 0 22.6753V1.32461C0 0.592925 0.592929 0 1.32462 0H22.6755C23.407 0 24 0.592925 24 1.32461V22.6753C24 23.4069 23.4069 24 22.6755 24H16.5597V14.7059H19.6793L20.1464 11.0838H16.5597V8.77132C16.5597 7.72264 16.8509 7.00801 18.3546 7.00801L20.2727 7.00717V3.76755C19.9409 3.7234 18.8024 3.62478 17.4778 3.62478C14.7124 3.62478 12.8192 5.31276 12.8192 8.4126V11.0838H9.69156V14.7059H12.8192V24Z" fill="#222222"/>
                 </svg>
 
@@ -62,8 +48,8 @@ const Footer = () => {
                 </svg>
                 
                 </div>
-                <button type="button" class="px-6 py-3.5 w-56 h-11 mt-3.5 text-base font-medium text-white inline-flex items-center bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center justify-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                <div className="font-poppins text-16px ml-2">Donate </div>
+                <button type="button" class="px-6 py-3.5 w-56 h-11 mt-3.5 text-base font-medium text-white inline-flex items-center bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center justify-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:py-2.5 md:mt-2">
+                <div className="font-poppins text-16px md:text-sm ml-2">Donate </div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6  ml-2">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                 </svg>

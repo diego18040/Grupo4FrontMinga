@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchGenres, fetchMangas } from '../../store/actions/CardActions.js';
+import { fetchGenres, fetchMangas } from '../store/actions/CardActions.js';
 
 export default function Checkboxs() {
     const dispatch = useDispatch();

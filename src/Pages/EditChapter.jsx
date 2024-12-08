@@ -1,5 +1,6 @@
+
 import React from "react";
-import CreateLayout from "../Layouts/CreateLayout";  
+import CreateLayout from "../layouts/CreateLayout";  
 import EditChapterForm from "../components/EditChapterForm"; 
 
 const EditChapter = () => {

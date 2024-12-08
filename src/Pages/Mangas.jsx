@@ -16,13 +16,19 @@ const Mangas = () => {
   }, [navigate]);
 
   return (
-    <div className="mangas-container">
-    
-      <SearchBar /> 
-      <Cards/>
-      
+    <div>
+      <div>
+        <SearchBar></SearchBar>
+      </div>
+      <div className="mangas-container">
+
+        <Cards />
+
+      </div>
     </div>
   );
 };
+
+export default Mangas;
 
 export default Mangas;
