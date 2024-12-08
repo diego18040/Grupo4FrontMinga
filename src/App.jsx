@@ -96,7 +96,6 @@ const router = createBrowserRouter([
       <SignRoute>
         <SignIn/>
       </SignRoute>)}
-      { path: "signin", element: <SignIn /> }
     ],
   },
 ]);
