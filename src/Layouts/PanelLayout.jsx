@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../Components/Header";
 import Hero from "../Components/Hero";
 import { Outlet, useLocation } from "react-router-dom";
-import '../App.css'
+import Footer from "../Components/Footer";
 
 const PanelLayout = () => {
   const location = useLocation();
@@ -20,7 +20,11 @@ const PanelLayout = () => {
       <main className="flex flex-col items-center py-10">
         {state && state.children}
       </main>
+      <div>
+        <Footer></Footer>
+      </div>
     </div>
+
   );
 };
 

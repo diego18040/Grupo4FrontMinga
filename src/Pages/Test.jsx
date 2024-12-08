@@ -27,7 +27,7 @@
 import React from "react";
 import CardsEdit from "../Components/CardsEdit";
 import Cards from "../Components/Cards";
-
+import Carousel from "../Components/Carousel"
 
 
 export default function Test() {
@@ -57,7 +57,7 @@ export default function Test() {
       </section>
 
       <div>
-
+<Carousel></Carousel>
       </div>
 
     </>
