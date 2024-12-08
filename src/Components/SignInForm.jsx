@@ -1,7 +1,7 @@
 import '../App.css'; 
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { login } from "../../store/actions/authActions";
+import { login } from "../store/actions/authActions";
 import { NavLink } from "react-router-dom";
 
 const SignInForm = () => {
@@ -18,10 +18,6 @@ const SignInForm = () => {
   const loginWithGoogle = () => {
     window.location.href = "http://localhost:8080/api/auth/signin/google/";
   };
-
-/*   const loading = authStore.loading;
-  const error = authStore.error; */
-
 
   return (
     <>

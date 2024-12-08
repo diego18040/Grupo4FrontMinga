@@ -1,20 +1,15 @@
+
 import React from "react";
 import heroImage from "../../src/assets/homecta.jpg";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Home() {
-  const navigate = useNavigate();
-
-  const handleSignIn = () => {
-    navigate("/signin");
-  };
-
   return (
     <div
       className="relative h-screen w-full bg-cover bg-bottom md:bg-center bg-no-repeat"
       style={{
         backgroundImage: `url(${heroImage})`,
-        backgroundPosition: " 50% 10%",
+        backgroundPosition: "50% 10%",
       }}
     >
       <div className="absolute inset-0 bg-black/30"></div>
@@ -31,12 +26,12 @@ export default function Home() {
           <p className="text-sm mb-6 flex items-center gap-2">
             #MingaForever <span className="text-red-500">❤</span>
           </p>
-          <button
-            onClick={handleSignIn}
+          <NavLink
+            to="/signin"
             className="bg-pink-500 hover:bg-pink-600 text-white px-12 py-3 rounded-lg transition-colors"
           >
-            Sign In!
-          </button>
+            Sign In
+          </NavLink>
         </div>
 
         {/* Desktop */}
@@ -49,12 +44,12 @@ export default function Home() {
             <p className="text-sm mb-6 flex items-center gap-2">
               #MingaForever <span className="text-red-500">❤</span>
             </p>
-            <button
-              onClick={handleSignIn}
+            <NavLink
+              to="/signin"
               className="bg-pink-500 hover:bg-pink-600 text-white px-12 py-3 rounded-lg transition-colors"
             >
               Sign In!
-            </button>
+            </NavLink>
           </div>
         </div>
       </div>

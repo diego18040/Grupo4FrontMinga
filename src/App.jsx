@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { setUser } from "../store/actions/authActions";
+import { setUser } from "./store/actions/authActions.js";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 import './App.css';
@@ -32,8 +32,10 @@ import SignRoute from "./Components/SignRoute.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const isOnline = useSelector((store) => store.userSignUpReducer.isOnline);
-  return isOnline ? children : <Navigate to="signin"/>;
+  const token = localStorage.getItem("token");
+  return isOnline && token ? children : <Navigate to="signin" />;
 };
+
 
 const router = createBrowserRouter([
   {
@@ -90,7 +92,10 @@ const router = createBrowserRouter([
     element: <SignInLayout />,
     children: [
       { path: "register", element: <Register /> },
-      { path: "signin", element: (<SignRoute><SignIn/></SignRoute>)}
+      { path: "signin", element: (
+      <SignRoute>
+        <SignIn/>
+      </SignRoute>)}
     ],
   },
 ]);
@@ -122,6 +127,7 @@ function App() {
     // Captura el token de la URL si viene desde Google
     const queryParams = new URLSearchParams(window.location.search);
     const tokenFromURL = queryParams.get("token");
+    const emailFromStorage = localStorage.getItem("userEmail");
 
     if (tokenFromURL) {
       localStorage.setItem("token", tokenFromURL);
@@ -134,8 +140,12 @@ function App() {
       loginWithToken(token).then((user) => {
         if (user) {
           dispatch(setUser({ user, token }));
+          if (!emailFromStorage && user.email) {
+            localStorage.setItem("userEmail", user.email);
+        }
         } else {
           localStorage.removeItem("token"); // Elimina el token si no es válido
+          localStorage.removeItem("userEmail"); // Limpia el email si el token no es válido
         }
       });
     }

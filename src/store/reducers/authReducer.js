@@ -4,8 +4,8 @@ import { login, signUp, setUser, logout } from "../actions/authActions";
 const initialState = {  
     loading: false,
     error: null,
-    users: JSON.parse(localStorage.getItem("userEmail")) || null, 
-    token: null
+    users: localStorage.getItem("userEmail") || null,
+    token: localStorage.getItem("token") || null
 };
 
 const authReducer = createReducer(initialState, (builder) => {
@@ -17,9 +17,9 @@ const authReducer = createReducer(initialState, (builder) => {
             state.error = false;
             state.users = action.payload.user;
             state.token = action.payload.token;
-            if (action.payload.users?.email) {
-                localStorage.setItem("userEmail", action.payload.users.email);
-              }
+            if (action.payload.user?.email) {
+                localStorage.setItem("userEmail", action.payload.user.email);
+            }            
         })
         .addCase(login.pending, (state,action) => {
             console.log("Se inicio sign in");
@@ -44,9 +44,12 @@ const authReducer = createReducer(initialState, (builder) => {
         .addCase(logout.fulfilled, (state) => {
             console.log("Cierre de sesión exitoso");
             localStorage.removeItem("userEmail");
+            localStorage.removeItem("token");
             state.users = null;
             state.token = null;
             state.error = null;
+
+            window.location.reload();
         })
         .addCase(logout.pending, (state) => {
             state.loading = true;

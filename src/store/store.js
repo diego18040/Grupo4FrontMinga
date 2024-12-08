@@ -5,10 +5,13 @@ import cardReducer from '../store/reducers/CardReducer';
 import mangaReducer from './reducers/ReadReducer.js';
 import CommentsReducers from './reducers/CommentsReducers.js';
 import favReducer from './reducers/FavReducer';
+import authReducer from "./reducers/authReducer.js"
 import { loadFavorites } from './actions/FavActions';
 
 export const store = configureStore({
   reducer: {
+    
+    authStore: authReducer,
     chapters: chaptersReducer,
     cards: cardReducer,
     manga: mangaReducer,
