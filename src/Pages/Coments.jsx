@@ -1,34 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { MessageSquare } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchComments } from "../store/actions/CommentActions";
+import { selectCommentsState } from "../store/reducers/CommentsReducers";
 
 export default function Comments() {
     const { id } = useParams();
-    const [comments, setComments] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const dispatch = useDispatch();
+    const { commentsList: comments, loading, error } = useSelector(selectCommentsState);
 
     useEffect(() => {
-        const fetchComments = async () => {
-            try {
-                const response = await fetch(
-                    `http://localhost:8080/api/comments/chapter/${id}`
-                );
-                if (!response.ok) {
-                    throw new Error("Error fetching comments");
-                }
-                const data = await response.json();
-                setComments(data.response || []);
-            } catch (err) {
-                setError(err.message);
-                console.error("Error:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchComments();
-    }, [id]);
+        dispatch(fetchComments(id));
+    }, [id, dispatch]);
 
     if (loading)
         return (

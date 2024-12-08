@@ -1,41 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchChapter } from "../store/actions/ReadMangas";
+import { selectMangaState } from "../store/reducers/ReadReducer";
 
 export default function ReadManga() {
-  const { id } = useParams();  // Obtener id de la URL
+  const { id } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const [mangaData, setMangaData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const dispatch = useDispatch();
+  const { chapterData: mangaData, loading, error } = useSelector(selectMangaState);
 
   useEffect(() => {
-    const fetchChapterData = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/api/chapters/id/${id}`);
-        if (!response.ok) {
-          throw new Error("Error al obtener los datos del capítulo");
-        }
-    
-        const data = await response.json();
-        console.log("Datos recibidos:", data); // debug
-        
-         // accedemos a la propiedad response de la respuesta JSON
-    if (data.response && data.response[0]) {
-      setMangaData(data.response[0]);
-      setLoading(false);
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    setError(true);
-    setLoading(false);
-  }
-    };
-
     if (id) {
-      fetchChapterData();
+      dispatch(fetchChapter(id));
     }
-  }, [id]);
+  }, [id, dispatch]);
 
   if (loading) {
     return <div className="text-center mt-10">Cargando datos del capítulo...</div>;
@@ -54,14 +34,14 @@ export default function ReadManga() {
       <div className="pt-16 pb-20">
         {/* Vista Mobile */}
         <div className="md:hidden">
-  {mangaData && mangaData.pages && (
-    <img
-      src={mangaData.pages[currentPage - 1]}
-      alt={`Página ${currentPage}`}
-      className="w-full h-auto"
-    />
-  )}
-</div>
+          {mangaData && mangaData.pages && (
+            <img
+              src={mangaData.pages[currentPage - 1]}
+              alt={`Página ${currentPage}`}
+              className="w-full h-auto"
+            />
+          )}
+        </div>
 
         {/* Vista Desktop */}
         <div className="hidden md:grid grid-cols-[auto_1fr_auto] max-w-6xl mx-auto gap-4 px-4">
