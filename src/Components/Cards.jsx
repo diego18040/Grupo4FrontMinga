@@ -5,7 +5,6 @@ import Checkboxs from './Checkboxs';
 import '../../src/App.css';
 import { NavLink, useNavigate } from 'react-router-dom'; // Importa useNavigate
 
-
 export default function Cards() {
   const dispatch = useDispatch();
   const { loading, mangas, error } = useSelector(state => state.cards);
@@ -55,7 +54,7 @@ export default function Cards() {
           {mangas.map(manga => (
             <div
               key={manga._id}
-              className="m-2 flex rounded-xl border relative transition-transform duration-200 ease-in-out transform hover:scale-105 cursor-pointer"
+              className="m-2 flex rounded-xl border shadow-lg relative transition-transform duration-200 ease-in-out transform hover:scale-105 cursor-pointer"
               onClick={() => handleCardClick(manga._id)}
             >
               <div className={`w-2 h-40 rounded-t-xl ${genreColors[manga.category_id.name.toLowerCase()] || 'bg-gray-500'}`}></div>
@@ -67,7 +66,7 @@ export default function Cards() {
                   </p>
                 </div>
                 <div className='w-[80%] flex'>
-                  <NavLink to={`/mangas/${manga._id}`} className="mt-4 bg-teal-200 text-teal-500 text-teal-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10 flex items-center justify-center md:block hidden">
+                  <NavLink to={`/mangas/${manga._id}`} className="mt-4 bg-teal-200 text-teal-500 text-teal-400 font-bold py-2 px-4  text-center rounded-full hover:bg-teal-300 w-24 h-10 flex items-center justify-center md:block hidden">
                     Read
                   </NavLink>
                 </div>
