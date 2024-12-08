@@ -29,6 +29,5 @@ const Mangas = () => {
   );
 };
 
-export default Mangas;
 
 export default Mangas;

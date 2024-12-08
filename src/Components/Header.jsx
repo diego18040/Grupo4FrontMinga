@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink,useNavigate } from 'react-router-dom';
 import logo from "../assets/logo.png";
-import {logout} from "../../store/actions/authActions";
+import {logout} from "../store/actions/authActions";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);

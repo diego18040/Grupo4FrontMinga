@@ -23,6 +23,5 @@ const ProfilePanel = () => {
   );
 };
 
-export default ProfilePanel;
 
 export default ProfilePanel;

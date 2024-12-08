@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { setUser } from "../store/actions/authActions";
+import { setUser } from "./store/actions/authActions.js";
 import { useSelector, useDispatch } from "react-redux";
 import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 import './App.css';
