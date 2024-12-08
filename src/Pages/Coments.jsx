@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { MessageSquare, Send, Pencil,Trash2,} from "lucide-react";
+import { MessageSquare, Send, Pencil,Trash2,
+} from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchComments,createComment, updateComment,deleteComment
 } from "../store/actions/CommentActions";
@@ -31,11 +32,11 @@ export default function Comments() {
         setEditedMessage(comment.message);
     };
 
-  const handleUpdateComment = (e, comment) => {
+    const handleUpdateComment = (e, commentId) => {
         e.preventDefault();
         if (editedMessage.trim()) {
             dispatch(updateComment({ 
-                _id: comment._id,  // Aseguramos pasar el _id correcto
+                comment_id: commentId, 
                 message: editedMessage 
             }));
             setEditingComment(null);
@@ -43,11 +44,12 @@ export default function Comments() {
         }
     };
 
-    const handleDeleteComment = (comment) => {
+    const handleDeleteComment = (commentId) => {
         if (window.confirm("¿Estás seguro de que quieres eliminar este comentario?")) {
-            dispatch(deleteComment(comment._id));  // Pasamos el _id directamente
+            dispatch(deleteComment(commentId));
         }
     };
+
     if (loading) {
         return (
             <div className="flex justify-center items-center h-screen bg-gray-50">

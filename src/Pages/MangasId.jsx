@@ -79,7 +79,8 @@ export default function MangasId() {
               </h1>
 
               <div className="flex justify-center gap-6 mb-6">
-                <button className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-100 hover:bg-gray-200" onClick={handleAddFavorite}>
+                <button className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-100 hover:bg-gray-200"
+                 onClick={handleAddFavorite}>
                   👍Fav
                 </button>
                 <button className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-100 hover:bg-gray-200">
