@@ -5,94 +5,128 @@ import axios from "axios";
 const EditChapterForm = () => {
   const { id } = useParams(); // Obtener el id del manga desde la URL
   const [mangaName, setMangaName] = useState("");
-  const [chapter, setChapter] = useState("");
-  const [date, setDate] = useState("");
+  const [chapters, setChapters] = useState([]);
+  const [selectedChapter, setSelectedChapter] = useState("");
+  const [selectedPage, setSelectedPage] = useState("");
   const [dataToEdit, setDataToEdit] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
-    const fetchManga = async () => {
+    const fetchMangaAndChapters = async () => {
       try {
         const token = localStorage.getItem('token'); // Obtener el token de autenticación
-        const response = await axios.get(`http://localhost:8080/api/mangas/id/${id}`, {
+        const mangaResponse = await axios.get(`http://localhost:8080/api/mangas/id/${id}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
-        const manga = response.data.response[0];
+        const manga = mangaResponse.data.response[0];
         setMangaName(manga.title);
         setImageUrl(manga.cover_photo);
+
+        const chaptersResponse = await axios.get(`http://localhost:8080/api/chapters/manga/${id}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        setChapters(chaptersResponse.data.response);
       } catch (error) {
-        console.error("Error fetching manga data:", error);
+        console.error("Error fetching manga or chapters data:", error);
       }
     };
 
-    fetchManga();
+    fetchMangaAndChapters();
   }, [id]);
+  const handleEdit = async () => {
+    try {
+      const token = localStorage.getItem('token'); // Obtener el token de autenticación
+      const payload = {
+        title: mangaName,
+        pages: [dataToEdit],
+      };
 
-  const handleEdit = () => {
-    console.log("Edit clicked");
+      console.log("Payload:", payload);
+
+      const response = await axios.put(`http://localhost:8080/api/chapters/update/${selectedChapter}`, payload, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      console.log("Response:", response.data);
+
+      alert("Chapter updated successfully!");
+    } catch (error) {
+      console.error("Error updating chapter:", error);
+      alert("Failed to update.");
+    }
   };
 
   const handleDelete = () => {
     console.log("Delete clicked");
   };
 
+  const handleChapterChange = (e) => {
+    setSelectedChapter(e.target.value);
+    const chapter = chapters.find(ch => ch._id === e.target.value);
+    setSelectedPage(chapter.pages[0]); // Seleccionar la primera página por defecto
+    setDataToEdit(chapter.pages[0]); // Actualizar el campo dataToEdit con la primera página
+  };
+
+  const handlePageChange = (e) => {
+    setSelectedPage(e.target.value);
+    setDataToEdit(e.target.value); // Actualizar el campo dataToEdit
+  };
+
   return (
-    <div className="flex w-full h-screen ">
+    <div className="flex w-full h-screen">
       {/* Contenedor del formulario */}
-      <div className="flex justify-center ml-[90px] items-center w-2/3 p-6 ">
-        <div className="w-full max-w-sm ">
-          <h2 className="text-3xl text-center p-10 flex ">Edit Chapter</h2>
-          
-          <form className="flex flex-col space-y-6 mt-12"> 
-          {/* Campo Nombre del Manga */}
-<div className="relative w-full">
-  <input
-    id="mangaName"
-    type="text"
-    value={mangaName}
-    onChange={(e) => setMangaName(e.target.value)}
-    className="w-full max-w-[280px] bg-transparent focus:outline-none border-b-2 border-gray-300 focus:border-blue-500 text-base"
-    placeholder="Enter the name of the manga"
-  />
-  <label
-    htmlFor="mangaName"
-    className={`absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none transition-all duration-200 p-2 ${mangaName ? 'text-xs -translate-y-6' : 'text-base'}`}
-  >
+      <div className="flex justify-center ml-[90px] items-center w-2/3 p-6">
+        <div className="w-full max-w-sm">
+          <h2 className="text-3xl text-center p-10 flex">Edit Chapter</h2>
 
-  </label>
-</div>
-
-
+          <form className="flex flex-col space-y-6 mt-12">
+            {/* Campo Nombre del Manga */}
+            <div className="relative w-full">
+              <input
+                id="mangaName"
+                type="text"
+                value={mangaName}
+                onChange={(e) => setMangaName(e.target.value)}
+                className="w-full max-w-[280px] bg-transparent focus:outline-none border-b-2 border-gray-300 focus:border-blue-500 text-base"
+                placeholder="Enter the name of the manga"
+              />
+              <label
+                htmlFor="mangaName"
+                className={`absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none transition-all duration-200 p-2 ${mangaName ? 'text-xs -translate-y-6' : 'text-base'}`}
+              />
+            </div>
             {/* Campo Select para elegir el Capítulo */}
             <div className="relative w-full mb-6">
               <select
                 id="chapter"
-                value={chapter}
-                onChange={(e) => setChapter(e.target.value)}
+                value={selectedChapter}
+                onChange={handleChapterChange}
                 className="p-2 text-gray-500 w-full max-w-[280px] bg-transparent focus:outline-none placeholder-transparent border-b-2 border-gray-300 focus:border-blue-500 text-base"
               >
-                <option value="">select Chapter</option>
-                <option value="Chapter 1">Chapter 1</option>
-                <option value="Chapter 2">Chapter 2</option>
-                <option value="Chapter 3">Chapter 3</option>
+                <option value="">Select Chapter</option>
+                {chapters.map(chapter => (
+                  <option key={chapter._id} value={chapter._id}>
+                    {chapter.title}
+                  </option>
+                ))}
               </select>
             </div>
-
-            {/* Campo Select para elegir la Fecha */}
+            {/* Campo Select para elegir la Página */}
             <div className="relative w-full mb-6">
               <select
-                id="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
+                id="page"
+                value={selectedPage}
+                onChange={handlePageChange}
                 className="p-2 text-gray-500 w-full max-w-[280px] bg-transparent focus:outline-none placeholder-transparent border-b-2 border-gray-300 focus:border-blue-500 text-base"
               >
-                <option value="">select Date</option>
-                <option value="2024-12-01">December 1, 2024</option>
-                <option value="2024-12-02">December 2, 2024</option>
-                <option value="2024-12-03">December 3, 2024</option>
+                <option value="">Select Page</option>
+                {selectedChapter && chapters.find(ch => ch._id === selectedChapter).pages.map((page, index) => (
+                  <option key={index} value={page}>
+                    Page {index + 1}
+                  </option>
+                ))}
               </select>
             </div>
-
             {/* Campo para editar los datos */}
             <div className="relative w-full mb-6">
               <input
@@ -107,10 +141,9 @@ const EditChapterForm = () => {
                 htmlFor="dataToEdit"
                 className={`absolute p-3 left-0 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none transition-all duration-200 ${dataToEdit ? 'text-xs -translate-y-6' : 'text-base'}`}
               >
-                Data to Edit
+              
               </label>
             </div>
-
             {/* Botones de acción */}
             <div className="flex flex-col space-y-6 justify-center">
               <button
@@ -133,13 +166,13 @@ const EditChapterForm = () => {
       </div>
 
       {/* Contenedor de la imagen con el título encima */}
-      <div className="relative flex justify-center items-center w-full mt-[30px]  ">
+      <div className="relative flex justify-center items-center w-full mt-[30px]">
         <div className="w-full p-4 max-w-sm text-center hidden sm:block">
           <h2 className="text-lg text-center">{mangaName}</h2>
           <img
             src={imageUrl}
             alt={mangaName}
-            className="rounded-lg w-[350px] h-[480px] "
+            className="rounded-lg w-[350px] h-[480px]"
           />
         </div>
       </div>

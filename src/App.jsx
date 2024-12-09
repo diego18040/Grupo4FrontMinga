@@ -25,12 +25,13 @@ import Comments from './Pages/Coments.jsx';
 import EditAuthor from './Pages/EditAuthor.jsx';
 import EditCompany from './Pages/EditCompany';
 import CreateRoles from './Layouts/CreateRoles.jsx';
-import NewRoleForm from './Components/NewRoleForm.jsx';
 import SignRoute from "./Components/SignRoute.jsx";
 import EditMangaPage from "./Pages/EditMangaPage.jsx";
+import NewMangaPage from "./Pages/NewMangaPage.jsx";
+import NewChapterPage from "./Pages/NewChapterPage.jsx"
+import NewRoleFormTwo from "./Pages/RoleCompany.jsx";
 import NewRoleFormOne from "./Components/CreateRoleForm.jsx";
 import NewRole from "./Components/NewRoleForm.jsx";
-import NewRoleFormTwo from "./Pages/RoleCompany.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const isOnline = useSelector((store) => store.userSignUpReducer.isOnline);
@@ -54,10 +55,13 @@ const router = createBrowserRouter([
   {
     element: <CreateLayout />,
     children: [
-      { path: "editauthor/:id", element: <EditAuthor /> },
-      { path: "editchapter/:id", element: <EditChapter /> },
-      { path: "editcompany/:id", element: <EditCompany /> },
-      { path: "editmanga/:id", element: <EditMangaPage /> },
+      { path: "/editauthor/:id", element: <EditAuthor /> },
+      { path: "/editchapter/:id", element: <EditChapter /> },
+      { path: "/editcompany/:id", element: <EditCompany /> },
+      { path: "/editmanga/:id", element: <EditMangaPage /> },
+      { path: "/newmanga/", element: <NewMangaPage /> },
+      { path: "/:id/newchapter/", element: <NewChapterPage /> },
+      
 
     ]
   },
@@ -112,7 +116,7 @@ function App() {
       localStorage.setItem("token", tokenFromURL);
       localStorage.setItem("userId", userIdFromURL);
       window.history.replaceState({}, document.title, "/");
-      
+
       const user = { _id: userIdFromURL };
       dispatch(setUser({ user, token: tokenFromURL }));
     }
@@ -122,6 +126,7 @@ function App() {
     <div className="App">
       <RouterProvider router={router} />
     </div>
+
   );
 }
 

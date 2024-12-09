@@ -4,10 +4,14 @@ import { fetchMangasEdit } from '../store/actions/CardsEditActions';
 import edit from "../assets/editar.png";
 import del from "../assets/eliminar.png";
 import CheckboxsEdit from './CheckboxEdit';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import Swal from 'sweetalert2'; // Importar SweetAlert2
 
 export default function CardsEdit() {
     const { id } = useParams(); // Obtener el id del creador desde la URL
+    const navigate = useNavigate(); // Inicializar useNavigate
+    const userId = localStorage.getItem("userId"); // Obtener userId del localStorage
     const dispatch = useDispatch();
     const { loading, mangas, error } = useSelector(state => state.cards);
     const selectedTitle = useSelector(state => state.cards.selectedTitle);
@@ -31,15 +35,50 @@ export default function CardsEdit() {
         kodomo: 'text-purple-400'
     };
 
+    const handleDelete = async (mangaId) => {
+        const token = localStorage.getItem('token'); // Obtener el token de autenticación
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await axios.delete(`http://localhost:8080/api/mangas/deleteone/${mangaId}`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+
+                    console.log("Response:", response.data);
+
+                    Swal.fire(
+                        'Deleted!',
+                        'Your manga has been deleted.',
+                        'success'
+                    );
+
+                    dispatch(fetchMangasEdit(id, selectedTitle, selectedGenre)); // Actualizar la lista de mangas
+                } catch (error) {
+                    console.error("Error deleting manga:", error);
+                    Swal.fire(
+                        'Failed!',
+                        'Your manga could not be deleted.',
+                        'error'
+                    );
+                }
+            }
+        });
+    };
     return (
         <div>
             <CheckboxsEdit />
+            <NavLink to={`/newmanga/`} className="mt-4 bg-purple-300 text-purple-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">NEW MANGA</NavLink>
             {loading && (
                 <div className="flex justify-center items-center h-64">
-                    <svg className="animate-spin h-16 w-16 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                    </svg>
+                    <div className="animate-spin h-16 w-16 border-4 border-blue-500 border-t-transparent rounded-full"></div>
                 </div>
             )}
             {!loading && (error || mangas.length === 0) && (
@@ -64,7 +103,7 @@ export default function CardsEdit() {
                                             <button className=""><img src={edit} alt="edit" /></button>
                                         </div>
                                         <div className="p-2">
-                                            <button className=""><img src={del} alt="delete" /></button>
+                                            <button className="" onClick={() => handleDelete(manga._id)}><img src={del} alt="delete" /></button>
                                         </div>
                                     </div>
                                 </div>
@@ -73,13 +112,14 @@ export default function CardsEdit() {
                                     <p className={`${manga.category_id && manga.category_id.name ? textColorClasses[manga.category_id.name.toLowerCase()] : ''} text-left font-bold text-xl`}>
                                         {manga.category_id && manga.category_id.name}
                                     </p>
+                                    <div></div>
                                 </div>
                                 <div className="grid grid-cols-2">
                                     <div className="w-[80%] flex">
-                                      <NavLink to={`/editmanga/${manga._id}`} className="mt-4 bg-purple-300 text-purple-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">EDIT</NavLink>
+                                        <NavLink to={`/editmanga/${manga._id}`} className="mt-4 bg-purple-300 text-purple-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">EDIT</NavLink>
                                     </div>
                                     <div className="w-[80%] flex">
-                                        <button className="mt-4 bg-teal-200 text-teal-500 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">DELETE</button>
+                                        <button className="mt-4 bg-teal-200 text-teal-500 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10" onClick={() => handleDelete(manga._id)}>DELETE</button>
                                     </div>
                                 </div>
                             </div>

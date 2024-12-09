@@ -14,3 +14,4 @@ export const fetchChaptersByMangaId = createAsyncThunk(
     return response.data;
   }
 );
+
