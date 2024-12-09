@@ -99,24 +99,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-// Function to validate the token
-
-const loginWithToken = async (token) => {
-  try {
-    console.log("se ejecutó login with token");
-
-    const response = await axios.get("http://localhost:8080/api/users/validatetoken",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }
-    )
-    return response.data.response
-  } catch (error) {
-    console.log("error", error)
-  }
-}
 
 function App() {
   const dispatch = useDispatch();
@@ -124,26 +106,15 @@ function App() {
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const tokenFromURL = queryParams.get("token");
-    const emailFromStorage = localStorage.getItem("userEmail");
+    const userIdFromURL = queryParams.get("userId");
 
-    if (tokenFromURL) {
+    if (tokenFromURL && userIdFromURL) {
       localStorage.setItem("token", tokenFromURL);
+      localStorage.setItem("userId", userIdFromURL);
       window.history.replaceState({}, document.title, "/");
-    }
-
-    const token = localStorage.getItem("token");
-    if (token) {
-      loginWithToken(token).then((user) => {
-        if (user) {
-          dispatch(setUser({ user, token }));
-          if (!emailFromStorage && user.email) {
-            localStorage.setItem("userEmail", user.email);
-          }
-        } else {
-          localStorage.removeItem("token");
-          localStorage.removeItem("userEmail");
-        }
-      });
+      
+      const user = { _id: userIdFromURL };
+      dispatch(setUser({ user, token: tokenFromURL }));
     }
   }, [dispatch]);
 

@@ -14,49 +14,42 @@ const authReducer = createReducer(initialState, (builder) => {
         console.log("Se ejecuto correctamente");
         console.log(action);
 
-        state.loading = false;
-        state.error = false;
-        state.users = action.payload.user;
-        state.userId = action.payload.user._id; // Almacenar userId en el estado
-        state.token = action.payload.token;
-        if (action.payload.user?.email) {
-            localStorage.setItem("userEmail", action.payload.user.email);
-            localStorage.setItem("userId", action.payload.user._id); // Guardar userId en el localStorage
-        }
-    })
-    .addCase(login.pending, (state, action) => {
-        console.log("Se inicio sign in");
-        console.log(action);
-        state.loading = true;
-        state.error = false;
-        state.users = null;
-        state.userId = null;
-        state.token = null;
-    })
-    .addCase(login.rejected, (state, action) => {
-        console.log("Error en el sign in");
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId"); // Remover userId del localStorage
-        state.loading = false;
-        state.error = action.error?.message || "Error desconocido";
-        state.users = null;
-        state.userId = null;
-        state.token = null;
-    })
-    .addCase(setUser, (state, action) => {
-        state.users = action.payload.user;
-        state.userId = action.payload.user._id; // Almacenar userId en el estado
-        state.token = action.payload.token;
-    })
-    .addCase(logout.fulfilled, (state) => {
-        console.log("Cierre de sesión exitoso");
-        localStorage.removeItem("userEmail");
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId"); // Remover userId del localStorage
-        state.users = null;
-        state.userId = null;
-        state.token = null;
-        state.error = null;
+            state.loading = false;
+            state.error = false;
+            state.users = action.payload.user;
+            state.token = action.payload.token;
+            if (action.payload.user?.email) {
+                localStorage.setItem("userEmail", action.payload.user.email);
+            }            
+        })
+        .addCase(login.pending, (state,action) => {
+            console.log("Se inicio sign in");
+            console.log(action);
+            state.loading = true;
+            state.error = false;
+            state.users = null;
+            state.token = null;
+        })
+        .addCase(login.rejected, (state, action) => {
+            console.log("Error en el sign in");
+            localStorage.removeItem("token");
+            state.loading = false;
+            state.error = action.error?.message || "Error desconocido";
+            state.users = null;
+            state.token = null;
+        })
+        .addCase(setUser, (state, action) => {
+            state.users = action.payload.user;
+            state.token = action.payload.token;
+        })
+        .addCase(logout.fulfilled, (state) => {
+            console.log("Cierre de sesión exitoso");
+            localStorage.removeItem("userEmail");
+            localStorage.removeItem("token");
+            localStorage.removeItem("userId");
+            state.users = null;
+            state.token = null;
+            state.error = null;
 
         window.location.reload();
     })

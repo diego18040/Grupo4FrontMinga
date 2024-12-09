@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
 
 export const createAuthor = createAsyncThunk(
     "roles/createAuthor",
@@ -15,7 +16,8 @@ export const createAuthor = createAsyncThunk(
                 "http://localhost:8080/api/authors/create",
                 {
                     name: authorData.name,
-                    email: authorData.email
+                    email: authorData.email,
+                    userId,
                 },
                 {
                     headers: {

@@ -4,12 +4,19 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchComments = createAsyncThunk(
     "comments/fetchComments",
     async (chapterId) => {
+        const token = localStorage.getItem('token');
         const response = await fetch(
-            `http://localhost:8080/api/comments/chapter/${chapterId}`
+            `http://localhost:8080/api/comments/chapter/${chapterId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
         );
+        
         if (!response.ok) {
             throw new Error("Error fetching comments");
         }
+        
         const data = await response.json();
         return data.response;
     }

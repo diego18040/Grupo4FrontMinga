@@ -117,7 +117,7 @@ const SignInForm = () => {
               className="w-6 h-6"
               alt="Google Logo"
             />
-            <span>Login with Google</span>
+            <span>Sign in with Google</span>
           </button>
         </div>
         </div>
