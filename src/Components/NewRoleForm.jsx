@@ -15,7 +15,13 @@ const NewRole = () => {
 
   const handleJoin = (selectedRole) => {
     console.log('Navegando a NewRoleForm con rol:', selectedRole);
-    navigate('/NewRoleForm', { 
+    navigate('/NewRoleFormOne', { 
+      state: { role: selectedRole } 
+    });
+  };
+  const handleJoinDos = (selectedRole) => {
+    console.log('Navegando a NewRoleForm con rol:', selectedRole);
+    navigate('/NewRoleFormTwo', { 
       state: { role: selectedRole } 
     });
   };
@@ -77,7 +83,7 @@ const NewRole = () => {
 
             {/* Botón Join as Company */}
             <button
-              onClick={() => handleJoin("Company")}
+              onClick={() => handleJoinDos("Company")}
               className="md:w-[40vw] md:h-[12vh] border border-pink-500 text-pink-500 rounded-2xl  hover:bg-pink-400 transition-colors bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-transparent bg-clip-text relative flex justify-between items-center px-8"
             >
               {/* Contenedor de las imágenes */}

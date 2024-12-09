@@ -132,7 +132,8 @@ export default function MangasId() {
             <button
               className={`px-6 py-2 rounded-full text-sm ${activeTab === "chapters" ? "bg-pink-500 text-white" : "bg-gray-200"
                 } hover:bg-gray-300`}
-       
+              className={`px-8 py-3 rounded-full ${activeTab === "chapters" ? "bg-pink-500 text-white" : "bg-gray-200"} hover:bg-gray-300`}
+              onClick={() => setActiveTab("chapters")}
             >
               Chapters
             </button>

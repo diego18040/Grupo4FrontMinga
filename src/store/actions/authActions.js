@@ -65,4 +65,5 @@ const signUp = createAsyncThunk("signUp", async ({ email, password, photo }) => 
   return response.data;
 });
 
+
 export { login, signUp, setUser, logout };

@@ -1,18 +1,31 @@
 import '../App.css'; 
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { login } from "../store/actions/authActions";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { loading = false, error = null } = useSelector((state) => state.authStore || {});
+  const navigate = useNavigate();
+  const { loading = false, error = null, token } = useSelector((state) => state.authStore || {});
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (token) {
+      navigate('/mangas'); // or wherever you want to redirect after login
+    }
+  }, [token, navigate]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    try {
+      await dispatch(login({ email, password })).unwrap();
+    } catch (err) {
+      console.error("Login failed:", err);
+    }
   };
 
   const loginWithGoogle = () => {

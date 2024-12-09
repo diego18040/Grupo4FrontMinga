@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { createAuthor, createCompany } from "../store/actions/RolesActions";
-import { clearRoleState } from "../store/reducers/rolesReducer";
 
 const NewRoleForm = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { loading, error, success } = useSelector((state) => state.roles);
 
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState(""); // Estado para el rol seleccionado
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,13 +12,7 @@ const NewRoleForm = () => {
     website: "",
   });
 
-  useEffect(() => {
-    if (success) {
-      dispatch(clearRoleState());
-      navigate("/mangas");
-    }
-  }, [success, navigate, dispatch]);
-
+  // Función para manejar los cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -32,50 +21,31 @@ const NewRoleForm = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  // Función para manejar el envío del formulario
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Enviando datos:", { role, formData });
 
-    try {
-      if (role === "Author" || !role) {
-        await dispatch(
-          createAuthor({
-            name: formData.name,
-            email: formData.email,
-          })
-        ).unwrap();
-      }
-      if (role === "Company" || !role) {
-        await dispatch(
-          createCompany({
-            name: formData.companyName || formData.name,
-            email: formData.email,
-            website: formData.website,
-          })
-        ).unwrap();
-      }
-    } catch (err) {
-      console.error("Error creating role:", err);
-    }
+    // Aquí puedes hacer lo que necesites con los datos del formulario (enviar a la API, etc.)
+    console.log(formData);
+    // Redirigir a otra página después de enviar el formulario
+    navigate("/success"); // Ejemplo de ruta de éxito
   };
 
   return (
     <div className="flex w-full h-screen mt-16 md:mt-0">
+      {/* Contenedor izquierdo (Formulario) */}
       <div className="flex justify-center items-center w-full md:w-2/3 p-6">
         <div className="w-full max-w-sm text-center">
-          {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-              {error}
-            </div>
-          )}
-
+          {/* Contenedor del título y descripción */}
           <div className="flex flex-col items-center mb-4">
             <p className="text-4xl p-8 text-transparent bg-clip-text bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 mb-2 whitespace-nowrap">
-              Complete your profile
+              Complete your profile asdasdasdasdas
             </p>
           </div>
 
+          {/* Formulario */}
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Selección de rol */}
             <div className="flex justify-center items-center space-x-4 mb-4">
               <button
                 type="button"
@@ -97,6 +67,7 @@ const NewRoleForm = () => {
               </button>
             </div>
 
+            {/* Campo de nombre */}
             <div className="flex flex-col items-start mb-4">
               <label htmlFor="name" className="text-lg font-semibold">
                 Name
@@ -108,10 +79,11 @@ const NewRoleForm = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full p-2 rounded-md border border-gray-300 focus:border-pink-500 focus:ring focus:ring-pink-200"
+                className="p-2 rounded-md border border-gray-300"
               />
             </div>
 
+            {/* Campo de correo */}
             <div className="flex flex-col items-start mb-4">
               <label htmlFor="email" className="text-lg font-semibold">
                 Email
@@ -123,10 +95,11 @@ const NewRoleForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full p-2 rounded-md border border-gray-300 focus:border-pink-500 focus:ring focus:ring-pink-200"
+                className="p-2 rounded-md border border-gray-300"
               />
             </div>
 
+            {/* Campos específicos según el rol */}
             {role === "Company" && (
               <>
                 <div className="flex flex-col items-start mb-4">
@@ -140,7 +113,7 @@ const NewRoleForm = () => {
                     value={formData.companyName}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 rounded-md border border-gray-300 focus:border-pink-500 focus:ring focus:ring-pink-200"
+                    className="p-2 rounded-md border border-gray-300"
                   />
                 </div>
                 <div className="flex flex-col items-start mb-4">
@@ -153,28 +126,26 @@ const NewRoleForm = () => {
                     name="website"
                     value={formData.website}
                     onChange={handleChange}
-                    className="w-full p-2 rounded-md border border-gray-300 focus:border-pink-500 focus:ring focus:ring-pink-200"
+                    className="p-2 rounded-md border border-gray-300"
                   />
                 </div>
               </>
             )}
 
+            {/* Botón de enviar */}
             <button
               type="submit"
-              disabled={loading}
-              className={`w-full p-3 text-white ${
-                loading
-                  ? "bg-pink-300 cursor-not-allowed"
-                  : "bg-pink-500 hover:bg-pink-400"
-              } rounded-2xl transition-colors`}
+              className="w-full p-3 text-white bg-pink-500 rounded-2xl hover:bg-pink-400"
             >
-              {loading ? "Processing..." : "Submit"}
+              Submit
             </button>
           </form>
         </div>
       </div>
 
+      {/* Contenedor derecho (imagen de fondo opcional) */}
       <div className="relative justify-center items-center w-2/3 h-full hidden md:block">
+        {/* Imagen de fondo opcional */}
         <img
           src="https://via.placeholder.com/800x600"
           alt="Background"

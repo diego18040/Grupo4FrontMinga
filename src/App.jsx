@@ -28,6 +28,9 @@ import CreateRoles from './Layouts/CreateRoles.jsx';
 import NewRoleForm from './Components/NewRoleForm.jsx';
 import SignRoute from "./Components/SignRoute.jsx";
 import EditMangaPage from "./Pages/EditMangaPage.jsx";
+import NewRoleFormOne from "./Components/CreateRoleForm.jsx";
+import NewRole from "./Components/NewRoleForm.jsx";
+import NewRoleFormTwo from "./Pages/RoleCompany.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const isOnline = useSelector((store) => store.userSignUpReducer.isOnline);
@@ -59,9 +62,11 @@ const router = createBrowserRouter([
     ]
   },
   {
+    //el que agarra
     element: <CreateRoles />,
     children: [
-      { path: "/Newroleform", element: <NewRoleForm /> }
+      { path: "/NewroleformOne", element: <NewRoleFormOne /> },
+      {path:"/NewRoleFormTwo",element:<NewRoleFormTwo/>}
     ],
   },
   {
@@ -77,9 +82,12 @@ const router = createBrowserRouter([
     ],
   },
   {
+    //elegir autor o company
+    //pero a la vez esta en la page NewRoleForm , y para exportar se llama NEWROLE
     element: <RolesLayaut />,
     children: [
-      { path: "/newrole", element: <RolesLayaut /> },
+      { path: "/newrole", element: <NewRole /> },
+
     ],
   },
   {
