@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchMangas } from '../store/actions/CardActions.js';
 import Checkboxs from './Checkboxs';
 import '../../src/App.css';
-import { NavLink, useNavigate } from 'react-router-dom'; // Importa useNavigate
+import { NavLink, useNavigate } from 'react-router-dom'; 
 
 export default function Cards() {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export default function Cards() {
   const selectedTitle = useSelector(state => state.cards.selectedTitle);
   const selectedGenre = useSelector(state => state.cards.selectedGenre);
 
-  const navigate = useNavigate(); // Inicializa useNavigate
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     dispatch(fetchMangas(selectedTitle, selectedGenre));
@@ -32,7 +32,7 @@ export default function Cards() {
   };
 
   const handleCardClick = (id) => {
-    if (window.innerWidth <= 768) { // Detecta dispositivos mÃ³viles
+    if (window.innerWidth <= 768) { 
       navigate(`/mangas/${id}`);
     }
   };

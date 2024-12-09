@@ -1,7 +1,3 @@
-
-
-// export default Mangas;
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import mangas from "../assets/mangas.jpg";

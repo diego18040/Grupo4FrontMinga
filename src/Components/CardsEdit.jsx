@@ -6,19 +6,19 @@ import del from "../assets/eliminar.png";
 import CheckboxsEdit from './CheckboxEdit';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import Swal from 'sweetalert2'; // Importar SweetAlert2
+import Swal from 'sweetalert2'; 
 
 export default function CardsEdit() {
-    const { id } = useParams(); // Obtener el id del creador desde la URL
-    const navigate = useNavigate(); // Inicializar useNavigate
-    const userId = localStorage.getItem("userId"); // Obtener userId del localStorage
+    const { id } = useParams(); 
+    const navigate = useNavigate(); 
+    const userId = localStorage.getItem("userId"); 
     const dispatch = useDispatch();
     const { loading, mangas, error } = useSelector(state => state.cards);
     const selectedTitle = useSelector(state => state.cards.selectedTitle);
     const selectedGenre = useSelector(state => state.cards.selectedGenre);
 
     useEffect(() => {
-        dispatch(fetchMangasEdit(id, selectedTitle, selectedGenre)); // Pasar el id aquí
+        dispatch(fetchMangasEdit(id, selectedTitle, selectedGenre)); 
     }, [id, selectedTitle, selectedGenre, dispatch]);
 
     const genreColors = {
@@ -36,7 +36,7 @@ export default function CardsEdit() {
     };
 
     const handleDelete = async (mangaId) => {
-        const token = localStorage.getItem('token'); // Obtener el token de autenticación
+        const token = localStorage.getItem('token'); 
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
