@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Home() {
-  // Obtener el estado de forma más segura
+  // Obtener el estado 
   const authStore = useSelector(state => state.authStore);
   const token = authStore?.token;
   const isAuthenticated = Boolean(token);

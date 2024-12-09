@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 const Footer = () => {
   return (
     <div>
-      {/* Contenedor principal para la imagen con margen */}
       <div className="relative w-full h-auto bg-white overflow-hidden">
         {/* Imagen principal con curva */}
         <img
@@ -18,8 +17,6 @@ const Footer = () => {
           }}
         />
       </div>
-
-      {/* Footer */}
       <footer class="bg-white border-gray-200 mt-auto">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 md:py-2">
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -30,7 +27,6 @@ const Footer = () => {
           <div class="flex md:order-3 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div className="flex flex-col items-start w-56 h-30">
               <div className="max-w-sm  bg-white  rounded-lg">
-                {/* Redes sociales */}
                 <div className="flex space-x-8 mt-4 w-52 h-6 justify-center">
                   <svg width="24" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12.8192 24H1.32462C0.592836 24 0 23.4068 0 22.6753V1.32461C0 0.592925 0.592929 0 1.32462 0H22.6755C23.407 0 24 0.592925 24 1.32461V22.6753C24 23.4069 23.4069 24 22.6755 24H16.5597V14.7059H19.6793L20.1464 11.0838H16.5597V8.77132C16.5597 7.72264 16.8509 7.00801 18.3546 7.00801L20.2727 7.00717V3.76755C19.9409 3.7234 18.8024 3.62478 17.4778 3.62478C14.7124 3.62478 12.8192 5.31276 12.8192 8.4126V11.0838H9.69156V14.7059H12.8192V24Z" fill="#222222" />

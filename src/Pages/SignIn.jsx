@@ -9,7 +9,6 @@ const SignIn = () => {
 
   return (
     <div className="h-screen flex">
-      {/* Imagen en la mitad izquierda */}
       <div className="hidden lg:block w-1/2">
         <img
           src={backgroundImg}
@@ -17,8 +16,6 @@ const SignIn = () => {
           className="w-full h-full object-cover"
         />
       </div>
-
-      {/* Contenedor del formulario en la mitad derecha */}
       <div className="w-full lg:w-1/2 flex justify-center items-center bg-gray-50">
         <SignInForm onSubmit={handleFormSubmit} />
       </div>

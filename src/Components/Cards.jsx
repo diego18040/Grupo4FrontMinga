@@ -32,7 +32,7 @@ export default function Cards() {
   };
 
   const handleCardClick = (id) => {
-    if (window.innerWidth <= 768) { // Detecta dispositivos mÃ³viles
+    if (window.innerWidth <= 768) { 
       navigate(`/mangas/${id}`);
     }
   };

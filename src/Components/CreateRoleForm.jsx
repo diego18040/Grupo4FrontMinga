@@ -41,13 +41,14 @@ const NewRoleFormOne = () => {
       return;
     }
 
+    // Datos del autor
     const authorData = {
       name: `${formData.firstName} ${formData.lastName}`,
       location: formData.location,
       dateJoined: formData.dateJoined,
       profileImage: formData.profileImage,
       email: localStorage.getItem("userEmail"),
-      user_id: userId, // Usamos `user_id` para coincidir con el backend
+      user_id: userId, // Usamos `user_id` para buscar con el backend
     };
 
     try {

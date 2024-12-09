@@ -49,7 +49,6 @@ export default function MangasId() {
     <div className="max-w-full mx-auto mt-16">
       <FavoritesModal />
       <div className="flex flex-col md:flex-row gap-8 p-4 md:p-8">
-        {/* Left section */}
         <div className="md:w-1/2 lg:w-2/5">
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="h-[400px] md:h-[500px]">
@@ -103,9 +102,7 @@ export default function MangasId() {
           </div>
         </div>
 
-        {/* Right section */}
         <div className="md:w-1/2 lg:w-3/5 space-y-6 lg:mt-10">
-          {/* Tabs */}
           <div className="flex gap-4 justify-center">
             <button
               onClick={() => setActiveTab("manga")}

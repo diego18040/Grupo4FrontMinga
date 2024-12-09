@@ -6,7 +6,6 @@ import EditChapterForm from "../components/EditChapterForm";
 const EditChapter = () => {
   return (
     <CreateLayout>
-      
       <EditChapterForm />
     </CreateLayout>
   );

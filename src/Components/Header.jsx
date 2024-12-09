@@ -42,9 +42,8 @@ const Header = () => {
         </div>
 
         <div
-          className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-white shadow-lg transform transition-transform duration-300 ${
-            menuOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
+          className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-white shadow-lg transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
         >
           <button
             className="text-right p-4 text-white"
@@ -75,15 +74,31 @@ const Header = () => {
                 Home
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/register"
-                className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
-                onClick={toggleMenu}
-              >
-                Register
-              </NavLink>
-            </li>
+
+            {!token ? (
+              // Mostrar "Register" cuando no hay token
+              <li>
+                <NavLink
+                  to="/register"
+                  className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                  onClick={toggleMenu}
+                >
+                  Register
+                </NavLink>
+              </li>
+            ) : (
+              // Mostrar "Mangas" cuando el usuario está logueado
+              <li>
+                <NavLink
+                  to="/mangas"
+                  className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                  onClick={toggleMenu}
+                >
+                  Mangas
+                </NavLink>
+              </li>
+            )}
+
             {token && (
               <>
                 <li>
@@ -123,6 +138,7 @@ const Header = () => {
                 </li>
               </>
             )}
+
             {!token && (
               <li>
                 <NavLink

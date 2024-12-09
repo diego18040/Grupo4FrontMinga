@@ -9,7 +9,6 @@ const ProfilePanel = () => {
   const location = useLocation();
 
   useEffect(() => {
-
     if (location.pathname !== "/profile") {
       navigate('/profile', {
         state: {
@@ -19,19 +18,14 @@ const ProfilePanel = () => {
       });
     }
   }, [navigate, location.pathname]);
-
   const isProfilePage = location.pathname === "/profile"; 
-
   return (
     <>
-
       {isProfilePage && (
         <div className="hidden md:block">
           <Hero backgroundImage={profile} title="Profile" />
         </div>
       )}
-
-
       <ProfileForm />
     </>
   );
