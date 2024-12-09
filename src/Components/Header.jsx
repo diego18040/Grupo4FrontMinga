@@ -10,6 +10,7 @@ const Header = () => {
   const user = useSelector((state) => state.authStore?.users);
   const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId"); // Obtener userId del estado o localStorage
   const userEmail = user?.email || localStorage.getItem("userEmail");
+  const userPhoto = user?.photo || localStorage.getItem("userPhoto");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,8 +20,8 @@ const Header = () => {
   };
 
   const handleSignOut = () => {
-    dispatch(logout()); // Acción de logout
-    navigate("/"); // Redirige al login tras cerrar sesión
+    dispatch(logout());
+    navigate("/");
   };
 
   return (
@@ -51,6 +52,19 @@ const Header = () => {
           >
             ✕
           </button>
+
+          {/* Información del usuario */}
+          {token && (
+            <div className="p-4 flex flex-col items-center space-y-2 border-b border-white">
+              <img
+                src={userPhoto || "https://via.placeholder.com/150"}
+                alt="User avatar"
+                className="w-16 h-16 rounded-full"
+              />
+              <span className="text-white font-bold text-sm">{userEmail || "User"}</span>
+            </div>
+          )}
+
           <ul className="space-y-4 p-4 text-xs">
             <li>
               <NavLink
@@ -70,7 +84,7 @@ const Header = () => {
                 Register
               </NavLink>
             </li>
-            {token ? (
+            {token && (
               <>
                 <li>
                   <NavLink
@@ -99,10 +113,7 @@ const Header = () => {
                     Admin Panel
                   </NavLink>
                 </li>
-                <li className="flex items-center space-x-4">
-                  <span className="text-gray-900 dark:text-white">
-                    Welcome, {userEmail || "User"}
-                  </span>
+                <li>
                   <button
                     onClick={handleSignOut}
                     className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
@@ -111,7 +122,8 @@ const Header = () => {
                   </button>
                 </li>
               </>
-            ) : (
+            )}
+            {!token && (
               <li>
                 <NavLink
                   to="/signin"
@@ -130,3 +142,4 @@ const Header = () => {
 };
 
 export default Header;
+

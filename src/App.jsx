@@ -111,12 +111,16 @@ function App() {
     const queryParams = new URLSearchParams(window.location.search);
     const tokenFromURL = queryParams.get("token");
     const userIdFromURL = queryParams.get("userId");
+    const UserEmailFromURL = queryParams.get("userEmail");
+    const userPhotoFromURL = queryParams.get("userPhoto");
 
     if (tokenFromURL && userIdFromURL) {
       localStorage.setItem("token", tokenFromURL);
       localStorage.setItem("userId", userIdFromURL);
+      localStorage.setItem("userEmail",UserEmailFromURL);
+      localStorage.setItem("userPhoto",userPhotoFromURL);
       window.history.replaceState({}, document.title, "/");
-
+      
       const user = { _id: userIdFromURL };
       dispatch(setUser({ user, token: tokenFromURL }));
     }
