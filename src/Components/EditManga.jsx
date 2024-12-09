@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Importar useNavigate
+import { useParams, useNavigate, NavLink } from "react-router-dom"; // Importar useNavigate
 import axios from "axios";
 
 const EditManga = () => {
@@ -178,6 +178,20 @@ const EditManga = () => {
                             >
                                 Edit
                             </button>
+                            <NavLink to={`/${id}/newchapter/`}
+
+
+                                className="w-[280px] h-[65px] bg-[#FBDDCC] text-[#EE837F] px-[55px] py-[20px] rounded-[50000px] opacity-100 font-montserrat text-[20px] font-bold leading-[29.26px] text-center hover:bg-[#f9cdb8] transition-colors"
+                            >
+                                New Chapter
+                            </NavLink>
+                            <NavLink to={`/editchapter/${id}`}
+
+
+                                className="w-[280px] h-[65px] bg-[#FBDDCC] text-[#EE837F] px-[55px] py-[20px] rounded-[50000px] opacity-100 font-montserrat text-[20px] font-bold leading-[29.26px] text-center hover:bg-[#f9cdb8] transition-colors"
+                            >
+                                Edit Chapter
+                            </NavLink>
                             <button
                                 type="button"
                                 onClick={handleDelete}
@@ -185,6 +199,7 @@ const EditManga = () => {
                             >
                                 Delete
                             </button>
+
                         </div>
                     </form>
                 </div>

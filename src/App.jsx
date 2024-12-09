@@ -28,6 +28,8 @@ import CreateRoles from './Layouts/CreateRoles.jsx';
 import NewRoleForm from './Components/NewRoleForm.jsx';
 import SignRoute from "./Components/SignRoute.jsx";
 import EditMangaPage from "./Pages/EditMangaPage.jsx";
+import NewMangaPage from "./Pages/NewMangaPage.jsx";
+import NewChapterPage from "./Pages/NewChapterPage.jsx"
 
 const ProtectedRoute = ({ children }) => {
   const isOnline = useSelector((store) => store.userSignUpReducer.isOnline);
@@ -52,10 +54,13 @@ const router = createBrowserRouter([
   {
     element: < CreateLayout />,
     children: [
-      { path: "editauthor/:id", element: <EditAuthor /> },
-      { path: "editchapter/:id", element: <EditChapter /> },
-      { path: "editcompany/:id", element: <EditCompany /> },
-      { path: "editmanga/:id", element: <EditMangaPage /> },
+      { path: "/editauthor/:id", element: <EditAuthor /> },
+      { path: "/editchapter/:id", element: <EditChapter /> },
+      { path: "/editcompany/:id", element: <EditCompany /> },
+      { path: "/editmanga/:id", element: <EditMangaPage /> },
+      { path: "/newmanga/", element: <NewMangaPage /> },
+      { path: "/:id/newchapter/", element: <NewChapterPage /> },
+      
 
     ]
   },
@@ -124,36 +129,25 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Captura el token de la URL si viene desde Google
     const queryParams = new URLSearchParams(window.location.search);
     const tokenFromURL = queryParams.get("token");
-    const emailFromStorage = localStorage.getItem("userEmail");
+    const userIdFromURL = queryParams.get("userId");
 
-    if (tokenFromURL) {
+    if (tokenFromURL && userIdFromURL) {
       localStorage.setItem("token", tokenFromURL);
-      window.history.replaceState({}, document.title, "/"); // Elimina el token de la URL
-    }
+      localStorage.setItem("userId", userIdFromURL);
+      window.history.replaceState({}, document.title, "/");
 
-    // Valida el token desde localStorage
-    const token = localStorage.getItem("token");
-    if (token) {
-      loginWithToken(token).then((user) => {
-        if (user) {
-          dispatch(setUser({ user, token }));
-          if (!emailFromStorage && user.email) {
-            localStorage.setItem("userEmail", user.email);
-        }
-        } else {
-          localStorage.removeItem("token"); // Elimina el token si no es válido
-          localStorage.removeItem("userEmail"); // Limpia el email si el token no es válido
-        }
-      });
+      const user = { _id: userIdFromURL };
+      dispatch(setUser({ user, token: tokenFromURL }));
     }
   }, [dispatch]);
+
   return (
     <div className="App">
       <RouterProvider router={router} />
     </div>
+
   );
 }
 
