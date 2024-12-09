@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
+import { useState } from 'react'; 
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink,useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import logo from "../assets/logo.png";
-import {logout} from "../store/actions/authActions";
+import { logout } from "../store/actions/authActions";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const token = useSelector((state) => state.authStore?.token); // Token del usuario
+  const token = useSelector((state) => state.authStore?.token);
   const user = useSelector((state) => state.authStore?.users);
-  const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId"); // Obtener userId del estado o localStorage
+  const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId");
   const userEmail = user?.email || localStorage.getItem("userEmail");
-  const userPhoto  = user?.photo || localStorage.getItem("userPhoto");
-  
+  const userPhoto = user?.photo || localStorage.getItem("userPhoto");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
   const handleSignOut = () => {
-    dispatch( logout()); // Acción de logout
-    navigate("/"); // Redirige al login tras cerrar sesión
+    dispatch(logout());
+    navigate("/");
   };
-  
+
   return (
     <header className="bg-transparent p-4 fixed w-full top-0 left-0 z-50">
       <nav className="flex items-center justify-between relative">
@@ -51,6 +52,19 @@ const Header = () => {
           >
             ✕
           </button>
+
+          {/* Información del usuario */}
+          {token && (
+            <div className="p-4 flex flex-col items-center space-y-2 border-b border-white">
+              <img
+                src={userPhoto || "https://via.placeholder.com/150"}
+                alt="User avatar"
+                className="w-16 h-16 rounded-full"
+              />
+              <span className="text-white font-bold text-sm">{userEmail || "User"}</span>
+            </div>
+          )}
+
           <ul className="space-y-4 p-4 text-xs">
             <li>
               <NavLink
@@ -70,7 +84,7 @@ const Header = () => {
                 Register
               </NavLink>
             </li>
-            {token ? (
+            {token && (
               <>
                 <li>
                   <NavLink
@@ -99,15 +113,7 @@ const Header = () => {
                     Admin Panel
                   </NavLink>
                 </li>
-                <li className="flex items-center space-x-4">
-                <img
-                 src={userPhoto || "https://via.placeholder.com/150"} // Imagen de reemplazo si no hay foto
-                 alt="User avatar"
-                 className="w-10 h-10 rounded-full"
-                />
-                  <span className="text-gray-900 dark:text-white">
-                    {userEmail || "User"}
-                  </span>
+                <li>
                   <button
                     onClick={handleSignOut}
                     className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
@@ -116,7 +122,8 @@ const Header = () => {
                   </button>
                 </li>
               </>
-            ) : (
+            )}
+            {!token && (
               <li>
                 <NavLink
                   to="/signin"
@@ -135,3 +142,4 @@ const Header = () => {
 };
 
 export default Header;
+
