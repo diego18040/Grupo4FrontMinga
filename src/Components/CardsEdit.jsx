@@ -49,7 +49,7 @@ export default function CardsEdit() {
 
             alert("Manga deleted successfully!");
 
-            // Redirigir después de 3 segundos
+      
             setTimeout(() => {
                 navigate(`/manager/${userId}`);
             }, 100);
