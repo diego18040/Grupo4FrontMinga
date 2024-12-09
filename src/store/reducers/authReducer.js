@@ -45,6 +45,7 @@ const authReducer = createReducer(initialState, (builder) => {
             console.log("Cierre de sesión exitoso");
             localStorage.removeItem("userEmail");
             localStorage.removeItem("token");
+            localStorage.removeItem("userId");
             state.users = null;
             state.token = null;
             state.error = null;

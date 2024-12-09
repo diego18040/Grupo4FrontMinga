@@ -129,7 +129,7 @@ const LoginForm = () => {
                 className="w-6 h-6"
                 alt="Google Logo"
               />
-              <span>Register with Google</span>
+              <span>Sign in with Google</span>
             </button>
         </form>
         <p className="text-center mt-4">

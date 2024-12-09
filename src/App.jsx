@@ -103,10 +103,13 @@ const router = createBrowserRouter([
 // Function to validate the token
 const loginWithToken = async (token) => {
   try {
+    /*if (!userId) {
+      throw new Error("userId no está definido");
+    }*/
     console.log("Se ejecutó Login With Token");
-
+    
     const response = await axios.get(
-      "http://localhost:8080/api/users/all",
+      `http://localhost:8080/api/users/validatetoken`, // Incluye el userId en la ruta
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -124,32 +127,40 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Captura el token de la URL si viene desde Google
+    // Captura el token y el userId desde la URL
     const queryParams = new URLSearchParams(window.location.search);
     const tokenFromURL = queryParams.get("token");
-    const emailFromStorage = localStorage.getItem("userEmail");
+    const userIdFromURL = queryParams.get("userId");
 
-    if (tokenFromURL) {
+    if (tokenFromURL && userIdFromURL) {
       localStorage.setItem("token", tokenFromURL);
-      window.history.replaceState({}, document.title, "/"); // Elimina el token de la URL
+      localStorage.setItem("userId", userIdFromURL); // Guarda el userId en localStorage
+      window.history.replaceState({}, document.title, "/"); // Elimina parámetros de la URL
     }
-
-    // Valida el token desde localStorage
+  
+    // Valida el token y el userId desde localStorage
     const token = localStorage.getItem("token");
-    if (token) {
-      loginWithToken(token).then((user) => {
+    const userId = localStorage.getItem("userId");
+
+    console.log("Token desde localStorage:", token);
+    console.log("UserID desde localStorage:", userId);
+
+    if (token && userId) {
+      loginWithToken(token, userId).then((user) => {
         if (user) {
           dispatch(setUser({ user, token }));
-          if (!emailFromStorage && user.email) {
+          if (!localStorage.getItem("userEmail") && user.email) {
             localStorage.setItem("userEmail", user.email);
-        }
+          }
         } else {
-          localStorage.removeItem("token"); // Elimina el token si no es válido
-          localStorage.removeItem("userEmail"); // Limpia el email si el token no es válido
+          localStorage.removeItem("token");
+          localStorage.removeItem("userId");
+          localStorage.removeItem("userEmail");
         }
       });
     }
   }, [dispatch]);
+  
   return (
     <div className="App">
       <RouterProvider router={router} />
