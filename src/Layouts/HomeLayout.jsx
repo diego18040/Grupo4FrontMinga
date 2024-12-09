@@ -12,7 +12,7 @@ export default function HomeLayout() {
             <div className="hidden md:block mt-40">
                 <Carousel />
             </div>
-                <main className="flex-1 lg:mt-36">
+                <main className=" p-o md:p-[5%] flex-1 lg:mt-30 ">
                     <Outlet />
                 </main>
                 <Footer />

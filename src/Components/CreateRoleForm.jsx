@@ -6,7 +6,7 @@ import companyauthor from "../assets/companyauthor.jpg";
 
 const CreateRole = () => {
   const location = useLocation();
-  const role = location.state?.role; // Get the role from the navigation state
+  const role = location.state?.role; 
 
   const [formData, setFormData] = useState({
     title: "",
@@ -179,7 +179,7 @@ const CreateRole = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-[67vw] md:w-[21vw] p-3 mt-4 bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-white rounded-3xl hover:bg-pink-400"
+                className="w-[100%]  p-3 mt-4 bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-white rounded-3xl hover:bg-pink-400"
               >
                 Send
               </button>
