@@ -41,19 +41,10 @@ export default function Test() {
         <div className=" border">
 
         </div>
-
-
-
         <div className="container mx-auto bg-white rounded-xl lg:p-20 xl:p-40 md:p-0">
-
           <CardsEdit></CardsEdit>
           <Cards></Cards>
-
-
         </div>
-
-    
-
       </section>
 
       <div>
