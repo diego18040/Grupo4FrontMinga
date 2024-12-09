@@ -1,205 +1,188 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createAuthor, createCompany } from "../store/actions/RolesActions";
+import { clearRoleState } from "../store/reducers/rolesReducer";
 
+const NewRoleForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error, success } = useSelector((state) => state.roles);
 
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import companyauthor from "../assets/companyauthor.jpg";
-
-const CreateRole = () => {
-  const location = useLocation();
-  const role = location.state?.role; // Get the role from the navigation state
-
+  const [role, setRole] = useState("");
   const [formData, setFormData] = useState({
-    title: "",
-    category: "",
-    description: "",
     name: "",
-    surname: "",
-    address: "",
-    birthdate: "",
-    photoUrl: "",
+    email: "",
+    companyName: "",
     website: "",
-    profileImageUrl: "",
   });
+
+  useEffect(() => {
+    if (success) {
+      dispatch(clearRoleState());
+      navigate("/mangas");
+    }
+  }, [success, navigate, dispatch]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted with data:", formData);
+    console.log("Enviando datos:", { role, formData });
+
+    try {
+      if (role === "Author" || !role) {
+        await dispatch(
+          createAuthor({
+            name: formData.name,
+            email: formData.email,
+          })
+        ).unwrap();
+      }
+      if (role === "Company" || !role) {
+        await dispatch(
+          createCompany({
+            name: formData.companyName || formData.name,
+            email: formData.email,
+            website: formData.website,
+          })
+        ).unwrap();
+      }
+    } catch (err) {
+      console.error("Error creating role:", err);
+    }
   };
 
   return (
     <div className="flex w-full h-screen mt-16 md:mt-0">
-      {/* Left container */}
-      <div className=" flex justify-center items-center w-full md:w-2/3 p-6">
-        <div className=" md:mt-20 w-full max-w-sm text-center">
-          <div className="flex flex-col items-center mb-4">
-            <p className="text-3xl p-2 bg-clip-text bg-gradient-to-br text-blacks mb-2 whitespace-nowrap">
-              {role === "Author" ? "New Author" : "New Company"}
-            </p>
+      <div className="flex justify-center items-center w-full md:w-2/3 p-6">
+        <div className="w-full max-w-sm text-center">
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+              {error}
+            </div>
+          )}
 
-            {/* Profile Image under the title */}
-            <div className="mb-4">
-              <img
-                src={companyauthor} // Default image for Author or Company
-                alt="Company or Author"
-                className="w-20 h-20 rounded-full object-cover border-4 border-gray-300"
+          <div className="flex flex-col items-center mb-4">
+            <p className="text-4xl p-8 text-transparent bg-clip-text bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 mb-2 whitespace-nowrap">
+              Complete your profile
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="flex justify-center items-center space-x-4 mb-4">
+              <button
+                type="button"
+                onClick={() => setRole("Author")}
+                className={`${
+                  role === "Author" ? "bg-pink-400" : "bg-pink-300"
+                } text-white p-3 rounded-2xl w-1/3`}
+              >
+                Author
+              </button>
+              <button
+                type="button"
+                onClick={() => setRole("Company")}
+                className={`${
+                  role === "Company" ? "bg-pink-400" : "bg-pink-300"
+                } text-white p-3 rounded-2xl w-1/3`}
+              >
+                Company
+              </button>
+            </div>
+
+            <div className="flex flex-col items-start mb-4">
+              <label htmlFor="name" className="text-lg font-semibold">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full p-2 rounded-md border border-gray-300 focus:border-pink-500 focus:ring focus:ring-pink-200"
               />
             </div>
 
-            {/* Form */}
-            <form onSubmit={handleSubmit}>
-              {/* Fields for Author */}
-              {role === "Author" && (
-                <>
-                  {/* Name */}
-                  <div className="mb-4">
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      placeholder="Insert name"
-                      className="w-full p-2 border-b-2 max-w-[280px] border-gray-300 focus:outline-none"
-                    />
-                  </div>
+            <div className="flex flex-col items-start mb-4">
+              <label htmlFor="email" className="text-lg font-semibold">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full p-2 rounded-md border border-gray-300 focus:border-pink-500 focus:ring focus:ring-pink-200"
+              />
+            </div>
 
-                  {/* Surname */}
-                  <div className="mb-4">
-                    <input
-                      type="text"
-                      id="surname"
-                      name="surname"
-                      value={formData.surname}
-                      onChange={handleChange}
-                      required
-                      placeholder="Insert surname"
-                      className="w-full p-2 border-b-2 max-w-[280px] border-gray-300 focus:outline-none"
-                    />
-                  </div>
+            {role === "Company" && (
+              <>
+                <div className="flex flex-col items-start mb-4">
+                  <label htmlFor="companyName" className="text-lg font-semibold">
+                    Company Name
+                  </label>
+                  <input
+                    type="text"
+                    id="companyName"
+                    name="companyName"
+                    value={formData.companyName}
+                    onChange={handleChange}
+                    required
+                    className="w-full p-2 rounded-md border border-gray-300 focus:border-pink-500 focus:ring focus:ring-pink-200"
+                  />
+                </div>
+                <div className="flex flex-col items-start mb-4">
+                  <label htmlFor="website" className="text-lg font-semibold">
+                    Website
+                  </label>
+                  <input
+                    type="url"
+                    id="website"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    className="w-full p-2 rounded-md border border-gray-300 focus:border-pink-500 focus:ring focus:ring-pink-200"
+                  />
+                </div>
+              </>
+            )}
 
-                  {/* Address */}
-                  <div className="mb-4">
-                    <input
-                      type="text"
-                      id="address"
-                      name="address"
-                      value={formData.address}
-                      onChange={handleChange}
-                      required
-                      placeholder="Insert address"
-                      className="w-full p-2 border-b-2 max-w-[280px] border-gray-300 focus:outline-none"
-                    />
-                  </div>
-
-                  {/* Birthdate */}
-                  <div className="mb-4">
-                    <input
-                      type="date"
-                      id="birthdate"
-                      name="birthdate"
-                      value={formData.birthdate}
-                      onChange={handleChange}
-                      required
-                      className="w-full p-2 border-b-2 max-w-[280px] border-gray-300 focus:outline-none"
-                    />
-                  </div>
-
-                  {/* Profile picture URL */}
-                  <div className="mb-4">
-                    <input
-                      type="url"
-                      id="photoUrl"
-                      name="photoUrl"
-                      value={formData.photoUrl}
-                      onChange={handleChange}
-                      required
-                      placeholder="URL Profile Image"
-                      className="w-full p-2 border-b-2 max-w-[280px] border-gray-300 focus:outline-none"
-                    />
-                  </div>
-                </>
-              )}
-
-              {/* Fields for Company */}
-              {role === "Company" && (
-                <>
-                  {/* Company Website */}
-                  <div className="mb-4">
-                    <input
-                      type="url"
-                      id="website"
-                      name="website"
-                      value={formData.website}
-                      onChange={handleChange}
-                      required
-                      placeholder="Insert company website"
-                      className="w-full p-2 border-b-2 max-w-[280px] border-gray-300 focus:outline-none"
-                    />
-                  </div>
-
-                  {/* Company Profile Image URL */}
-                  <div className="mb-4">
-                    <input
-                      type="url"
-                      id="profileImageUrl"
-                      name="profileImageUrl"
-                      value={formData.profileImageUrl}
-                      onChange={handleChange}
-                      required
-                      placeholder="URL Profile Image"
-                      className="w-full p-2 border-b-2 max-w-[280px] border-gray-300 focus:outline-none"
-                    />
-                  </div>
-
-                  {/* Company Description */}
-                  <div className="mb-4">
-                    <input
-                      type="text"
-                      id="description"
-                      name="description"
-                      value={formData.description}
-                      onChange={handleChange}
-                      required
-                      placeholder="Insert company description"
-                      className="w-full p-2 border-b-2 max-w-[280px] border-gray-300 focus:outline-none"
-                    />
-                  </div>
-                </>
-              )}
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-[67vw] md:w-[21vw] p-3 mt-4 bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-white rounded-3xl hover:bg-pink-400"
-              >
-                Send
-              </button>
-            </form>
-          </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full p-3 text-white ${
+                loading
+                  ? "bg-pink-300 cursor-not-allowed"
+                  : "bg-pink-500 hover:bg-pink-400"
+              } rounded-2xl transition-colors`}
+            >
+              {loading ? "Processing..." : "Submit"}
+            </button>
+          </form>
         </div>
       </div>
 
-      {/* Image container */}
-      <div className="relative w-full  md:w-1/2 h-full  hidden sm:block">
-        <div className="absolute top-0 left-0 w-full  h-full bg-black opacity-50 z-10"></div>
-
+      <div className="relative justify-center items-center w-2/3 h-full hidden md:block">
         <img
-          src={companyauthor} 
-          alt="Company or Author"
-          className="w-full h-full  object-cover"
+          src="https://via.placeholder.com/800x600"
+          alt="Background"
+          className="w-full h-full object-cover opacity-50"
         />
       </div>
     </div>
   );
 };
 
-export default CreateRole;
+export default NewRoleForm;

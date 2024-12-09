@@ -1,9 +1,19 @@
-
 import React from "react";
 import heroImage from "../../src/assets/homecta.jpg";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Home() {
+  // Obtener el estado de forma más segura
+  const authStore = useSelector(state => state.authStore);
+  const token = authStore?.token;
+  const isAuthenticated = Boolean(token);
+
+  // Props del botón basados en autenticación
+  const buttonProps = isAuthenticated 
+    ? { to: "/mangas", text: "Explore" }
+    : { to: "/signin", text: "Sign In" };
+
   return (
     <div
       className="relative h-screen w-full bg-cover bg-bottom md:bg-center bg-no-repeat"
@@ -27,10 +37,10 @@ export default function Home() {
             #MingaForever <span className="text-red-500">❤</span>
           </p>
           <NavLink
-            to="/signin"
+            to={buttonProps.to}
             className="bg-pink-500 hover:bg-pink-600 text-white px-12 py-3 rounded-lg transition-colors"
           >
-            Sign In
+            {buttonProps.text}
           </NavLink>
         </div>
 
@@ -45,10 +55,10 @@ export default function Home() {
               #MingaForever <span className="text-red-500">❤</span>
             </p>
             <NavLink
-              to="/signin"
+              to={buttonProps.to}
               className="bg-pink-500 hover:bg-pink-600 text-white px-12 py-3 rounded-lg transition-colors"
             >
-              Sign In!
+              {buttonProps.text}
             </NavLink>
           </div>
         </div>
