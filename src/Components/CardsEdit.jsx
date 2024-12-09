@@ -4,10 +4,13 @@ import { fetchMangasEdit } from '../store/actions/CardsEditActions';
 import edit from "../assets/editar.png";
 import del from "../assets/eliminar.png";
 import CheckboxsEdit from './CheckboxEdit';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 export default function CardsEdit() {
     const { id } = useParams(); // Obtener el id del creador desde la URL
+    const navigate = useNavigate(); // Inicializar useNavigate
+    const userId = localStorage.getItem("userId"); // Obtener userId del localStorage
     const dispatch = useDispatch();
     const { loading, mangas, error } = useSelector(state => state.cards);
     const selectedTitle = useSelector(state => state.cards.selectedTitle);
@@ -29,6 +32,31 @@ export default function CardsEdit() {
         seinen: 'text-orange-400',
         shojo: 'text-teal-400',
         kodomo: 'text-purple-400'
+    };
+
+    const handleDelete = async (mangaId) => {
+        try {
+            const token = localStorage.getItem('token'); // Obtener el token de autenticación
+            console.log(`http://localhost:8080/api/mangas/deleteone/${mangaId}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            const response = await axios.delete(`http://localhost:8080/api/mangas/deleteone/${mangaId}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            console.log("Response:", response.data);
+
+            alert("Manga deleted successfully!");
+
+            // Redirigir después de 3 segundos
+            setTimeout(() => {
+                navigate(`/manager/${userId}`);
+            }, 100);
+        } catch (error) {
+            console.error("Error deleting manga:", error);
+            alert("Failed to delete manga.");
+        }
     };
 
     return (
@@ -64,7 +92,7 @@ export default function CardsEdit() {
                                             <button className=""><img src={edit} alt="edit" /></button>
                                         </div>
                                         <div className="p-2">
-                                            <button className=""><img src={del} alt="delete" /></button>
+                                            <button className="" onClick={() => handleDelete(manga._id)}><img src={del} alt="delete" /></button>
                                         </div>
                                     </div>
                                 </div>
@@ -76,10 +104,10 @@ export default function CardsEdit() {
                                 </div>
                                 <div className="grid grid-cols-2">
                                     <div className="w-[80%] flex">
-                                      <NavLink to={`/editmanga/${manga._id}`} className="mt-4 bg-purple-300 text-purple-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">EDIT</NavLink>
+                                        <NavLink to={`/editmanga/${manga._id}`} className="mt-4 bg-purple-300 text-purple-400 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">EDIT</NavLink>
                                     </div>
                                     <div className="w-[80%] flex">
-                                        <button className="mt-4 bg-teal-200 text-teal-500 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10">DELETE</button>
+                                        <button className="mt-4 bg-teal-200 text-teal-500 font-bold py-2 px-4 rounded-full hover:bg-teal-300 w-24 h-10" onClick={() => handleDelete(manga._id)}>DELETE</button>
                                     </div>
                                 </div>
                             </div>
