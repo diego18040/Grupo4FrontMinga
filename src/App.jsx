@@ -100,74 +100,29 @@ const router = createBrowserRouter([
   },
 ]);
 
-// Function to validate the token
-const loginWithToken = async (token) => {
-  try {
-    /*if (!userId) {
-      throw new Error("userId no está definido");
-    }*/
-    console.log("Se ejecutó Login With Token");
-    
-    const response = await axios.get(
-      `http://localhost:8080/api/users/validatetoken`, // Incluye el userId en la ruta
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    return response.data.response;
-  } catch (error) {
-    console.error("Error al validar token:", error);
-    return null;
-  }
-};
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Captura el token y el userId desde la URL
     const queryParams = new URLSearchParams(window.location.search);
     const tokenFromURL = queryParams.get("token");
     const userIdFromURL = queryParams.get("userId");
-    const userPhotoFromURL = queryParams.get("userPhoto")
+    const UserEmailFromURL = queryParams.get("userEmail");
+    const userPhotoFromURL = queryParams.get("userPhoto");
 
     if (tokenFromURL && userIdFromURL) {
       localStorage.setItem("token", tokenFromURL);
-      localStorage.setItem("userId", userIdFromURL); // Guarda el userId en localStorage
+      localStorage.setItem("userId", userIdFromURL);
+      localStorage.setItem("userEmail",UserEmailFromURL);
       localStorage.setItem("userPhoto",userPhotoFromURL);
-      window.history.replaceState({}, document.title, "/"); // Elimina parámetros de la URL
-    }
-  
-    // Valida el token y el userId desde localStorage
-    const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId");
-    const userPhoto = localStorage.getItem("userPhoto");
-
-    console.log("Token desde localStorage:", token);
-    console.log("UserID desde localStorage:", userId);
-    console.log ("UserPhoto desde localStorage",userPhoto)
-
-    if (token && userId && userPhoto) {
-      loginWithToken(token, userId, userPhoto).then((user) => {
-        if (user) {
-          dispatch(setUser({ user, token }));
-          if (!localStorage.getItem("userEmail") && user.email) {
-            localStorage.setItem("userEmail", user.email);
-            localStorage.setItem("userPhoto", user.photo);
-          }
-        } else {
-          localStorage.removeItem("token");
-          localStorage.removeItem("userId");
-          localStorage.removeItem("userEmail");
-          localStorage.removeItem("userPhoto")
-
-        }
-      });
+      window.history.replaceState({}, document.title, "/");
+      
+      const user = { _id: userIdFromURL };
+      dispatch(setUser({ user, token: tokenFromURL }));
     }
   }, [dispatch]);
-  
+
   return (
     <div className="App">
       <RouterProvider router={router} />
