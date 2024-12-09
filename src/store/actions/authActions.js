@@ -25,6 +25,7 @@ const logout = createAsyncThunk("logout", async (_, thunkAPI) => {
 
     // Limpia el almacenamiento local tras confirmar el logout
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     return {}; // No necesitamos un payload específico aquí
   } catch (error) {
     console.error("Error al cerrar sesión:", error.response?.data || error.message);
@@ -44,22 +45,23 @@ const login = createAsyncThunk("login", async ({ email, password }) => {
   console.log("Superamos la solicitud de Login");
 
   localStorage.setItem("token", response.data.token);
+  localStorage.setItem("userId", response.data.user._id); // Guardar userId en el localStorage
   return response.data;
 });
 
-const signUp = createAsyncThunk("signUp", async ({email, password, photo }) => {
+const signUp = createAsyncThunk("signUp", async ({ email, password, photo }) => {
   console.log("Entramos al Registro");
   const newUser = {
     email: email,
     password: password,
     photo: photo,
-    
   };
   const response = await axios.post("http://localhost:8080/api/users/register", newUser);
   console.log("Se procesó la solicitud de registro");
   console.log("Response", response.data);
 
   localStorage.setItem("token", response.data.token);
+  localStorage.setItem("userId", response.data.user._id); // Guardar userId en el localStorage
   return response.data;
 });
 

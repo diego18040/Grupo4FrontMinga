@@ -7,6 +7,7 @@ import CommentsReducers from './reducers/CommentsReducers.js';
 import favReducer from './reducers/FavReducer';
 import authReducer from "./reducers/authReducer.js"
 import { loadFavorites } from './actions/FavActions';
+import cardEditReducer from './reducers/CardsEditReducer.js';
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     manga: mangaReducer,
     comments: CommentsReducers,
     favorites: favReducer,
+    cardEdit: cardEditReducer
 
 
   }

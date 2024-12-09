@@ -109,11 +109,12 @@ export default function Cards() {
   };
 
   return (
-    <div className="absolute top-[50%] left-1/2 transform -translate-x-1/2 w-[95%] bg-white p-8 rounded-lg shadow-lg flex  items-center justify-center opacity-100 sm:flex-row flex-col-reverse">
+    
+      <div>
       <Checkboxs />
 
       {loading && (
-        <div className="flex justify-center items-center h-64">
+        <div className="">
           <svg
             className="animate-spin h-16 w-16 text-indigo-600"
             xmlns="http://www.w3.org/2000/svg"
@@ -196,6 +197,7 @@ export default function Cards() {
           ))}
         </div>
       </div>
-    </div>
+      </div>
+
   );
 }

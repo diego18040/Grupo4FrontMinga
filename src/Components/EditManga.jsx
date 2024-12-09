@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const EditChapterForm = () => {
+const EditManga = () => {
   const { id } = useParams(); // Obtener el id del manga desde la URL
   const [mangaName, setMangaName] = useState("");
   const [chapter, setChapter] = useState("");
@@ -41,7 +41,7 @@ const EditChapterForm = () => {
       {/* Contenedor del formulario */}
       <div className="flex justify-center ml-[90px] items-center w-2/3 p-6 ">
         <div className="w-full max-w-sm ">
-          <h2 className="text-3xl text-center p-10 flex ">Edit Chapter</h2>
+          <h2 className="text-3xl text-center p-10 flex ">Edit Manga</h2>
           
           <form className="flex flex-col space-y-6 mt-12"> 
           {/* Campo Nombre del Manga */}
@@ -147,4 +147,4 @@ const EditChapterForm = () => {
   );
 };
 
-export default EditChapterForm;
+export default EditManga;

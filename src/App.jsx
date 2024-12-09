@@ -26,15 +26,16 @@ import EditAuthor from './Pages/EditAuthor.jsx';
 import EditCompany from './Pages/EditCompany'
 import CreateRoles from './Layouts/CreateRoles.jsx';
 import NewRoleForm from './Components/NewRoleForm.jsx';
-
-
 import SignRoute from "./Components/SignRoute.jsx";
+import EditMangaPage from "./Pages/EditMangaPage.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const isOnline = useSelector((store) => store.userSignUpReducer.isOnline);
   const token = localStorage.getItem("token");
   return isOnline && token ? children : <Navigate to="signin" />;
 };
+
+
 
 
 const router = createBrowserRouter([
@@ -54,7 +55,7 @@ const router = createBrowserRouter([
       { path: "editauthor/:id", element: <EditAuthor /> },
       { path: "editchapter/:id", element: <EditChapter /> },
       { path: "editcompany/:id", element: <EditCompany /> },
-      { path: "editchapter", element: <EditChapter /> },
+      { path: "editmanga/:id", element: <EditMangaPage /> },
 
     ]
   },
@@ -75,7 +76,7 @@ const router = createBrowserRouter([
       { path: "/adminpanel", element: <AdminPanel /> },
       { path: "/profile", element: <Profile /> },
       { path: "/mangas/:id", element: <MangasId /> },
-      { path: "/manager", element: <Manager /> },
+      { path: "/manager/:id", element: <Manager/> },
       { path: "/readmanga/:id", element: <ReadManga /> },
       { path: "/comments/:id", element: <Comments /> },
     ],
@@ -101,24 +102,23 @@ const router = createBrowserRouter([
 ]);
 
 // Function to validate the token
+
 const loginWithToken = async (token) => {
   try {
-    console.log("Se ejecutó Login With Token");
+    console.log("se ejecutó login with token");
 
-    const response = await axios.get(
-      "http://localhost:8080/api/users/all",
+    const response = await axios.get("http://localhost:8080/api/users/validatetoken",
       {
         headers: {
-          Authorization: `Bearer ${token}`,
-        },
+          Authorization: `Bearer ${token}`
+        }
       }
-    );
-    return response.data.response;
+    )
+    return response.data.response
   } catch (error) {
-    console.error("Error al validar token:", error);
-    return null;
+    console.log("error", error)
   }
-};
+}
 
 function App() {
   const dispatch = useDispatch();
