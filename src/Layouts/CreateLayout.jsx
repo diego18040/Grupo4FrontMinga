@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Components/Header";
-import EditChapterForm from "../components/EditChapterForm";
+import { Outlet } from "react-router-dom";
 
 const CreateLayout = ({ children }) => {
   return (
@@ -10,7 +10,7 @@ const CreateLayout = ({ children }) => {
 
       <main className="p-6">{children}</main>
 
-      <EditChapterForm />
+      <Outlet />
     </div>
   );
 };

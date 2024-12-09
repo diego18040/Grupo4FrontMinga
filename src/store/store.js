@@ -8,6 +8,7 @@ import favReducer from './reducers/FavReducer';
 import authReducer from "./reducers/authReducer.js"
 import { loadFavorites } from './actions/FavActions';
 import rolesReducer from "./reducers/rolesReducer.js";
+import cardEditReducer from './reducers/CardsEditReducer.js';
 
 export const store = configureStore({
   reducer: {
@@ -18,8 +19,8 @@ export const store = configureStore({
     manga: mangaReducer,
     comments: CommentsReducers,
     favorites: favReducer,
-    roles: rolesReducer
-
+    roles: rolesReducer,
+    cardEdit: cardEditReducer
 
 
   }

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import mangas from "../assets/mangas.jpg";
 import SearchBar from "../Components/SearchBar"
 import Cards from "../Components/Cards.jsx";
+import CardsEdit from "../Components/CardsEdit.jsx";
 const Mangas = () => {
   const navigate = useNavigate();
 
@@ -17,14 +18,17 @@ const Mangas = () => {
 
   return (
     <div>
-      <div>
-        <SearchBar></SearchBar>
-      </div>
-      <div className="mangas-container">
+<div className="">
+  <SearchBar />
+</div>
 
-        <Cards />
+      <div className="">
 
-      </div>
+<Cards />
+
+</div>
+
+
     </div>
   );
 };

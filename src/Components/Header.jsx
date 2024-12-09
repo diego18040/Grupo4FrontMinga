@@ -8,8 +8,9 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const token = useSelector((state) => state.authStore?.token);
   const user = useSelector((state) => state.authStore?.users);
+  const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId"); // Obtener userId del estado o localStorage
   const userEmail = user?.email || localStorage.getItem("userEmail");
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,10 +19,10 @@ const Header = () => {
   };
 
   const handleSignOut = () => {
-    dispatch(logout());
-    navigate("/");
+    dispatch(logout()); // Acción de logout
+    navigate("/"); // Redirige al login tras cerrar sesión
   };
-  
+
   return (
     <header className="bg-transparent p-4 fixed w-full top-0 left-0 z-50">
       <nav className="flex items-center justify-between relative">
@@ -60,67 +61,66 @@ const Header = () => {
                 Home
               </NavLink>
             </li>
-            
+            <li>
+              <NavLink
+                to="/register"
+                className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                onClick={toggleMenu}
+              >
+                Register
+              </NavLink>
+            </li>
             {token ? (
-              // Menú para usuarios autenticados
               <>
                 <li>
                   <NavLink
-                    to="/mangas"
+                    to={`/profile/${userId}`}
                     className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
                     onClick={toggleMenu}
                   >
-                    Explore Mangas
+                    Profile
                   </NavLink>
                 </li>
                 <li>
                   <NavLink
-                    to="/newrole"
+                    to={`/manager/${userId}`}
                     className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
                     onClick={toggleMenu}
                   >
-                    Register as Author
+                    Manager
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink
+                    to={`/adminpanel/${userId}`}
+                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                    onClick={toggleMenu}
+                  >
+                    Admin Panel
+                  </NavLink>
                 </li>
-                <li className="pt-4">
-                  <div className="text-center mb-2 text-white">
+                <li className="flex items-center space-x-4">
+                  <span className="text-gray-900 dark:text-white">
                     Welcome, {userEmail || "User"}
-                  </div>
+                  </span>
                   <button
-                    onClick={() => {
-                      handleSignOut();
-                      toggleMenu();
-                    }}
-                    className="w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                    onClick={handleSignOut}
+                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
                   >
                     Sign Out
                   </button>
                 </li>
               </>
             ) : (
-              // Menú para usuarios no autenticados
-              <>
-                <li>
-                  <NavLink
-                    to="/register"
-                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
-                    onClick={toggleMenu}
-                  >
-                    Register
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/signin"
-                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
-                    onClick={toggleMenu}
-                  >
-                    Sign In
-                  </NavLink>
-                </li>
-              </>
+              <li>
+                <NavLink
+                  to="/signin"
+                  className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                  onClick={toggleMenu}
+                >
+                  Sign In
+                </NavLink>
+              </li>
             )}
           </ul>
         </div>

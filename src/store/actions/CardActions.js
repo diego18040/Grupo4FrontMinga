@@ -11,12 +11,18 @@ export const FETCH_MANGA_BY_ID_REQUEST = 'FETCH_MANGA_BY_ID_REQUEST';
 export const FETCH_MANGA_BY_ID_SUCCESS = 'FETCH_MANGA_BY_ID_SUCCESS';
 export const FETCH_MANGA_BY_ID_FAILURE = 'FETCH_MANGA_BY_ID_FAILURE';
 
+const getAuthToken = () => {
+  return localStorage.getItem('token'); // Cambia 'token' por la clave correcta en tu localStorage
+};
+
 export const fetchMangas = (title = '', genres = []) => {
   return async dispatch => {
     dispatch({ type: FETCH_MANGAS_REQUEST });
     try {
+      const token = getAuthToken();
       const response = await axios.get(`http://localhost:8080/api/mangas/all`, {
-        params: { title, category: genres.join(',') }
+        params: { title, category: genres.join(',') },
+        headers: { 'Authorization': `Bearer ${token}` }
       });
       dispatch({ type: FETCH_MANGAS_SUCCESS, payload: response.data.response });
     } catch (error) {
@@ -29,7 +35,10 @@ export const fetchGenres = () => {
   return async dispatch => {
     dispatch({ type: FETCH_GENRES_REQUEST });
     try {
-      const response = await axios.get('http://localhost:8080/api/categories/all');
+      const token = getAuthToken();
+      const response = await axios.get('http://localhost:8080/api/categories/all', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
       dispatch({ type: FETCH_GENRES_SUCCESS, payload: response.data.response });
     } catch (error) {
       dispatch({ type: FETCH_GENRES_FAILURE, payload: error.message });
@@ -41,7 +50,10 @@ export const fetchMangaById = (id) => {
   return async dispatch => {
     dispatch({ type: FETCH_MANGA_BY_ID_REQUEST });
     try {
-      const response = await axios.get(`http://localhost:8080/api/mangas/${id}`);
+      const token = getAuthToken();
+      const response = await axios.get(`http://localhost:8080/api/mangas/${id}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
       dispatch({ type: FETCH_MANGA_BY_ID_SUCCESS, payload: response.data.response });
     } catch (error) {
       dispatch({ type: FETCH_MANGA_BY_ID_FAILURE, payload: error.message });
