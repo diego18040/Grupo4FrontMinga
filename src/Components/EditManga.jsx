@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, NavLink } from "react-router-dom"; // Importar useNavigate
+import { useParams, useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 
 const EditManga = () => {
-    const { id } = useParams(); // Obtener el id del manga desde la URL
-    const navigate = useNavigate(); // Inicializar useNavigate
-    const userId = localStorage.getItem("userId"); // Obtener userId del localStorage
+    const { id } = useParams(); // obtener el id del manga desde la URL
+    const navigate = useNavigate(); // inicializar useNavigate
+    const userId = localStorage.getItem("userId"); // userId del localStorage
 
     const [mangaName, setMangaName] = useState("");
     const [description, setDescription] = useState("");
@@ -21,12 +21,13 @@ const EditManga = () => {
                 const response = await axios.get(`http://localhost:8080/api/mangas/id/${id}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
+                // Obtener datos del manga
                 const manga = response.data.response[0];
                 setMangaName(manga.title);
                 setImageUrl(manga.cover_photo);
                 setDescription(manga.description);
                 setPhotoUrl(manga.cover_photo);
-                setCategory(manga.category_id.name); // Ajuste para almacenar el nombre literal de la categoría
+                setCategory(manga.category_id.name);
             } catch (error) {
                 console.error("Error fetching manga data:", error);
             }
@@ -50,15 +51,17 @@ const EditManga = () => {
 
     const handleEdit = async () => {
         try {
-            const token = localStorage.getItem('token'); // Obtener el token de autenticación
+            //token de autenticación
+            const token = localStorage.getItem('token');
             const payload = {
                 title: mangaName,
                 description,
                 cover_photo: photoUrl,
             };
-
+            // Enviar datos al backend
             console.log("Payload:", payload);
             console.log(`http://localhost:8080/api/mangas/update/${id}?category=${category}`);
+            // Actualizar datos en el backend
             const response = await axios.put(`http://localhost:8080/api/mangas/update/${id}?category=${category}`, payload, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -67,7 +70,7 @@ const EditManga = () => {
 
             alert("Changes updated successfully!");
 
-            // Redirigir inmediatamente después del mensaje satisfactorio
+            // Redirigir después del mensaje satisfactorio
             navigate(`/manager/${userId}`);
         } catch (error) {
             console.error("Error updating manga:", error);

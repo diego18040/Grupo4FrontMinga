@@ -24,28 +24,25 @@ const NewRoleForm = () => {
  
   const handleSubmit = (e) => {
     e.preventDefault();
-
-   
     console.log(formData);
-    
     navigate("/success"); 
   };
 
   return (
     <div className="flex w-full h-screen mt-16 md:mt-0">
-      {/* Contenedor izquierdo (Formulario) */}
+      {/* contenedor izquierdo (Formulario) */}
       <div className="flex justify-center items-center w-full md:w-2/3 p-6">
         <div className="w-full max-w-sm text-center">
-          {/* Contenedor del título y descripción */}
+          {/* contenedor del título y descripción */}
           <div className="flex flex-col items-center mb-4">
             <p className="text-4xl p-8 text-transparent bg-clip-text bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 mb-2 whitespace-nowrap">
               Complete your profile asdasdasdasdas
             </p>
           </div>
 
-          {/* Formulario */}
+          {/* formulario */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Selección de rol */}
+            {/* selección de rol */}
             <div className="flex justify-center items-center space-x-4 mb-4">
               <button
                 type="button"
@@ -67,7 +64,7 @@ const NewRoleForm = () => {
               </button>
             </div>
 
-            {/* Campo de nombre */}
+            {/* campo de nombre */}
             <div className="flex flex-col items-start mb-4">
               <label htmlFor="name" className="text-lg font-semibold">
                 Name
@@ -83,7 +80,7 @@ const NewRoleForm = () => {
               />
             </div>
 
-            {/* Campo de correo */}
+            {/* campo de correo */}
             <div className="flex flex-col items-start mb-4">
               <label htmlFor="email" className="text-lg font-semibold">
                 Email
@@ -99,7 +96,7 @@ const NewRoleForm = () => {
               />
             </div>
 
-            {/* Campos específicos según el rol */}
+            {/* campos específicos según el rol */}
             {role === "Company" && (
               <>
                 <div className="flex flex-col items-start mb-4">
@@ -131,8 +128,6 @@ const NewRoleForm = () => {
                 </div>
               </>
             )}
-
-            {/* Botón de enviar */}
             <button
               type="submit"
               className="w-full p-3 text-white bg-pink-500 rounded-2xl hover:bg-pink-400"
@@ -143,9 +138,7 @@ const NewRoleForm = () => {
         </div>
       </div>
 
-      {/* Contenedor derecho (imagen de fondo opcional) */}
       <div className="relative justify-center items-center w-2/3 h-full hidden md:block">
-        {/* Imagen de fondo opcional */}
         <img
           src="https://via.placeholder.com/800x600"
           alt="Background"

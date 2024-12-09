@@ -47,7 +47,7 @@ const NewMangaPage = () => {
 
       alert("Manga created successfully!");
 
-      // Redirigir inmediatamente después del mensaje satisfactorio
+      // Redirigir despues del mensaje
       navigate(`/manager/${userId}`);
     } catch (error) {
       console.error("Error creating manga:", error);

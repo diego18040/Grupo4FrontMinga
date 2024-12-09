@@ -33,7 +33,7 @@ const NewChapterPage = () => {
             const payload = {
                 title: chapterTitle,
                 pages: photoUrls, // Enviar múltiples URLs de imágenes como pages
-                order: order, // Asegurarnos de enviar el orden correcto
+                order: order, //orden
             };
 
             console.log("Payload:", payload);

@@ -10,8 +10,6 @@ const Register = () => {
 
   return (
     <div className="h-screen flex">
-      {/* Imagen en la mitad izquierda */}
-
       {/* Contenedor del formulario en la mitad derecha */}
       <div className="w-full lg:w-1/2 flex justify-center items-center bg-gray-50">
         <LoginForm onSubmit={handleFormSubmit} />
