@@ -35,21 +35,21 @@ const NewRoleFormOne = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!userId) {
-        console.error("User ID is missing");
-        return;
+      console.error("User ID is missing");
+      return;
     }
 
     const authorData = {
-        name: `${formData.firstName} ${formData.lastName}`,
-        location: formData.location,
-        dateJoined: formData.dateJoined,
-        profileImage: formData.profileImage,
-        email: localStorage.getItem("userEmail"),
-        user_id: userId  // Changed from userId to user_id
+      name: `${formData.firstName} ${formData.lastName}`,
+      location: formData.location,
+      dateJoined: formData.dateJoined,
+      profileImage: formData.profileImage,
+      email: localStorage.getItem("userEmail"),
+      user_id: userId, // Usamos `user_id` para coincidir con el backend
     };
-    
+
     try {
       await dispatch(createAuthor(authorData)).unwrap();
     } catch (err) {

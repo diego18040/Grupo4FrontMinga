@@ -54,30 +54,30 @@ const NewRole = () => {
             {/* Botón Join as Author */}
             <button
               onClick={() => handleJoin("Author")}
-              className="md:w-[40vw] md:h-[12vh]  border border-pink-500 text-pink-500 rounded-2xl xl:text-3xl md:text-sm hover:bg-pink-400 transition-colors bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-transparent bg-clip-text relative flex justify-between items-center px-8"
+              className="md:w-[40vw] md:h-[12vh] border border-pink-500 text-pink-500 rounded-2xl xl:text-3xl md:text-sm hover:bg-pink-400 transition-colors bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-transparent bg-clip-text relative flex justify-between items-center px-8"
             >
               {/* Contenedor de las imágenes */}
               <div className="relative flex items-center space-x-2">
-                {/* Círculo superior (imagen de persona 1) */}
-                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white absolute top-0 left-1/2 transform -translate-x-1/2">
+                {/* Círculo superior (imagen de persona 1) - Solo visible en pantallas xl */}
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white absolute top-0 left-1/2 transform -translate-x-1/2 hidden xl:block">
                   <img src={peopleImages1[1]} alt="Person 1" className="w-full h-full object-cover" />
                 </div>
 
-                {/* Círculo inferior izquierdo (persona 2) */}
-                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white">
+                {/* Círculo inferior izquierdo (persona 2) - Solo visible en pantallas xl */}
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white hidden xl:block">
                   <img src={peopleImages1[2]} alt="Person 2" className="w-full h-full object-cover" />
                 </div>
 
-                {/* Círculo inferior derecho (persona 3) */}
-                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white ml-8">
+                {/* Círculo inferior derecho (persona 3) - Solo visible en pantallas xl */}
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white ml-8 hidden xl:block">
                   <img src={peopleImages1[0]} alt="Person 3" className="w-full h-full object-cover" />
                 </div>
               </div>
 
               {/* Texto a la derecha de las imágenes */}
-              <div className="ml-8 text-left">
-                <p className=" font-bold md:text-sm sm:text-sm ">Join as an Author!</p>
-                <p className="text-sm ">I’m a company and I want to publish my comics</p>
+              <div className="ml-8 xl:ml-0 text-left xl:mr-20">
+                <p className="font-bold text-[clamp(1.25rem,5vw,2rem)] sm:text-xl lg:text-2xl xl:text-2xl">Join as an Author!</p>
+                <p className="text-sm">I’m a company and I want to publish my comics</p>
               </div>
             </button>
 
@@ -88,26 +88,26 @@ const NewRole = () => {
             >
               {/* Contenedor de las imágenes */}
               <div className="relative flex items-center space-x-2">
-                {/* Círculo superior (imagen de persona 1) */}
-                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white absolute top-0 left-1/2 transform -translate-x-1/2">
+                {/* Círculo superior (imagen de persona 1) - Solo visible en pantallas xl */}
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white absolute top-0 left-1/2 transform -translate-x-1/2 hidden xl:block">
                   <img src={peopleImages[1]} alt="Person 1" className="w-full h-full object-cover" />
                 </div>
 
-                {/* Círculo inferior izquierdo (persona 2) */}
-                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white">
+                {/* Círculo inferior izquierdo (persona 2) - Solo visible en pantallas xl */}
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white hidden xl:block">
                   <img src={peopleImages[0]} alt="Person 2" className="w-full h-full object-cover" />
                 </div>
 
-                {/* Círculo inferior derecho (persona 3) */}
-                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white ml-6">
+                {/* Círculo inferior derecho (persona 3) - Solo visible en pantallas xl */}
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white ml-6 hidden xl:block">
                   <img src={peopleImages[2]} alt="Person 3" className="w-full h-full object-cover" />
                 </div>
               </div>
 
               {/* Texto a la derecha de las imágenes */}
-              <div className="ml-8 text-left">
-                <p className=" font-bold md:text-sm sm:text-sm">Join as Company!</p>
-                <p className="text-sm ">I’m a company and I want to publish my comics</p>
+              <div className="ml-8 xl:ml-0 text-left xl:mr-20">
+                <p className="font-bold text-[clamp(1.25rem,5vw,2rem)] sm:text-xl lg:text-xl xl:text-2xl">Join as Company!</p>
+                <p className="text-sm">I’m a company and I want to publish my comics</p>
               </div>
             </button>
           </div>

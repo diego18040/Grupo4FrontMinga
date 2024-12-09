@@ -60,8 +60,8 @@ export default function Checkboxs() {
     };
 
     return (
-        <div className='flex'>
-            <div className="flex flex-wrap gap-2 p-4 justify-center">
+        <div className='flex '>
+            <div className="flex text-xs md:text-sm gap-1 p-2  w-full">
                 <button
                     className={`py-2 px-4 rounded-full font-roboto font-bold ${genreColors.all.bg} ${genreColors.all.text} ${genreColors.all.hover}`}
                     onClick={handleAllClick}
@@ -81,3 +81,4 @@ export default function Checkboxs() {
         </div>
     );
 }
+

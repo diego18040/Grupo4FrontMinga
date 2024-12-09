@@ -31,3 +31,12 @@ body {
 .spinner {
   animation: spin 1s linear infinite;
 }
+
+
+
+
+@media (max-width: 768px) { 
+  .profile-panel-container {
+    display: none; 
+  }
+}

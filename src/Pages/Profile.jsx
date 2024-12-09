@@ -1,27 +1,69 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import profile from "../assets/profile.jpg";  
-import ProfileForm from "../Components/ProfilePanel"; 
+
+// import React, { useEffect } from "react";
+// import { useNavigate, useLocation } from "react-router-dom";  
+// import profile from "../assets/profile.jpg";
+// import ProfileForm from "../Components/ProfilePanel";  
+// import Hero from "../Components/Hero";  
+
+// const ProfilePanel = () => {
+//   const navigate = useNavigate();
+//   const location = useLocation();  
+
+//   useEffect(() => {
   
+//     navigate('/profile', {
+//       state: {
+//         backgroundImage: profile,
+//         title: "Profile",
+//       }
+//     });
+//   }, [navigate]);
+
+//   const isProfilePage = location.pathname === "/profile"; 
+
+//   return (
+//     <>
+     
+//       <div style={{ display: isProfilePage ? 'block' : 'none' }}>
+//         <Hero backgroundImage={profile} title="Profile" />
+//       </div>
+
+//      <div><ProfileForm /></div>
+      
+//     </>
+//   );
+// };
+
+// export default ProfilePanel;
+
+import React, { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";  
+import profile from "../assets/profile.jpg";
+import ProfileForm from "../Components/ProfilePanel";  
+import Hero from "../Components/Hero";  
+
 const ProfilePanel = () => {
   const navigate = useNavigate();
+  const location = useLocation();  
 
-
-  React.useEffect(() => {
-    navigate('/profile', {
-      state: {
-        backgroundImage: profile,
-        title: "Profile",
-      }
-    });
-  }, [navigate]);
+  useEffect(() => {
+    // Asegúrate de redirigir solo si no estamos ya en /profile
+    if (location.pathname !== "/profile") {
+      navigate('/profile', {
+        state: {
+          backgroundImage: profile,
+          title: "Profile",
+        }
+      });
+    }
+  }, [navigate, location.pathname]);
 
   return (
-    <div className="profile-panel-container">
+    <>
+      {/* El Hero se maneja internamente, así que no necesitamos agregarlo aquí. */}
       <ProfileForm />
-    </div>
+    </>
   );
 };
-
 
 export default ProfilePanel;

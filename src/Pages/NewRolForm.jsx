@@ -21,14 +21,14 @@ const NewRoleForm = () => {
     }));
   };
 
-  // Función para manejar el envío del formulario
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Aquí puedes hacer lo que necesites con los datos del formulario (enviar a la API, etc.)
+   
     console.log(formData);
-    // Redirigir a otra página después de enviar el formulario
-    navigate("/success"); // Ejemplo de ruta de éxito
+    
+    navigate("/success"); 
   };
 
   return (

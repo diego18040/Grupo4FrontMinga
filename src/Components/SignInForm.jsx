@@ -67,25 +67,6 @@ const SignInForm = () => {
                 placeholder="...................."
               />
             </label>
-
-          {/* <div className="flex flex-row justify-between">
-              <div>
-                <label htmlFor="remember">
-                  <input
-                    type="checkbox"
-                    id="remember"
-                    className="w-4 h-4 border-slate-200 focus:bg-indigo-600"
-                  />
-                  Remember me
-                </label>
-              </div>
-              <div>
-                <a href="#" className="font-medium text-indigo-600">
-                  Forgot Password?
-                </a
-              </div>
-            </div>*/}
-
             <button
               type="submit"
               className="w-full py-3 font-medium  bg-pink-500 text-white py-2 rounded hover:bg-pink-600 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"

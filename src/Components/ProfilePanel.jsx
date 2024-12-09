@@ -24,8 +24,8 @@ const ProfileForm = () => {
   };
 
   return (
-    <div className="absolute top-[50%] left-1/2 transform -translate-x-1/2 w-[95%] bg-white p-8 rounded-lg shadow-lg flex items-center justify-center opacity-100 sm:flex-row flex-col-reverse">
-      {/* Contenedor principal con medidas relativas */}
+    <div className="absolute top-[10%] md:top-1/2 left-1/2 transform -translate-x-1/2 w-[95%] bg-white p-8 rounded-lg shadow-lg flex items-center justify-center opacity-100 sm:flex-row flex-col-reverse">
+      
       <div className="w-full sm:w-4/4 md:w-[60%] lg:w-[50%] xl:w-[40%] p-10 pt-[6%] gap-6 opacity-100 sm:mr-24 sm:mb-0 mb-8">
         <form>
           {/* Campo Nombre */}
@@ -151,6 +151,5 @@ const ProfileForm = () => {
 };
 
 export default ProfileForm;
-
 
 

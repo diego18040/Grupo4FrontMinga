@@ -4,6 +4,7 @@ import Hero from "../Components/Hero";
 import { Outlet, useLocation } from "react-router-dom";
 
 
+
 const PanelLayout = () => {
   const location = useLocation();
   const { state } = location; 

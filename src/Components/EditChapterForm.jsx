@@ -75,11 +75,11 @@ const EditChapterForm = () => {
   return (
     <div className="flex w-full h-screen">
       {/* Contenedor del formulario */}
-      <div className="flex justify-center ml-[90px] items-center w-2/3 p-6">
-        <div className="w-full max-w-sm">
-          <h2 className="text-3xl text-center p-10 flex">Edit Chapter</h2>
-
-          <form className="flex flex-col space-y-6 mt-12">
+      <div className="flex justify-center p-8 items-center w-2/3  ">
+        <div className="w-[100vw] md:w-full md:ml-[30%] lg:ml-[40%]">
+          <h2 className="text-3xl text-center ml-[32%] flex ">Edit Chapter</h2>
+          
+          <form className="flex flex-col space-y-6 mt-12 ml-20"> 
             {/* Campo Nombre del Manga */}
             <div className="relative w-full">
               <input
@@ -91,9 +91,12 @@ const EditChapterForm = () => {
                 placeholder="Enter the name of the manga"
               />
               <label
-                htmlFor="mangaName"
-                className={`absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none transition-all duration-200 p-2 ${mangaName ? 'text-xs -translate-y-6' : 'text-base'}`}
-              />
+  htmlFor="mangaName"
+  className="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none transition-all duration-200 p-2 text-base whitespace-nowrap"
+>
+  Name of the manga
+</label>
+
             </div>
             {/* Campo Select para elegir el Capítulo */}
             <div className="relative w-full mb-6">
@@ -146,20 +149,24 @@ const EditChapterForm = () => {
             </div>
             {/* Botones de acción */}
             <div className="flex flex-col space-y-6 justify-center">
-              <button
-                type="button"
-                onClick={handleEdit}
-                className="w-[280px] h-[65px] bg-[#34D399] text-white px-[55px] py-[20px] rounded-[50000px] opacity-100 font-montserrat text-[20px] font-bold leading-[29.26px] text-center hover:bg-[#2ab380] transition-colors"
-              >
-                Edit
-              </button>
-              <button
-                type="button"
-                onClick={handleDelete}
-                className="w-[280px] h-[65px] bg-[#FBDDCC] text-[#EE837F] px-[55px] py-[20px] rounded-[50000px] opacity-100 font-montserrat text-[20px] font-bold leading-[29.26px] text-center hover:bg-[#f9cdb8] transition-colors"
-              >
-                Delete
-              </button>
+            {/* Botones de acción */}
+<div className="flex flex-col space-y-4 justify-center items-center">
+  <button
+    type="button"
+    onClick={handleEdit}
+    className="w-[100%] h-14 bg-[#34D399] text-white px-[55px] py-[20px] rounded-[50000px] opacity-100 font-montserrat text-[120%] font-bold leading-[1px] text-center hover:bg-[#2ab380] transition-colors"
+  >
+    Edit
+  </button>
+  <button
+    type="button"
+    onClick={handleDelete}
+    className="w-[100%] h-14 bg-[#FBDDCC] text-[#EE837F] px-[55px] py-[20px] rounded-[50000px] opacity-100 font-montserrat text-[120%] font-bold leading-[1px] text-center hover:bg-[#f9cdb8] transition-colors"
+  >
+    Delete
+  </button>
+</div>
+
             </div>
           </form>
         </div>
