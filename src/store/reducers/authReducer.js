@@ -19,6 +19,7 @@ const authReducer = createReducer(initialState, (builder) => {
             state.token = action.payload.token;
             if (action.payload.user?.email) {
                 localStorage.setItem("userEmail", action.payload.user.email);
+                localStorage.setItem("userPhoto", action.payload.user.photo);
             }            
         })
         .addCase(login.pending, (state,action) => {
@@ -46,6 +47,7 @@ const authReducer = createReducer(initialState, (builder) => {
             localStorage.removeItem("userEmail");
             localStorage.removeItem("token");
             localStorage.removeItem("userId");
+            localStorage.removeItem("userPhoto");
             state.users = null;
             state.token = null;
             state.error = null;
