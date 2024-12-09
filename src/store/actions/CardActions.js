@@ -6,13 +6,12 @@ export const FETCH_MANGAS_FAILURE = 'FETCH_MANGAS_FAILURE';
 export const FETCH_GENRES_REQUEST = 'FETCH_GENRES_REQUEST';
 export const FETCH_GENRES_SUCCESS = 'FETCH_GENRES_SUCCESS';
 export const FETCH_GENRES_FAILURE = 'FETCH_GENRES_FAILURE';
-//manga por id
 export const FETCH_MANGA_BY_ID_REQUEST = 'FETCH_MANGA_BY_ID_REQUEST';
 export const FETCH_MANGA_BY_ID_SUCCESS = 'FETCH_MANGA_BY_ID_SUCCESS';
 export const FETCH_MANGA_BY_ID_FAILURE = 'FETCH_MANGA_BY_ID_FAILURE';
 
 const getAuthToken = () => {
-  return localStorage.getItem('token'); // Cambia 'token' por la clave correcta en tu localStorage
+  return localStorage.getItem('token'); 
 };
 
 export const fetchMangas = (title = '', genres = []) => {

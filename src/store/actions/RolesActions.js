@@ -6,62 +6,60 @@ export const createAuthor = createAsyncThunk(
     async (authorData) => {
         try {
             const token = localStorage.getItem("token");
-            console.log("Token:", token);
-
-            if (!token) {
-                throw new Error("No authentication token found");
-            }
+            if (!token) throw new Error("No authentication token found");
 
             const response = await axios.post(
                 "http://localhost:8080/api/authors/create",
                 {
                     name: authorData.name,
+                    location: authorData.location,
+                    dateJoined: authorData.dateJoined,
+                    profileImage: authorData.profileImage,
                     email: authorData.email,
-                    userId,
+                    user_id: authorData.user_id
                 },
                 {
                     headers: {
-                        Authorization: `Bearer ${token}`
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
                     }
                 }
             );
 
             return response.data;
         } catch (error) {
-            console.error("Create author error:", error);
             throw error.response?.data || error.message;
         }
     }
 );
 
-// Acción para crear compañía
 export const createCompany = createAsyncThunk(
     "roles/createCompany",
     async (companyData) => {
         try {
             const token = localStorage.getItem("token");
-            const response = await fetch("http://localhost:8080/api/companies/create", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
+            const userId = localStorage.getItem("userId");
+
+            if (!userId) throw new Error("User ID is required");
+
+            const response = await axios.post(
+                "http://localhost:8080/api/companies/create",
+                {
+                    ...companyData,
+                    user_id: userId
                 },
-                body: JSON.stringify({
-                    name: companyData.name,
-                    email: companyData.email,
-                    website: companyData.website
-                })
-            });
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
 
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.message || "Failed to create company");
-            }
-
-            const data = await response.json();
-            return data;
+            return response.data;
         } catch (error) {
-            throw error;
+            console.error("Error details:", error.response?.data);
+            throw error.response?.data || error;
         }
     }
 );

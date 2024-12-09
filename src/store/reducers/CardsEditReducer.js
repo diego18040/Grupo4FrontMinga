@@ -18,7 +18,7 @@ const cardEditReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(FETCH_MANGAS_REQUEST, (state) => {
       state.loading = true;
-      state.error = ''; // Clear any previous errors
+      state.error = ''; 
     })
     .addCase(FETCH_MANGAS_SUCCESS, (state, action) => {
       state.loading = false;
@@ -32,7 +32,7 @@ const cardEditReducer = createReducer(initialState, (builder) => {
     })
     .addCase(FETCH_GENRES_REQUEST, (state) => {
       state.loading = true;
-      state.error = ''; // Clear any previous errors
+      state.error = ''; 
     })
     .addCase(FETCH_GENRES_SUCCESS, (state, action) => {
       state.loading = false;

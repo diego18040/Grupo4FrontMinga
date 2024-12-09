@@ -5,41 +5,49 @@ import { createCompany } from "../store/actions/RolesActions";
 import { clearRoleState } from "../store/reducers/rolesReducer";
 
 const NewRoleFormTwo = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const { loading, error, success } = useSelector((state) => state.roles || {});
-  
-    const [formData, setFormData] = useState({
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error, success } = useSelector((state) => state.roles || {});
+  const userId = localStorage.getItem("userId");
+
+  const [formData, setFormData] = useState({
       name: "",
       website: "",
       profileImage: "",
       description: "",
-    });
-  
-    useEffect(() => {
+  });
+
+  useEffect(() => {
       if (success) {
-        dispatch(clearRoleState());
-        navigate("/mangas");
+          dispatch(clearRoleState());
+          navigate("/mangas");
       }
-    }, [success, navigate, dispatch]);
-  
-    const handleChange = (e) => {
+  }, [success, navigate, dispatch]);
+
+  const handleChange = (e) => {
       const { name, value } = e.target;
       setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
+          ...prevData,
+          [name]: value,
       }));
-    };
-  
-    const handleSubmit = async (e) => {
+  };
+
+  const handleSubmit = async (e) => {
       e.preventDefault();
-      try {
-        await dispatch(createCompany(formData)).unwrap();
-      } catch (err) {
-        console.error("Failed to create company:", err);
+      if (!userId) {
+          console.error("User ID is missing");
+          return;
       }
-    };
-  
+
+      try {
+          await dispatch(createCompany({
+              ...formData,
+              user_id: userId
+          })).unwrap();
+      } catch (err) {
+          console.error("Failed to create company:", err);
+      }
+  };
     return (
       <div className="flex w-full h-screen mt-16 md:mt-0">
         <div className="flex justify-center items-center w-full p-6">

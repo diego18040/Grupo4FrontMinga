@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createAuthor, createCompany } from "../store/actions/RolesActions";
+import { createAuthor } from "../store/actions/RolesActions";
 import { clearRoleState } from "../store/reducers/rolesReducer";
 
 const NewRoleFormOne = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, error, success } = useSelector((state) => state.roles || {});
+  const userId = localStorage.getItem("userId");
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -34,11 +35,19 @@ const NewRoleFormOne = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!userId) {
+        console.error("User ID is missing");
+        return;
+    }
+
     const authorData = {
-      name: `${formData.firstName} ${formData.lastName}`,
-      location: formData.location,
-      dateJoined: formData.dateJoined,
-      profileImage: formData.profileImage,
+        name: `${formData.firstName} ${formData.lastName}`,
+        location: formData.location,
+        dateJoined: formData.dateJoined,
+        profileImage: formData.profileImage,
+        email: localStorage.getItem("userEmail"),
+        user_id: userId  // Changed from userId to user_id
     };
     
     try {
