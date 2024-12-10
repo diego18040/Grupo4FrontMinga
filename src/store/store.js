@@ -22,6 +22,7 @@ export const store = configureStore({
     roles: rolesReducer,
     cardEdit: cardEditReducer,
     userProfile: userProfileReducer, 
+    
   }
 });
 
