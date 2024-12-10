@@ -100,20 +100,15 @@ const authReducer = createReducer(initialState, (builder) => {
         .addCase(signUp.fulfilled, (state, action) => {
             state.loading = false;
             state.error = null;
-            state.users = action.payload.user;
-            state.token = action.payload.token;
-            state.userId = action.payload.user._id;
-
-            if (action.payload.user?.role) {
-                state.userRole = action.payload.user.role;
-                localStorage.setItem("userRole", action.payload.user.role);
+          
+            if (action.payload && action.payload.user) {
+              state.userId = action.payload.user._id;
+              state.users = { email: action.payload.user.email };
+            } else {
+              state.error = "El registro no devolvió datos válidos.";
             }
-
-            if (action.payload.user?.photo) {
-                state.userPhoto = action.payload.user.photo;
-                localStorage.setItem("userPhoto", action.payload.user.photo);
-            }
-        })
+          })
+          
         .addCase(signUp.pending, (state) => {
             state.loading = true;
             state.error = null;
