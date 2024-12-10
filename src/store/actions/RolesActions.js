@@ -25,7 +25,10 @@ export const createAuthor = createAsyncThunk(
                     }
                 }
             );
-
+            if (response.data.token){
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("role", 1);
+            }
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
@@ -55,7 +58,10 @@ export const createCompany = createAsyncThunk(
                     }
                 }
             );
-
+            if (response.data.token){
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("role", 2);
+            }
             return response.data;
         } catch (error) {
             console.error("Error details:", error.response?.data);

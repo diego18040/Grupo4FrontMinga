@@ -45,14 +45,13 @@ const login = createAsyncThunk("login", async ({ email, password }) => {
     const response = await axios.post("http://localhost:8080/api/auth/signIn", credentials);
     console.log("Login exitoso:", response.data);
 
-    // Guardar datos en localStorage
-    // Guardar datos en localStorage
+    
+    //  datos en localStorage
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("userId", response.data.user._id);
     localStorage.setItem("userEmail", response.data.user.email);
     localStorage.setItem("role", response.data.user.role);
 
-        // hacemos una petición adicional para obtener el rol del usuario
         try {
           const userDetailsResponse = await axios.get(
             `http://localhost:8080/api/users/${response.data.user._id}`,
@@ -63,7 +62,7 @@ const login = createAsyncThunk("login", async ({ email, password }) => {
             }
           );
 
-// ver el rol basado en la respuesta
+
 // ver el rol basado en la respuesta
 if (userDetailsResponse.data.user.author) {
   localStorage.setItem("userRole", "author");
@@ -71,7 +70,6 @@ if (userDetailsResponse.data.user.author) {
   localStorage.setItem("userRole", "company");
 }
 
-  // agregar el rol a la respuesta
   // agregar el rol a la respuesta
   return {
     ...response.data,
