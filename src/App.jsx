@@ -113,6 +113,8 @@ function App() {
     const userIdFromURL = queryParams.get("userId");
     const UserEmailFromURL = queryParams.get("userEmail");
     const userPhotoFromURL = queryParams.get("userPhoto");
+    
+    console.log({ tokenFromURL, userIdFromURL, UserEmailFromURL, userPhotoFromURL });
 
     if (tokenFromURL && userIdFromURL) {
       localStorage.setItem("token", tokenFromURL);

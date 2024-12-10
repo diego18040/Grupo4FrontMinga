@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div>
       <div className="relative w-full h-auto bg-white overflow-hidden">
-        {/* Imagen principal con curva */}
+        
         <img
           src={frame}
           alt="Curved"

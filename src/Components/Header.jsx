@@ -8,7 +8,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const token = useSelector((state) => state.authStore?.token);
   const user = useSelector((state) => state.authStore?.users);
-  const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId"); // Obtener userId del estado o localStorage
+  const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId"); 
   const userEmail = user?.email || localStorage.getItem("userEmail");
   const userPhoto = user?.photo || localStorage.getItem("userPhoto");
 
@@ -52,7 +52,7 @@ const Header = () => {
             ✕
           </button>
 
-          {/* Información del usuario */}
+          
           {token && (
             <div className="p-4 flex flex-col items-center space-y-2 border-b border-white">
               <img
@@ -76,7 +76,7 @@ const Header = () => {
             </li>
 
             {!token ? (
-              // Mostrar "Register" cuando no hay token
+              
               <li>
                 <NavLink
                   to="/register"
@@ -87,7 +87,7 @@ const Header = () => {
                 </NavLink>
               </li>
             ) : (
-              // Mostrar "Mangas" cuando el usuario está logueado
+              
               <li>
                 <NavLink
                   to="/mangas"

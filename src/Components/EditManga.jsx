@@ -3,9 +3,9 @@ import { useParams, useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 
 const EditManga = () => {
-    const { id } = useParams(); // obtener el id del manga desde la URL
-    const navigate = useNavigate(); // inicializar useNavigate
-    const userId = localStorage.getItem("userId"); // userId del localStorage
+    const { id } = useParams(); 
+    const navigate = useNavigate(); 
+    const userId = localStorage.getItem("userId"); 
 
     const [mangaName, setMangaName] = useState("");
     const [description, setDescription] = useState("");
@@ -21,7 +21,7 @@ const EditManga = () => {
                 const response = await axios.get(`http://localhost:8080/api/mangas/id/${id}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                // Obtener datos del manga
+                
                 const manga = response.data.response[0];
                 setMangaName(manga.title);
                 setImageUrl(manga.cover_photo);
@@ -51,17 +51,17 @@ const EditManga = () => {
 
     const handleEdit = async () => {
         try {
-            //token de autenticación
+            
             const token = localStorage.getItem('token');
             const payload = {
                 title: mangaName,
                 description,
                 cover_photo: photoUrl,
             };
-            // Enviar datos al backend
+            
             console.log("Payload:", payload);
             console.log(`http://localhost:8080/api/mangas/update/${id}?category=${category}`);
-            // Actualizar datos en el backend
+            
             const response = await axios.put(`http://localhost:8080/api/mangas/update/${id}?category=${category}`, payload, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -70,7 +70,7 @@ const EditManga = () => {
 
             alert("Changes updated successfully!");
 
-            // Redirigir después del mensaje satisfactorio
+            
             navigate(`/manager/${userId}`);
         } catch (error) {
             console.error("Error updating manga:", error);
@@ -80,7 +80,7 @@ const EditManga = () => {
 
     const handleDelete = async () => {
         try {
-            const token = localStorage.getItem('token'); // Obtener el token de autenticación
+            const token = localStorage.getItem('token'); 
             console.log(`http://localhost:8080/api/mangas/deleteone/${id}`);
             const response = await axios.delete(`http://localhost:8080/api/mangas/deleteone/${id}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -90,7 +90,7 @@ const EditManga = () => {
 
             alert("Manga deleted successfully!");
 
-            // Redirigir después de 3 segundos
+            
             setTimeout(() => {
                 navigate(`/manager/${userId}`);
             }, 3000);
@@ -102,13 +102,13 @@ const EditManga = () => {
 
     return (
         <div className="flex w-full h-screen">
-            {/* Contenedor del formulario */}
+            
             <div className="flex justify-center ml-[90px] items-center w-2/3 p-6">
                 <div className="w-full max-w-sm">
                     <h2 className="text-3xl text-center p-10 flex">Edit Manga</h2>
 
                     <form className="flex flex-col space-y-6 mt-12">
-                        {/* Campo Nombre del Manga */}
+                        
                         <div className="relative w-full">
                             <input
                                 id="mangaName"
@@ -124,7 +124,7 @@ const EditManga = () => {
                             ></label>
                         </div>
 
-                        {/* Campo Descripción */}
+                        
                         <div className="relative w-full">
                             <textarea
                                 id="description"
@@ -139,7 +139,7 @@ const EditManga = () => {
                             ></label>
                         </div>
 
-                        {/* Campo URL de la Foto */}
+                        
                         <div className="relative w-full">
                             <input
                                 id="photoUrl"
@@ -155,7 +155,7 @@ const EditManga = () => {
                             ></label>
                         </div>
 
-                        {/* Campo Select para elegir la Categoría */}
+                        
                         <div className="relative w-full mb-6">
                             <select
                                 id="category"
@@ -166,13 +166,13 @@ const EditManga = () => {
                                 <option value="">Select Category</option>
                                 {categories.map((cat) => (
                                     <option key={cat._id} value={cat.name}>
-                                        {cat.name} {/* Mostrar el nombre literal */}
+                                        {cat.name} 
                                     </option>
                                 ))}
                             </select>
                         </div>
 
-                        {/* Botones de acción */}
+                        
                         <div className="flex flex-col space-y-6 justify-center">
                             <button
                                 type="button"
@@ -208,7 +208,7 @@ const EditManga = () => {
                 </div>
             </div>
 
-            {/* Contenedor de la imagen con el título encima */}
+            
             <div className="relative flex justify-center items-center w-full mt-[30px]">
                 <div className="w-full p-4 max-w-sm text-center hidden sm:block">
                     <h2 className="text-lg text-center">{mangaName}</h2>

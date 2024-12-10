@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-// Fetch comments
+
 export const fetchComments = createAsyncThunk(
     "comments/fetchComments",
     async (chapterId) => {
@@ -25,7 +25,7 @@ export const createComment = createAsyncThunk(
             const token = localStorage.getItem("token");
             if (!token) throw new Error("No token found");
 
-            // Preparar datos para el body
+            
             const requestData = {
                 message: commentData.message,
                 chapter_id: commentData.chapter_id
@@ -33,7 +33,7 @@ export const createComment = createAsyncThunk(
 
             console.log("Request data being sent:", requestData);
 
-            //  el user_id como query parameter
+            
             const response = await axios.post(
                 `http://localhost:8080/api/comments/create?id=${commentData.user_id}`,
                 requestData,
@@ -53,7 +53,7 @@ export const createComment = createAsyncThunk(
         }
     }
 );
-// Update comment
+
 export const updateComment = createAsyncThunk(
     "comments/updateComment",
     async ({ _id, message }) => {
@@ -74,7 +74,7 @@ export const updateComment = createAsyncThunk(
     }
 );
 
-// Delete comment
+
 export const deleteComment = createAsyncThunk(
     "comments/deleteComment",
     async (_id) => {
