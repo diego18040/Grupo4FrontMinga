@@ -3,21 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useNavigate } from 'react-router-dom';
 import logo from "../assets/logo.png";
 import { logout } from "../store/actions/authActions";
-import FavoritesModal from "../Components/FavoritesModals"
+import FavoritesModal from "../Components/FavoritesModals";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const token = useSelector((state) => state.authStore?.token);
-  const user = useSelector((state) => state.authStore?.users);
-  const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId");
-  const userEmail = user?.email || localStorage.getItem("userEmail");
-  const userPhoto = user?.photo || localStorage.getItem("userPhoto");
-  const userRole = user?.role || localStorage.getItem("userRole");
 
-  const isBasicUser = () => {
-    const roleNumber = Number(userRole);
-    return roleNumber === 0;
-  };
+  const token = useSelector((state) => state.authStore?.token) || localStorage.getItem("token");
+  const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId");
+  const userEmail = useSelector((state) => state.authStore?.users?.email) || localStorage.getItem("userEmail");
+  const userPhoto = useSelector((state) => state.authStore?.users?.photo) || localStorage.getItem("userPhoto");
+  const userRole = useSelector((state) => state.authStore?.users?.role) || localStorage.getItem("role");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,6 +25,8 @@ const Header = () => {
     dispatch(logout());
     navigate("/");
   };
+
+  const isRole = (role) => Number(userRole) === role;
 
   return (
     <header className="bg-transparent p-4 fixed w-full top-0 left-0 z-50">
@@ -75,43 +72,70 @@ const Header = () => {
             </li>
 
             {!token && (
-              <li>
-                <NavLink
-                  to="/register"
-                  className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
-                  onClick={toggleMenu}
-                >
-                  Register
-                </NavLink>
-              </li>
-            )}
-
-            {token && (
-              <li>
-                <NavLink
-                  to="/mangas"
-                  className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
-                  onClick={toggleMenu}
-                >
-                  Mangas
-                </NavLink>
-              </li>
-            )}
-
-            {token && isBasicUser() && (
-              <li>
-                <NavLink
-                  to="/newrole"
-                  className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
-                  onClick={toggleMenu}
-                >
-                  Become Author/Company
-                </NavLink>
-              </li>
-            )}
-
-            {token && !isBasicUser() && (
               <>
+                <li>
+                  <NavLink
+                    to="/register"
+                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                    onClick={toggleMenu}
+                  >
+                    Register
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/signin"
+                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                    onClick={toggleMenu}
+                  >
+                    Sign In
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {token && isRole(0) && (
+              <>
+                <li>
+                  <NavLink
+                    to="/mangas"
+                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                    onClick={toggleMenu}
+                  >
+                    Mangas
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/newrole"
+                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                    onClick={toggleMenu}
+                  >
+                    Register Company or Author
+                  </NavLink>
+                </li>
+                <li>
+                  <button
+                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                    onClick={handleSignOut}
+                  >
+                    Sign Out
+                  </button>
+                </li>
+              </>
+            )}
+
+            {token && (isRole(1) || isRole(2)) && (
+              <>
+                <li>
+                  <NavLink
+                    to="/mangas"
+                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                    onClick={toggleMenu}
+                  >
+                    Mangas
+                  </NavLink>
+                </li>
                 <li>
                   <NavLink
                     to={`/profile/${userId}`}
@@ -148,30 +172,15 @@ const Header = () => {
                     Admin Panel
                   </NavLink>
                 </li>
+                <li>
+                  <button
+                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                    onClick={handleSignOut}
+                  >
+                    Sign Out
+                  </button>
+                </li>
               </>
-            )}
-
-            {token && (
-              <li>
-                <button
-                  onClick={handleSignOut}
-                  className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
-                >
-                  Sign Out
-                </button>
-              </li>
-            )}
-
-            {!token && (
-              <li>
-                <NavLink
-                  to="/signin"
-                  className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
-                  onClick={toggleMenu}
-                >
-                  Sign In
-                </NavLink>
-              </li>
             )}
           </ul>
         </div>

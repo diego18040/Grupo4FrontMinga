@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Importar useNavigate
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const NewMangaPage = () => {
-  const navigate = useNavigate(); // Inicializar useNavigate
-  const userId = localStorage.getItem("userId"); // Obtener userId del localStorage
+  const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
 
   const [mangaName, setMangaName] = useState("");
   const [description, setDescription] = useState("");
@@ -12,6 +12,7 @@ const NewMangaPage = () => {
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -28,16 +29,15 @@ const NewMangaPage = () => {
 
     fetchCategories();
   }, []);
+
   const handleCreate = async () => {
     try {
-      const token = localStorage.getItem('token'); // Obtener el token de autenticación
+      const token = localStorage.getItem('token');
       const payload = {
         title: mangaName,
         description,
         cover_photo: photoUrl,
       };
-
-      console.log("Payload:", payload);
 
       const response = await axios.post(`http://localhost:8080/api/mangas/create/${userId}?category=${category}`, payload, {
         headers: { 'Authorization': `Bearer ${token}` }
@@ -45,15 +45,20 @@ const NewMangaPage = () => {
 
       console.log("Response:", response.data);
 
-      alert("Manga created successfully!");
+      // Muestra el cartel de éxito
+      setShowSuccess(true);
 
-      // Redirigir despues del mensaje
-      navigate(`/manager/${userId}`);
+      // Redirige después de unos segundos
+      setTimeout(() => {
+        setShowSuccess(false);
+        navigate(`/manager/${userId}`);
+      }, 3000);
     } catch (error) {
       console.error("Error creating manga:", error);
       alert("Failed to submit.");
     }
   };
+
   return (
     <div className="flex w-full h-screen">
       {/* Contenedor del formulario */}
@@ -72,10 +77,6 @@ const NewMangaPage = () => {
                 className="w-full max-w-[280px] bg-transparent focus:outline-none border-b-2 border-gray-300 focus:border-blue-500 text-base"
                 placeholder="Insert title"
               />
-              <label
-                htmlFor="mangaName"
-                className={`absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none transition-all duration-200 p-2 ${mangaName ? 'text-xs -translate-y-6' : 'text-base'}`}
-              ></label>
             </div>
 
             {/* Campo Descripción */}
@@ -87,10 +88,6 @@ const NewMangaPage = () => {
                 className="w-full max-w-[280px] bg-transparent focus:outline-none border-b-2 border-gray-300 focus:border-blue-500 text-base"
                 placeholder="Insert description"
               ></textarea>
-              <label
-                htmlFor="description"
-                className={`absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none transition-all duration-200 p-2 ${description ? 'text-xs -translate-y-6' : 'text-base'}`}
-              ></label>
             </div>
 
             {/* Campo URL de la Foto */}
@@ -101,16 +98,13 @@ const NewMangaPage = () => {
                 value={photoUrl}
                 onChange={(e) => {
                   setPhotoUrl(e.target.value);
-                  setImageUrl(e.target.value); // Actualizar el estado de imageUrl
+                  setImageUrl(e.target.value);
                 }}
                 className="w-full max-w-[280px] bg-transparent focus:outline-none border-b-2 border-gray-300 focus:border-blue-500 text-base"
                 placeholder="Insert cover photo"
               />
-              <label
-                htmlFor="photoUrl"
-                className={`absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none transition-all duration-200 p-2 ${photoUrl ? 'text-xs -translate-y-6' : 'text-base'}`}
-              ></label>
             </div>
+
             {/* Campo Select para elegir la Categoría */}
             <div className="relative w-full mb-6">
               <select
@@ -122,7 +116,7 @@ const NewMangaPage = () => {
                 <option value="">Select Category</option>
                 {categories.map((cat) => (
                   <option key={cat._id} value={cat.name}>
-                    {cat.name} {/* Mostrar el nombre literal */}
+                    {cat.name}
                   </option>
                 ))}
               </select>
@@ -153,6 +147,25 @@ const NewMangaPage = () => {
           />
         </div>
       </div>
+
+      {/* Modal de éxito */}
+      {showSuccess && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 className="text-2xl font-bold text-green-500 mb-4">
+              🎉 Manga Created Successfully! 🎉
+            </h2>
+            <p className="text-gray-700">
+              "{mangaName}" has been added to your collection.
+            </p>
+            <img
+              src={photoUrl || "https://via.placeholder.com/150"}
+              alt="Manga Cover"
+              className="rounded-lg mt-4 w-40 h-60 mx-auto object-cover"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

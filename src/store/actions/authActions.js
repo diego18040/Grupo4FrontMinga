@@ -45,11 +45,13 @@ const login = createAsyncThunk("login", async ({ email, password }) => {
     const response = await axios.post("http://localhost:8080/api/auth/signIn", credentials);
     console.log("Login exitoso:", response.data);
 
-
+    // Guardar datos en localStorage
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("userId", response.data.user._id);
     localStorage.setItem("userEmail", response.data.user.email);
+    localStorage.setItem("role", response.data.user.role);
 
+        // hacemos una petición adicional para obtener el rol del usuario
         try {
           const userDetailsResponse = await axios.get(
             `http://localhost:8080/api/users/${response.data.user._id}`,
@@ -60,14 +62,14 @@ const login = createAsyncThunk("login", async ({ email, password }) => {
             }
           );
 
-
+// ver el rol basado en la respuesta
 if (userDetailsResponse.data.user.author) {
   localStorage.setItem("userRole", "author");
 } else if (userDetailsResponse.data.user.company) {
   localStorage.setItem("userRole", "company");
 }
 
-
+  // agregar el rol a la respuesta
   return {
     ...response.data,
     userRole: localStorage.getItem("userRole")
@@ -86,18 +88,19 @@ const signUp = createAsyncThunk("signUp", async ({ email, password, photo }) => 
     console.log("Iniciando registro de usuario");
     const newUser = {
       email: email,
-      photo: photo,
       password: password,
+      photo: photo,
     };
 
     const response = await axios.post("http://localhost:8080/api/users/register", newUser);
     console.log("Registro exitoso:", response.data);
 
-
+// Guardar datos en localStorage
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("userId", response.data.user._id);
     localStorage.setItem("userEmail", response.data.user.email);
-
+    // guardar el rol del usuario
+    // verificar el rol guardado
     if (response.data.user.role) {
       localStorage.setItem("userRole", response.data.user.role);
     }

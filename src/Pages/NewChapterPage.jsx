@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom"; // Importar useParams para obtener el id de la URL
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const NewChapterPage = () => {
-    const { id } = useParams(); // Obtener el id del manga desde la URL
-    const navigate = useNavigate(); // Inicializar useNavigate
-    const userId = localStorage.getItem("userId"); // Obtener userId del localStorage
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const userId = localStorage.getItem("userId");
 
     const [chapterTitle, setChapterTitle] = useState("");
-    const [order, setOrder] = useState(0); // Cambiar el nombre a order para reflejar el formato del cuerpo
-    const [photoUrls, setPhotoUrls] = useState([""]); // Estado para múltiples URLs de imágenes
+    const [order, setOrder] = useState(0);
+    const [photoUrls, setPhotoUrls] = useState([""]);
     const [imageUrls, setImageUrls] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handlePhotoUrlChange = (index, value) => {
         const newPhotoUrls = [...photoUrls];
@@ -29,14 +30,12 @@ const NewChapterPage = () => {
 
     const handleCreate = async () => {
         try {
-            const token = localStorage.getItem('token'); // Obtener el token de autenticación
+            const token = localStorage.getItem('token');
             const payload = {
                 title: chapterTitle,
-                pages: photoUrls, // Enviar múltiples URLs de imágenes como pages
-                order: order, //orden
+                pages: photoUrls,
+                order: order,
             };
-
-            console.log("Payload:", payload);
 
             const response = await axios.post(`http://localhost:8080/api/chapters/create/${id}`, payload, {
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -44,17 +43,42 @@ const NewChapterPage = () => {
 
             console.log("Response:", response.data);
 
-            alert("Chapter created successfully!");
+            // Mostrar el modal
+            setIsModalOpen(true);
 
-            // Redirigir inmediatamente después del mensaje satisfactorio
-            navigate(`/manager/${userId}`);
+            // Ocultar el modal después de unos segundos y redirigir
+            setTimeout(() => {
+                setIsModalOpen(false);
+                navigate(`/manager/${userId}`);
+            }, 3000);
         } catch (error) {
             console.error("Error creating chapter:", error);
             alert("Failed to submit.");
         }
     };
+
     return (
         <div className="flex w-full h-screen">
+            {/* Modal de éxito */}
+            {isModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white rounded-lg p-8 text-center">
+                        <h2 className="text-2xl font-bold mb-4">Chapter Created Successfully!</h2>
+                        <p className="text-lg">{chapterTitle}</p>
+                        <div className="mt-4">
+                            {imageUrls.map((url, index) => (
+                                <img
+                                    key={index}
+                                    src={url}
+                                    alt={`Chapter page ${index + 1}`}
+                                    className="rounded-lg w-[200px] h-[300px] mb-4"
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Contenedor del formulario */}
             <div className="flex justify-center ml-[90px] items-center w-2/3 p-6">
                 <div className="w-full max-w-sm">
@@ -71,10 +95,6 @@ const NewChapterPage = () => {
                                 className="w-full max-w-[280px] bg-transparent focus:outline-none border-b-2 border-gray-300 focus:border-blue-500 text-base"
                                 placeholder="Insert title"
                             />
-                            <label
-                                htmlFor="chapterTitle"
-                                className={`absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none transition-all duration-200 p-2 ${chapterTitle ? 'text-xs -translate-y-6' : 'text-base'}`}
-                            ></label>
                         </div>
 
                         {/* Campo Orden */}
@@ -87,10 +107,6 @@ const NewChapterPage = () => {
                                 className="w-full max-w-[280px] bg-transparent focus:outline-none border-b-2 border-gray-300 focus:border-blue-500 text-base"
                                 placeholder="Insert order"
                             />
-                            <label
-                                htmlFor="order"
-                                className={`absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none transition-all duration-200 p-2 ${order ? 'text-xs -translate-y-6' : 'text-base'}`}
-                            ></label>
                         </div>
 
                         {/* Campos URL de las Fotos */}
@@ -104,10 +120,6 @@ const NewChapterPage = () => {
                                     className="w-full max-w-[280px] bg-transparent focus:outline-none border-b-2 border-gray-300 focus:border-blue-500 text-base"
                                     placeholder="Insert pages"
                                 />
-                                <label
-                                    htmlFor={`photoUrl-${index}`}
-                                    className={`absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none transition-all duration-200 p-2 ${photoUrl ? 'text-xs -translate-y-6' : 'text-base'}`}
-                                ></label>
                             </div>
                         ))}
 
@@ -118,6 +130,7 @@ const NewChapterPage = () => {
                         >
                             Add Page
                         </button>
+
                         {/* Botones de acción */}
                         <div className="flex flex-col space-y-6 justify-center">
                             <button
