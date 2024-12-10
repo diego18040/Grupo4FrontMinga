@@ -33,6 +33,8 @@ import NewRoleFormTwo from "./Pages/RoleCompany.jsx";
 import NewRoleFormOne from "./Components/CreateRoleForm.jsx";
 import NewRole from "./Components/NewRoleForm.jsx";
 import FavouritesPage from "./Pages/FavouritesPage.jsx";
+import ProfileLayout from "./Layouts/ProfileLayout.jsx";
+import UserProfile from "./Components/UserProfile.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const isOnline = useSelector((store) => store.userSignUpReducer.isOnline);
@@ -79,7 +81,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/mangas", element: <Mangas /> },
       { path: "/adminpanel", element: <AdminPanel /> },
-      { path: "/profile", element: <Profile /> },
+      { path: "/profilez", element: <Profile /> },
       { path: "/mangas/:id", element: <MangasId /> },
       { path: "/manager/:id", element: <Manager/> },
       { path: "/readmanga/:id", element: <ReadManga /> },
@@ -101,6 +103,13 @@ const router = createBrowserRouter([
     children: [
       { path: "register", element: <Register /> },
       { path: "signin", element: <SignRoute><SignIn /></SignRoute> }
+    ],
+  },
+  {
+    element: <ProfileLayout />,
+    children: [
+      { path: "/profile/:id", element: <UserProfile /> },
+   
     ],
   },
 ]);
