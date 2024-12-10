@@ -9,7 +9,7 @@ const setUser = createAction("setUser", (datos) => {
 
 const logout = createAsyncThunk("logout", async (_, thunkAPI) => {
   try {
-    console.log("Cerrando sesión en el backend...");
+    console.log("Cerrando sesi贸n en el backend...");
     const token = localStorage.getItem("token");
     const response = await axios.post(
       "http://localhost:8080/api/auth/signout",
@@ -29,8 +29,8 @@ const logout = createAsyncThunk("logout", async (_, thunkAPI) => {
 
     return {};
   } catch (error) {
-    console.error("Error al cerrar sesión:", error.response?.data || error.message);
-    return thunkAPI.rejectWithValue(error.response?.data || "Error al cerrar sesión");
+    console.error("Error al cerrar sesi贸n:", error.response?.data || error.message);
+    return thunkAPI.rejectWithValue(error.response?.data || "Error al cerrar sesi贸n");
   }
 });
 
@@ -45,6 +45,7 @@ const login = createAsyncThunk("login", async ({ email, password }) => {
     const response = await axios.post("http://localhost:8080/api/auth/signIn", credentials);
     console.log("Login exitoso:", response.data);
 
+    // Guardar datos en localStorage
     // Guardar datos en localStorage
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("userId", response.data.user._id);
@@ -63,12 +64,14 @@ const login = createAsyncThunk("login", async ({ email, password }) => {
           );
 
 // ver el rol basado en la respuesta
+// ver el rol basado en la respuesta
 if (userDetailsResponse.data.user.author) {
   localStorage.setItem("userRole", "author");
 } else if (userDetailsResponse.data.user.company) {
   localStorage.setItem("userRole", "company");
 }
 
+  // agregar el rol a la respuesta
   // agregar el rol a la respuesta
   return {
     ...response.data,

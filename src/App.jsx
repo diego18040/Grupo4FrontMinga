@@ -22,7 +22,6 @@ import Manager from './Pages/Manager.jsx';
 import Test from './Pages/Test.jsx';
 import SignIn from './Pages/SignIn.jsx';
 import Comments from './Pages/Coments.jsx';
-import EditAuthor from './Pages/EditAuthor.jsx';
 import EditCompany from './Pages/EditCompany';
 import CreateRoles from './Layouts/CreateRoles.jsx';
 import SignRoute from "./Components/SignRoute.jsx";
@@ -35,7 +34,7 @@ import NewRole from "./Components/NewRoleForm.jsx";
 import FavouritesPage from "./Pages/FavouritesPage.jsx";
 import ProfileLayout from "./Layouts/ProfileLayout.jsx";
 import UserProfile from "./Components/UserProfile.jsx";
-
+import EditAuthor  from "./Pages/EditAuthor.jsx"
 const ProtectedRoute = ({ children }) => {
   const isOnline = useSelector((store) => store.userSignUpReducer.isOnline);
   const token = localStorage.getItem("token");
@@ -107,6 +106,7 @@ const router = createBrowserRouter([
     element: <ProfileLayout />,
     children: [
       { path: "/profile/:id", element: <UserProfile /> },
+      { path: "/editauthor/:id", element: < EditAuthor /> },
    
     ],
   },
