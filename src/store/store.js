@@ -9,10 +9,10 @@ import authReducer from "./reducers/authReducer.js"
 import { loadFavorites } from './actions/FavActions';
 import rolesReducer from "./reducers/rolesReducer.js";
 import cardEditReducer from './reducers/CardsEditReducer.js';
+import userProfileReducer from './reducers/UserProfileReducer.js'; 
 
 export const store = configureStore({
   reducer: {
-    
     authStore: authReducer,
     chapters: chaptersReducer,
     cards: cardReducer,
@@ -20,9 +20,8 @@ export const store = configureStore({
     comments: CommentsReducers,
     favorites: favReducer,
     roles: rolesReducer,
-    cardEdit: cardEditReducer
-
-
+    cardEdit: cardEditReducer,
+    userProfile: userProfileReducer, 
   }
 });
 

@@ -1,97 +1,42 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { FaMapMarkerAlt, FaBirthdayCake, FaEdit } from 'react-icons/fa';
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAuthorData, fetchCardsData } from '../store/actions/UserProfileActions';
 import profile from "../assets/profile.jpg";
+
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId"); // Obtener userId del estado o localStorage
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId");
+  const { authorData, loading, error, cardsData } = useSelector((state) => state.userProfile);
 
-  const [isNew, setIsNew] = useState(true);
-  const [authorData, setAuthorData] = useState({
-    id: "", // Agregar ID del autor
-    imageUrl: "",
-    name: "",
-    lastName: "",
-    city: "",
-    country: "",
-    birthDate: "",
-  });
+  useEffect(() => {
+    if (userId) {
+      console.log('Dispatching fetchAuthorData for userId:', userId);
+      dispatch(fetchAuthorData(userId));
+      console.log('Dispatching fetchCardsData for userId:', userId);
+      dispatch(fetchCardsData(userId));
+    }
+  }, [dispatch, userId]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     navigate(`/profile/${userId}`, {
       state: {
         backgroundImage: profile,
         title: "Profile",
       }
     });
-  }, [navigate]);
+  }, [navigate, userId]);
 
-  useEffect(() => {
-    const fetchAuthorData = async () => {
-      try {
-        const token = localStorage.getItem('token'); // Obtener el token de autenticación
-        if (!token) {
-          console.error("No token found in localStorage");
-          return;
-        }
-        if (!userId) {
-          console.error("No userId found");
-          return;
-        }
-        const response = await axios.get(`http://localhost:8080/api/authors/${userId}`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-        const data = response.data.response[0];
-        console.log("Author data:", data); // Aquí se añaden los datos traídos por la petición
-        setAuthorData({
-          id: data._id, // Asignar el ID del autor
-          imageUrl: data.photo,
-          name: data.name,
-          lastName: data.last_name,
-          city: data.city,
-          country: data.country,
-          birthDate: new Date(data.date).toLocaleDateString(),
-        });
-      } catch (error) {
-        console.error("Error fetching author data:", error);
-      }
-    };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-    fetchAuthorData();
-  }, [userId]);
-
-  const [cardsData, setCardsData] = useState([]);
-
-  useEffect(() => {
-    const fetchCardsData = async () => {
-      try {
-        const token = localStorage.getItem('token'); // Obtener el token de autenticación
-        if (!token) {
-          console.error("No token found in localStorage");
-          return;
-        }
-        if (!userId) {
-          console.error("No userId found");
-          return;
-        }
-        const response = await axios.get(`http://localhost:8080/api/mangas/creator/${userId}`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-        const data = response.data.response;
-        console.log("Cards data:", data); // Aquí se añaden los datos traídos por la petición
-        setCardsData(data);
-      } catch (error) {
-        console.error("Error fetching cards data:", error);
-      }
-    };
-
-    fetchCardsData();
-  }, [userId]);
-
-  const filteredCards = cardsData; // No filtrar por isNew por ahora, para simplificar
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center mt-20 p-8 pb-24">
@@ -126,10 +71,10 @@ const UserProfile = () => {
 
       <div className="bg-transparent">
         <div className="grid grid-cols-2 lg:gap-10 bg-transparent">
-          {filteredCards.map((card, index) => (
+          {cardsData.map((card, index) => (
             <div
               key={card._id}
-              className={`justify-center items-center bg-transparent ${index === filteredCards.length - 1 && filteredCards.length % 2 !== 0 ? 'col-span-2 justify-self-center' : ''}`}
+              className={`justify-center items-center bg-transparent ${index === cardsData.length - 1 && cardsData.length % 2 !== 0 ? 'col-span-2 justify-self-center' : ''}`}
             >
               <div className="bg-transparent h-[400px] bg-gray-100 w-[100%] rounded-lg p-4 shadow-md md:flex justify-center items-center">
                 <img src={card.cover_photo} className="h-full lg:h-full object-cover rounded-xl" alt={card.title}></img>
