@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useNavigate } from 'react-router-dom';
 import logo from "../assets/logo.png";
@@ -9,9 +9,16 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const token = useSelector((state) => state.authStore?.token);
   const user = useSelector((state) => state.authStore?.users);
-  const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId"); // Obtener userId del estado o localStorage
+  const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId");
   const userEmail = user?.email || localStorage.getItem("userEmail");
   const userPhoto = user?.photo || localStorage.getItem("userPhoto");
+  const userRole = user?.role || localStorage.getItem("userRole");
+
+  
+  const isBasicUser = () => {
+    const roleNumber = Number(userRole);
+    return roleNumber === 0;
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,11 +38,7 @@ const Header = () => {
         <FavoritesModal />
       </div>
       <nav className="flex items-center justify-between relative">
-        <div
-          className="flex flex-col items-center cursor-pointer space-y-1"
-          onClick={toggleMenu}
-        >
-          <div className="w-8 h-0.5 bg-pink-400"></div>
+        <div className="flex flex-col items-center cursor-pointer space-y-1" onClick={toggleMenu}>
           <div className="w-8 h-0.5 bg-pink-400"></div>
           <div className="w-8 h-0.5 bg-pink-400"></div>
           <div className="w-8 h-0.5 bg-pink-400"></div>
@@ -45,24 +48,17 @@ const Header = () => {
           <img src={logo} className="h-14" alt="Logo" />
         </div>
 
-        <div
-          className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-white shadow-lg transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'
-            }`}
-        >
-          <button
-            className="text-right p-4 text-white"
-            onClick={toggleMenu}
-          >
+        <div className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-white shadow-lg transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          <button className="text-right p-4 text-white" onClick={toggleMenu}>
             ✕
           </button>
 
-          {/* Información del usuario */}
           {token && (
             <div className="p-4 flex flex-col items-center space-y-2 border-b border-white">
               <img
                 src={userPhoto || "https://via.placeholder.com/150"}
                 alt="User avatar"
-                className="w-16 h-16 rounded-full"
+                className="w-16 h-16 rounded-full object-cover"
               />
               <span className="text-white font-bold text-sm">{userEmail || "User"}</span>
             </div>
@@ -80,7 +76,6 @@ const Header = () => {
             </li>
 
             {!token ? (
-              // Mostrar "Register" cuando no hay token
               <li>
                 <NavLink
                   to="/register"
@@ -91,7 +86,6 @@ const Header = () => {
                 </NavLink>
               </li>
             ) : (
-              // Mostrar "Mangas" cuando el usuario está logueado
               <li>
                 <NavLink
                   to="/mangas"
@@ -103,7 +97,19 @@ const Header = () => {
               </li>
             )}
 
-            {token && (
+            {token && isBasicUser() && (
+              <li>
+                <NavLink
+                  to="/newrole"
+                  className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                  onClick={toggleMenu}
+                >
+                  Become Author/Company
+                </NavLink>
+              </li>
+            )}
+
+            {token && !isBasicUser() && (
               <>
                 <li>
                   <NavLink
@@ -141,15 +147,18 @@ const Header = () => {
                     Admin Panel
                   </NavLink>
                 </li>
-                <li>
-                  <button
-                    onClick={handleSignOut}
-                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
-                  >
-                    Sign Out
-                  </button>
-                </li>
               </>
+            )}
+
+            {token && (
+              <li>
+                <button
+                  onClick={handleSignOut}
+                  className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                >
+                  Sign Out
+                </button>
+              </li>
             )}
 
             {!token && (
@@ -171,4 +180,3 @@ const Header = () => {
 };
 
 export default Header;
-

@@ -60,7 +60,7 @@ export default function CardsEdit() {
                         'success'
                     );
 
-                    dispatch(fetchMangasEdit(id, selectedTitle, selectedGenre)); // Actualizar la lista de mangas
+                    dispatch(fetchMangasEdit(id, selectedTitle, selectedGenre));
                 } catch (error) {
                     console.error("Error deleting manga:", error);
                     Swal.fire(

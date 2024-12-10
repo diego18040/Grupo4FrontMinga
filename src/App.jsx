@@ -43,18 +43,16 @@ const ProtectedRoute = ({ children }) => {
 };
 
 
-
-
 const router = createBrowserRouter([
   {
     element: <HomeLayout />,
     children: [
       { path: "/", element: <Home /> },
       { path: "home", element: <Home /> },
-      { path: "/*", element: <NotFound /> },
       { path: "/test", element: <Test /> },
     ],
   },
+  { path: "/*", element: <NotFound /> },
   {
     element: <CreateLayout />,
     children: [
@@ -124,6 +122,8 @@ function App() {
     const userIdFromURL = queryParams.get("userId");
     const UserEmailFromURL = queryParams.get("userEmail");
     const userPhotoFromURL = queryParams.get("userPhoto");
+    
+    console.log({ tokenFromURL, userIdFromURL, UserEmailFromURL, userPhotoFromURL });
 
     if (tokenFromURL && userIdFromURL) {
       localStorage.setItem("token", tokenFromURL);

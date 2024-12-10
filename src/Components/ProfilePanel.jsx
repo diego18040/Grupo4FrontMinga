@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 
 const ProfileForm = () => {
-  // Estado para los campos del formulario
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [address, setAddress] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [birthdate, setBirthdate] = useState('');
 
-  // Funciones para manejar los cambios en los campos del formulario
+  
   const handleSave = () => {
     alert("Data saved");
   };
 
   const handleDelete = () => {
     alert("Data deleted");
-    // Limpiar los campos del formulario
+
     setName('');
     setSurname('');
     setAddress('');
@@ -28,7 +28,7 @@ const ProfileForm = () => {
       
       <div className="w-full sm:w-4/4 md:w-[60%] lg:w-[50%] xl:w-[40%] p-10 pt-[6%] gap-6 opacity-100 sm:mr-24 sm:mb-0 mb-8">
         <form>
-          {/* Campo Nombre */}
+
           <div className="relative w-full mb-6">
             <input
               id="name"
@@ -46,7 +46,7 @@ const ProfileForm = () => {
             </label>
           </div>
 
-          {/* Campo Apellido */}
+
           <div className="relative w-full mb-6">
             <input
               id="surname"
@@ -64,7 +64,7 @@ const ProfileForm = () => {
             </label>
           </div>
 
-          {/* Campo Dirección */}
+
           <div className="relative w-full mb-6">
             <input
               id="address"
@@ -82,7 +82,7 @@ const ProfileForm = () => {
             </label>
           </div>
 
-          {/* Campo Fecha de Nacimiento */}
+
           <div className="relative w-full mb-6">
             <input
               id="birthdate"
@@ -97,7 +97,7 @@ const ProfileForm = () => {
             />
           </div>
 
-          {/* Campo URL Imagen */}
+
           <div className="relative w-full mb-6">
             <input
               id="imageUrl"
@@ -115,7 +115,7 @@ const ProfileForm = () => {
             </label>
           </div>
 
-          {/* Botones de acción */}
+
           <div className="flex flex-col space-y-6 justify-center">
             <button
               type="button"
@@ -135,7 +135,7 @@ const ProfileForm = () => {
         </form>
       </div>
 
-      {/* Imagen de perfil */}
+
       <div className="w-full sm:w-1/3 flex justify-center sm:ml-24 sm:mb-0 mb-8 sm:mt-0 mt-[5vh]">
   <div className="w-40 h-40 rounded-full overflow-hidden mx-auto mb-4">
     <img

@@ -48,7 +48,7 @@ const NewRoleFormOne = () => {
       dateJoined: formData.dateJoined,
       profileImage: formData.profileImage,
       email: localStorage.getItem("userEmail"),
-      user_id: userId, // Usamos `user_id` para buscar con el backend
+      user_id: userId, 
     };
 
     try {
