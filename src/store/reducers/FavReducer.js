@@ -1,4 +1,4 @@
-// src/store/reducers/FavReducer.js
+
 import { createReducer } from '@reduxjs/toolkit';
 import { ADD_FAVORITE, REMOVE_FAVORITE, LOAD_FAVORITES } from '../actions/FavActions';
 

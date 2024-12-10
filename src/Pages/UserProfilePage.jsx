@@ -3,6 +3,17 @@ import React, { useState } from "react";
 import { FaMapMarkerAlt, FaBirthdayCake, FaEdit } from 'react-icons/fa'; 
 
 const UserProfile = () => {
+    const navigate = useNavigate();
+
+    React.useEffect(() => {
+        navigate('/favourites', {
+          state: {
+            backgroundImage: favourites,
+            title: "Favourites",
+          }
+        });
+    }, [navigate]);
+
 
   const [isNew, setIsNew] = useState(true); 
 
