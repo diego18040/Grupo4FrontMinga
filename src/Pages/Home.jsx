@@ -4,19 +4,18 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Home() {
-  // Obtener el estado de forma más segura
   const authStore = useSelector(state => state.authStore);
   const token = authStore?.token;
   const isAuthenticated = Boolean(token);
 
-  // Props del botón basados en autenticación
+  // botón basados en autenticación
   const buttonProps = isAuthenticated 
     ? { to: "/mangas", text: "Explore" }
     : { to: "/signin", text: "Sign In" };
 
   return (
     <div
-      className="relative h-screen w-full bg-cover bg-bottom md:bg-center bg-no-repeat"
+      className="relative h-screen w-full bg-cover bg-bottom md:bg-center bg-no-repeat rounded-xl"
       style={{
         backgroundImage: `url(${heroImage})`,
         backgroundPosition: "50% 10%",

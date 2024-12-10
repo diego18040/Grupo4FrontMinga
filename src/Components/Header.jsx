@@ -14,7 +14,6 @@ const Header = () => {
   const userPhoto = user?.photo || localStorage.getItem("userPhoto");
   const userRole = user?.role || localStorage.getItem("userRole");
 
-  
   const isBasicUser = () => {
     const roleNumber = Number(userRole);
     return roleNumber === 0;
@@ -75,7 +74,7 @@ const Header = () => {
               </NavLink>
             </li>
 
-            {!token ? (
+            {!token && (
               <li>
                 <NavLink
                   to="/register"
@@ -85,7 +84,9 @@ const Header = () => {
                   Register
                 </NavLink>
               </li>
-            ) : (
+            )}
+
+            {token && (
               <li>
                 <NavLink
                   to="/mangas"
