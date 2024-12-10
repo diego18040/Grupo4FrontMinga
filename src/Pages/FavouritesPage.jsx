@@ -5,6 +5,9 @@ import { removeFavorite } from '../store/actions/FavActions';
 import favourites from "../assets/favourites.jpg"; 
 
 export default function FavoritesPage() {
+
+
+    
     const navigate = useNavigate();
 
     React.useEffect(() => {
@@ -15,6 +18,8 @@ export default function FavoritesPage() {
           }
         });
     }, [navigate]);
+
+
     const { favorites } = useSelector(state => state.favorites);
     const dispatch = useDispatch();
 

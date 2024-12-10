@@ -82,7 +82,7 @@ export default function Cards() {
             <div
               key={manga._id}
               className={`m-2 flex rounded-xl border shadow-lg transform transition-transform duration-200 hover:scale-110 cursor-pointer ${
-                index === mangas.length - 1 && mangas.length % 2 !== 0 ? 'md:col-span-2' : ''
+                index === mangas.length - 1 && mangas.length % 2 !== 0 ? 'md:col-span-2 justify-self-center md:w-[600px]' : ''
               }`}
               onClick={() => handleCardClick(manga._id)}
             >
