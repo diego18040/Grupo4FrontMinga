@@ -3,56 +3,59 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import {signUp} from "../store/actions/authActions";
-
+import { signUp } from "../store/actions/authActions";
 
 const LoginForm = () => {
-    const [formData, setFormData] = useState({
-      email: "",
-      photoURL: "",
-      password: "",
-    });
-  
-    const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value,});
-    };
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+  const [formData, setFormData] = useState({
+    email: "",
+    photoURL: "",
+    password: "",
+  });
 
-      const formattedData = {
-        email: formData.email,
-        password: formData.password,
-        photo: formData.photoURL || "https://res.cloudinary.com/dlczhwmok/image/upload/v1733688343/deffault_user_hoeoud.jpg",
-      };
-  
-      try {
-        await dispatch(signUp(formattedData)).unwrap();
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formattedData = {
+      email: formData.email,
+      password: formData.password,
+      photo: formData.photoURL || "https://res.cloudinary.com/dlczhwmok/image/upload/v1733688343/deffault_user_hoeoud.jpg",
+    };
+
+    try {
+      const response = await dispatch(signUp(formattedData)).unwrap();
+      if (response && response._id) {
         setIsSuccessModalOpen(true);
-      } catch (error) {
-        console.error("Error en el registro:", error);
-        alert("Hubo un error en el registro, por favor intenta nuevamente.");
+      } else {
+        throw new Error("El registro no devolvió un ID válido.");
       }
-    };
-  
-    const handleCloseModal = () => {
-      setIsSuccessModalOpen(false);
-      navigate("/");
-    };
-    
+    } catch (error) {
+      console.error("Error en el registro:", error);
+      alert("Hubo un error en el registro, por favor intenta nuevamente.");
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsSuccessModalOpen(false);
+    navigate("/");
+  };
+
   const signUpWithGoogle = () => {
     window.location.href = "http://localhost:8080/api/auth/signin/google/";
   };
-  
+
   return (
- <>
-      <div className="w-full max-w-md  p-6 rounded">
-        <h2 className="text-2xl text-32px font-Montserrat text-gray-800 text-center mb-4">
+    <>
+      <div className="w-full max-w-md p-6 rounded">
+        <h2 className="text-2xl font-Montserrat text-gray-800 text-center mb-4">
           Welcome!
         </h2>
         <p className="text-center font-Montserrat text-gray-600 mb-6">
@@ -71,6 +74,7 @@ const LoginForm = () => {
               onChange={handleChange}
               className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="DragonballZ@Krowl.com"
+              autoComplete="email"
             />
           </div>
           <div className="mb-4">
@@ -85,6 +89,7 @@ const LoginForm = () => {
               onChange={handleChange}
               className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="URL"
+              autoComplete="url"
             />
           </div>
           <div className="mb-4">
@@ -99,56 +104,49 @@ const LoginForm = () => {
               onChange={handleChange}
               className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
               placeholder="...................."
+              autoComplete="current-password"
             />
           </div>
-            <div className="flex items-center mb-4">
-                  <input
-                    type="checkbox"
-                    value=""
-                    id="disabled-checkbox"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  Send notification to my email
-                <label htmlFor="disabled-checkbox"  className="ms-2 text-sm text-Montserrat text-12px font-medium text-gray-400 dark:text-gray-500"></label>
-                
-              
-            </div>
+          <div className="mb-4 flex items-center">
+            <input
+              type="checkbox"
+              id="notification-checkbox"
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+            />
+            <label htmlFor="notification-checkbox" className="ml-2 text-sm text-gray-600">
+              Send notification to my email
+            </label>
+          </div>
           <button
             type="submit"
-            className="w-full py-3 font-medium  bg-pink-500 text-white py-2 rounded hover:bg-pink-600 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
+            className="w-full py-3 bg-pink-500 text-white rounded-lg hover:bg-pink-600"
           >
             Register
           </button>
-           {/* Register with Google */}
-           <button
-              onClick={signUpWithGoogle}
-              className="w-full text-center py-3 my-3 border flex space-x-2 items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150"
-            >
-              <img
-                src="https://www.svgrepo.com/show/355037/google.svg"
-                className="w-6 h-6"
-                alt="Google Logo"
-              />
-              <span>Sign in with Google</span>
-            </button>
+          <button
+            onClick={signUpWithGoogle}
+            type="button"
+            className="w-full mt-3 py-3 border flex items-center justify-center border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900"
+          >
+            <img
+              src="https://www.svgrepo.com/show/355037/google.svg"
+              className="w-6 h-6 mr-2"
+              alt="Google Logo"
+            />
+            Sign in with Google
+          </button>
         </form>
         <p className="text-center mt-4">
           Already have an account?{" "}
-          <NavLink
-            to = "/signin"
-            className="text-indigo-600 font-medium inline-flex space-x-1 items-center"
-          >
-            <span className="text-pink-500">Log in </span>
-            </NavLink>
+          <NavLink to="/signin" className="text-pink-500 font-medium">
+            Log in
+          </NavLink>
         </p>
         <p className="text-center mt-4">
           Go back to{" "}
-          <NavLink
-            to = "/"
-            className="text-indigo-600 font-medium inline-flex space-x-1 items-center"
-          >
-            <span className="text-pink-500">home page </span>
-            </NavLink>
+          <NavLink to="/" className="text-pink-500 font-medium">
+            Home page
+          </NavLink>
         </p>
       </div>
       {isSuccessModalOpen && (
@@ -158,15 +156,14 @@ const LoginForm = () => {
             <p className="mt-4 text-gray-700">Your account has been successfully created.</p>
             <button
               onClick={handleCloseModal}
-              className="mt-6 bg-indigo-600 text-white px-4 py-2 rounded-lg"
+              className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
             >
-              Continue
+              Close
             </button>
           </div>
         </div>
       )}
-
-      </>
+    </>
   );
 };
 

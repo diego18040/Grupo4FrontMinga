@@ -41,7 +41,6 @@ export default function Cards() {
     
       <div>
       <Checkboxs />
-
       {loading && (
         <div className="flex justify-center items-center h-64">
           <svg

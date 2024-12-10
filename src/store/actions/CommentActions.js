@@ -32,8 +32,6 @@ export const createComment = createAsyncThunk(
             };
 
             console.log("Request data being sent:", requestData);
-
-            //  el user_id como query parameter
             const response = await axios.post(
                 `http://localhost:8080/api/comments/create?id=${commentData.user_id}`,
                 requestData,
@@ -53,43 +51,55 @@ export const createComment = createAsyncThunk(
         }
     }
 );
-// Update comment
 export const updateComment = createAsyncThunk(
     "comments/updateComment",
-    async ({ _id, message }) => {
-        const token = localStorage.getItem("token");
-        if (!token) throw new Error("No token found");
+    async ({ _id, message, user_id }) => {
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) throw new Error("No token found");
 
-        const response = await axios.put(
-            "http://localhost:8080/api/comments/updateMessage",
-            { _id, message },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
+            const response = await axios.put(
+                `http://localhost:8080/api/comments/updateMessage/${_id}`, 
+                {
+                    message,
+                    user_id
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
                 }
-            }
-        );
-        return { _id, message };
+            );
+
+            console.log("Update response:", response.data);
+            return response.data;
+        } catch (error) {
+            console.error("Error updating comment:", error.response?.data);
+            throw error.response?.data || error;
+        }
     }
 );
 
-// Delete comment
 export const deleteComment = createAsyncThunk(
     "comments/deleteComment",
-    async (_id) => {
-        const token = localStorage.getItem("token");
-        if (!token) throw new Error("No token found");
-
-        await axios.delete(
-            `http://localhost:8080/api/comments/deleteOne/${_id}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
+    async ({ _id, user_id }) => {
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) throw new Error("No token found");
+            await axios.delete(
+                `http://localhost:8080/api/comments/deleteOne/${_id}`, 
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
                 }
-            }
-        );
-        return _id;
+            );
+            return _id;
+        } catch (error) {
+            console.error("Error deleting comment:", error.response?.data);
+            throw error.response?.data || error;
+        }
     }
 );
