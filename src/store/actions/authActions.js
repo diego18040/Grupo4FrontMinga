@@ -98,6 +98,7 @@ const signUp = createAsyncThunk("signUp", async ({ email, password, photo }) => 
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("userId", response.data.user._id);
     localStorage.setItem("userEmail", response.data.user.email);
+    localStorage.setItem("role", response.data.user.role);
     // guardar el rol del usuario
     // verificar el rol guardado
     if (response.data.user.role) {
