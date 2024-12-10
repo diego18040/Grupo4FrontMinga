@@ -95,7 +95,7 @@ export default function Cards() {
                   </p>
                 </div>
                 <div className='w-[80%] flex'>
-                  <NavLink to={`/mangas/${manga._id}`} className="mt-4 bg-teal-200  text-teal-400 font-bold py-2 px-4 text-center rounded-full hover:bg-teal-400 hover:text-teal-500 w-24 h-10 flex items-center justify-center md:block hidden">
+                  <NavLink to={`/mangas/${manga._id}`} className="mt-4 bg-teal-200  text-teal-400 font-bold py-2 px-4 text-center rounded-full hover:bg-teal-400 hover:text-teal-500 w-24 h-10  items-center justify-center md:block hidden">
                     Read
                   </NavLink>
                 </div>
