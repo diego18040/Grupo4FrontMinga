@@ -184,21 +184,21 @@ const EditManga = () => {
                             <NavLink to={`/${id}/newchapter/`}
 
 
-                                className="w-[280px] h-[65px] bg-[#FBDDCC] text-[#EE837F] px-[55px] py-[20px] rounded-[50000px] opacity-100 font-montserrat text-[20px] font-bold leading-[29.26px] text-center hover:bg-[#f9cdb8] transition-colors"
+                                className="w-[280px] h-[65px] bg-[rgb(234,111,250)] text-white px-[55px] py-[20px] rounded-[50000px] opacity-100 font-montserrat text-[20px] font-bold leading-[29.26px] text-center hover:bg-[#f9cdb8] transition-colors"
                             >
                                 New Chapter
                             </NavLink>
                             <NavLink to={`/editchapter/${id}`}
 
 
-                                className="w-[280px] h-[65px] bg-[#FBDDCC] text-[#EE837F] px-[55px] py-[20px] rounded-[50000px] opacity-100 font-montserrat text-[20px] font-bold leading-[29.26px] text-center hover:bg-[#f9cdb8] transition-colors"
+                                className="w-[280px] h-[65px] bg-blue-800 text-white px-[55px] py-[20px] rounded-[50000px] opacity-100 font-montserrat text-[20px] font-bold leading-[29.26px] text-center hover:bg-[#f9cdb8] transition-colors"
                             >
                                 Edit Chapter
                             </NavLink>
                             <button
                                 type="button"
                                 onClick={handleDelete}
-                                className="w-[280px] h-[65px] bg-[#FBDDCC] text-[#EE837F] px-[55px] py-[20px] rounded-[50000px] opacity-100 font-montserrat text-[20px] font-bold leading-[29.26px] text-center hover:bg-[#f9cdb8] transition-colors"
+                                className="w-[280px] h-[65px] bg-red-500 text-white px-[55px] py-[20px] rounded-[50000px] opacity-100 font-montserrat text-[20px] font-bold leading-[29.26px] text-center hover:bg-[#f9cdb8] transition-colors"
                             >
                                 Delete
                             </button>
