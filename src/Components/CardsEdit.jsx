@@ -18,7 +18,7 @@ export default function CardsEdit() {
     const selectedGenre = useSelector(state => state.cards.selectedGenre);
 
     useEffect(() => {
-        dispatch(fetchMangasEdit(id, selectedTitle, selectedGenre));
+        dispatch(fetchMangasEdit(id, selectedTitle, selectedGenre)); 
     }, [id, selectedTitle, selectedGenre, dispatch]);
 
     const genreColors = {
@@ -36,7 +36,7 @@ export default function CardsEdit() {
     };
 
     const handleDelete = async (mangaId) => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token'); 
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",

@@ -20,7 +20,7 @@ export const fetchMangasEdit = (id, title = '', genres = []) => {
     dispatch({ type: FETCH_MANGAS_REQUEST });
     try {
       const token = getAuthToken();
-      const response = await axios.get(`http://localhost:8080/api/mangas/creator/${id}`, { 
+      const response = await axios.get(`http://localhost:8080/api/mangas/creator/${id}`, {
         headers: { 'Authorization': `Bearer ${token}` },
         params: {
           title,
@@ -29,7 +29,7 @@ export const fetchMangasEdit = (id, title = '', genres = []) => {
       });
       dispatch({ type: FETCH_MANGAS_SUCCESS, payload: response.data.response });
     } catch (error) {
-      dispatch({ type: FETCH_MANGAS_FAILURE, payload: error.message });
+      dispatch({ type: FETCH_MANGAS_FAILURE, payload: error.message  });
     }
   };
 };

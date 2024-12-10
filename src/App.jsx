@@ -32,6 +32,7 @@ import NewChapterPage from "./Pages/NewChapterPage.jsx"
 import NewRoleFormTwo from "./Pages/RoleCompany.jsx";
 import NewRoleFormOne from "./Components/CreateRoleForm.jsx";
 import NewRole from "./Components/NewRoleForm.jsx";
+import FavouritesPage from "./Pages/FavouritesPage.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const isOnline = useSelector((store) => store.userSignUpReducer.isOnline);
@@ -83,6 +84,7 @@ const router = createBrowserRouter([
       { path: "/manager/:id", element: <Manager/> },
       { path: "/readmanga/:id", element: <ReadManga /> },
       { path: "/comments/:id", element: <Comments /> },
+      { path: "/favourites", element: <FavouritesPage /> },
     ],
   },
   {
