@@ -10,7 +10,7 @@ const UserProfile = () => {
   const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId"); // Obtener userId del estado o localStorage
 
   React.useEffect(() => {
-    navigate('', {
+    navigate(`/profile/${userId}`, {
       state: {
         backgroundImage: profile,
         title: "Profile",
@@ -118,7 +118,9 @@ const UserProfile = () => {
           </div>
         </div>
         <div className="ml-10">
+          <NavLink to={"/mangas"}>
           <FaEdit className="h-6 w-6 text-gray-600 cursor-pointer hover:text-gray-800" />
+          </NavLink>
         </div>
       </div>
 
