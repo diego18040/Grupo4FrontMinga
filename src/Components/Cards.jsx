@@ -95,7 +95,7 @@ export default function Cards() {
                   </p>
                 </div>
                 <div className='w-[80%] flex'>
-                  <NavLink to={`/mangas/${manga._id}`} className="mt-4 bg-teal-200  text-teal-400 font-bold py-2 px-4 text-center rounded-full hover:bg-teal-400 hover:text-teal-500 w-24 h-10 flex items-center justify-center md:block hidden">
+                  <NavLink to={`/mangas/${manga._id}`} className="mt-4 bg-teal-200  text-teal-400 font-bold py-2 px-4 text-center rounded-full hover:bg-teal-400 hover:text-teal-500 w-24 h-10  items-center justify-center md:block hidden">
                     Read
                   </NavLink>
                 </div>
@@ -112,7 +112,7 @@ export default function Cards() {
                 {[...Array(5)].map((_, i) => (
                   <div
                     key={i}
-                    className="leaf-fall absolute top-0 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-green-500 rounded-full opacity-75"
+                    className="leaf-fall absolute top-0 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-pink-500 rounded-full opacity-75"
                     style={{
                       animationDelay: `${Math.random() * 5}s`,
                       left: `${Math.random() * 100}%`,

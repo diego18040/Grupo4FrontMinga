@@ -69,7 +69,7 @@ const SignInForm = () => {
             </label>
             <button
               type="submit"
-              className="w-full py-3 font-medium  bg-pink-500 text-white py-2 rounded hover:bg-pink-600 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
+              className="w-full py-3 font-medium  bg-pink-500 text-white  hover:bg-pink-600 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
