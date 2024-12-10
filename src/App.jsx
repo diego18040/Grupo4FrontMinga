@@ -49,10 +49,10 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "home", element: <Home /> },
-      { path: "/*", element: <NotFound /> },
       { path: "/test", element: <Test /> },
     ],
   },
+  { path: "/*", element: <NotFound /> },
   {
     element: <CreateLayout />,
     children: [
