@@ -85,25 +85,17 @@ throw error.response?.data || error;
 });
 const signUp = createAsyncThunk("signUp", async ({ email, password, photo }) => {
   try {
-    console.log("Iniciando registro de usuario");
-    const newUser = {
-      email: email,
-      password: password,
-      photo: photo,
-    };
-
+    const newUser = { email, password, photo };
     const response = await axios.post("http://localhost:8080/api/users/register", newUser);
-    console.log("Registro exitoso:", response.data);
 
-// Guardar datos en localStorage
-    localStorage.setItem("token", response.data.token);
+    console.log("Respuesta del backend:", response.data);
+
+    if (!response.data.user || !response.data.user._id) {
+      throw new Error("El registro no devolvió un usuario válido.");
+    }
+
     localStorage.setItem("userId", response.data.user._id);
     localStorage.setItem("userEmail", response.data.user.email);
-    // guardar el rol del usuario
-    // verificar el rol guardado
-    if (response.data.user.role) {
-      localStorage.setItem("userRole", response.data.user.role);
-    }
 
     return response.data;
   } catch (error) {
@@ -111,5 +103,8 @@ const signUp = createAsyncThunk("signUp", async ({ email, password, photo }) => 
     throw error.response?.data || error;
   }
 });
+
+
+
 
 export { login, signUp, setUser, logout };

@@ -23,16 +23,16 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formattedData = {
       email: formData.email,
       password: formData.password,
       photo: formData.photoURL || "https://res.cloudinary.com/dlczhwmok/image/upload/v1733688343/deffault_user_hoeoud.jpg",
     };
-
+  
     try {
       const response = await dispatch(signUp(formattedData)).unwrap();
-      if (response && response._id) {
+      if (response && response.user._id) {
         setIsSuccessModalOpen(true);
       } else {
         throw new Error("El registro no devolvió un ID válido.");
@@ -45,7 +45,7 @@ const LoginForm = () => {
 
   const handleCloseModal = () => {
     setIsSuccessModalOpen(false);
-    navigate("/");
+    navigate("/signin");
   };
 
   const signUpWithGoogle = () => {

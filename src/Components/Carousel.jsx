@@ -66,8 +66,6 @@ const Carousel = () => {
             </div>
           </div>
 
-
-          
           <div className="flex-1 flex flex-col justify-center p-4 ">
             <div className="w-[80%]">
               <h2 className="text-white font-montserrat text-4xl font-semibold leading-6 text-left ">
@@ -79,6 +77,7 @@ const Carousel = () => {
             </div>
           </div>
         </div>
+        
         <button onClick={handleNext} className="bg-white p-2 rounded-full mx-4">→</button>
       </div>
     </div>
