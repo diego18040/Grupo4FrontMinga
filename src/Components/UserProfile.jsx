@@ -9,6 +9,17 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const userId = useSelector((state) => state.authStore?.userId) || localStorage.getItem("userId"); // Obtener userId del estado o localStorage
 
+  const [isNew, setIsNew] = useState(true);
+  const [authorData, setAuthorData] = useState({
+    id: "", // Agregar ID del autor
+    imageUrl: "",
+    name: "",
+    lastName: "",
+    city: "",
+    country: "",
+    birthDate: "",
+  });
+
   React.useEffect(() => {
     navigate(`/profile/${userId}`, {
       state: {
@@ -17,16 +28,6 @@ const UserProfile = () => {
       }
     });
   }, [navigate]);
-
-  const [isNew, setIsNew] = useState(true);
-  const [authorData, setAuthorData] = useState({
-    imageUrl: "",
-    name: "",
-    lastName: "",
-    city: "",
-    country: "",
-    birthDate: "",
-  });
 
   useEffect(() => {
     const fetchAuthorData = async () => {
@@ -46,6 +47,7 @@ const UserProfile = () => {
         const data = response.data.response[0];
         console.log("Author data:", data); // Aquí se añaden los datos traídos por la petición
         setAuthorData({
+          id: data._id, // Asignar el ID del autor
           imageUrl: data.photo,
           name: data.name,
           lastName: data.last_name,
@@ -118,9 +120,7 @@ const UserProfile = () => {
           </div>
         </div>
         <div className="ml-10">
-          <NavLink to={"/mangas"}>
-          <FaEdit className="h-6 w-6 text-gray-600 cursor-pointer hover:text-gray-800" />
-          </NavLink>
+          <NavLink to={`/editauthor/${authorData.id}`}> <FaEdit className="h-6 w-6 text-gray-600 cursor-pointer hover:text-gray-800" /> </NavLink>
         </div>
       </div>
 
@@ -129,8 +129,7 @@ const UserProfile = () => {
           {filteredCards.map((card, index) => (
             <div
               key={card._id}
-              className={`justify-center items-center bg-transparent ${index === filteredCards.length - 1 && filteredCards.length % 2 !== 0 ? 'col-span-2 justify-self-center' : ''
-                }`}
+              className={`justify-center items-center bg-transparent ${index === filteredCards.length - 1 && filteredCards.length % 2 !== 0 ? 'col-span-2 justify-self-center' : ''}`}
             >
               <div className="bg-transparent h-[400px] bg-gray-100 w-[100%] rounded-lg p-4 shadow-md md:flex justify-center items-center">
                 <img src={card.cover_photo} className="h-full lg:h-full object-cover rounded-xl" alt={card.title}></img>

@@ -9,7 +9,7 @@ const setUser = createAction("setUser", (datos) => {
 
 const logout = createAsyncThunk("logout", async (_, thunkAPI) => {
   try {
-    console.log("Cerrando sesión en el backend...");
+    console.log("Cerrando sesi贸n en el backend...");
     const token = localStorage.getItem("token");
     const response = await axios.post(
       "http://localhost:8080/api/auth/signout",
@@ -29,8 +29,8 @@ const logout = createAsyncThunk("logout", async (_, thunkAPI) => {
 
     return {};
   } catch (error) {
-    console.error("Error al cerrar sesión:", error.response?.data || error.message);
-    return thunkAPI.rejectWithValue(error.response?.data || "Error al cerrar sesión");
+    console.error("Error al cerrar sesi贸n:", error.response?.data || error.message);
+    return thunkAPI.rejectWithValue(error.response?.data || "Error al cerrar sesi贸n");
   }
 });
 
@@ -45,11 +45,12 @@ const login = createAsyncThunk("login", async ({ email, password }) => {
     const response = await axios.post("http://localhost:8080/api/auth/signIn", credentials);
     console.log("Login exitoso:", response.data);
 
-
+    // Guardar datos en localStorage
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("userId", response.data.user._id);
     localStorage.setItem("userEmail", response.data.user.email);
 
+        // hacemos una petici贸n adicional para obtener el rol del usuario
         try {
           const userDetailsResponse = await axios.get(
             `http://localhost:8080/api/users/${response.data.user._id}`,
@@ -60,14 +61,14 @@ const login = createAsyncThunk("login", async ({ email, password }) => {
             }
           );
 
-
+// ver el rol basado en la respuesta
 if (userDetailsResponse.data.user.author) {
   localStorage.setItem("userRole", "author");
 } else if (userDetailsResponse.data.user.company) {
   localStorage.setItem("userRole", "company");
 }
 
-
+  // agregar el rol a la respuesta
   return {
     ...response.data,
     userRole: localStorage.getItem("userRole")
@@ -93,11 +94,12 @@ const signUp = createAsyncThunk("signUp", async ({ email, password, photo }) => 
     const response = await axios.post("http://localhost:8080/api/users/register", newUser);
     console.log("Registro exitoso:", response.data);
 
-
+// Guardar datos en localStorage
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("userId", response.data.user._id);
     localStorage.setItem("userEmail", response.data.user.email);
-
+    // guardar el rol del usuario
+    // verificar el rol guardado
     if (response.data.user.role) {
       localStorage.setItem("userRole", response.data.user.role);
     }
