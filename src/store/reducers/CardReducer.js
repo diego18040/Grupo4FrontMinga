@@ -31,7 +31,7 @@ const cardReducer = createReducer(initialState, (builder) => {
     })
     .addCase(FETCH_GENRES_REQUEST, (state) => {
       state.loading = true;
-      state.error = ''; // Clear any previous errors
+      state.error = ''; 
     })
     .addCase(FETCH_GENRES_SUCCESS, (state, action) => {
       state.loading = false;

@@ -21,9 +21,9 @@ const Carousel = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 10000); // 10 segundos
+    }, 10000);
 
-    return () => clearInterval(interval); // Limpiar el intervalo al desmontar el componente
+    return () => clearInterval(interval); 
   }, [categories, currentIndex]);
 
   const handlePrev = () => {

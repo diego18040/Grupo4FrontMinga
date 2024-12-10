@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useNavigate } from 'react-router-dom';
 import logo from "../assets/logo.png";
 import { logout } from "../store/actions/authActions";
+import FavoritesModal from "../Components/FavoritesModals"
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,6 +34,9 @@ const Header = () => {
 
   return (
     <header className="bg-transparent p-4 fixed w-full top-0 left-0 z-50">
+      <div>
+        <FavoritesModal />
+      </div>
       <nav className="flex items-center justify-between relative">
         <div className="flex flex-col items-center cursor-pointer space-y-1" onClick={toggleMenu}>
           <div className="w-8 h-0.5 bg-pink-400"></div>
@@ -123,6 +127,15 @@ const Header = () => {
                     onClick={toggleMenu}
                   >
                     Manager
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/favourites"
+                    className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
+                    onClick={toggleMenu}
+                  >
+                    Favourites
                   </NavLink>
                 </li>
                 <li>

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-// Fetch comments
+
 export const fetchComments = createAsyncThunk(
     "comments/fetchComments",
     async (chapterId) => {
@@ -25,7 +25,7 @@ export const createComment = createAsyncThunk(
             const token = localStorage.getItem("token");
             if (!token) throw new Error("No token found");
 
-            // Preparar datos para el body
+            
             const requestData = {
                 message: commentData.message,
                 chapter_id: commentData.chapter_id

@@ -1,4 +1,4 @@
-// src/store/actions/FavActions.js
+
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 export const LOAD_FAVORITES = 'LOAD_FAVORITES';

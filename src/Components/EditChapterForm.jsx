@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const EditChapterForm = () => {
-  const { id } = useParams(); // Obtener el id del manga desde la URL
+  const { id } = useParams(); 
   const [mangaName, setMangaName] = useState("");
   const [chapters, setChapters] = useState([]);
   const [selectedChapter, setSelectedChapter] = useState("");
@@ -14,7 +14,7 @@ const EditChapterForm = () => {
   useEffect(() => {
     const fetchMangaAndChapters = async () => {
       try {
-        const token = localStorage.getItem('token'); // Obtener el token de autenticación
+        const token = localStorage.getItem('token'); 
         const mangaResponse = await axios.get(`http://localhost:8080/api/mangas/id/${id}`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -35,7 +35,7 @@ const EditChapterForm = () => {
   }, [id]);
   const handleEdit = async () => {
     try {
-      const token = localStorage.getItem('token'); // Obtener el token de autenticación
+      const token = localStorage.getItem('token'); 
       const payload = {
         title: mangaName,
         pages: [dataToEdit],
@@ -63,24 +63,24 @@ const EditChapterForm = () => {
   const handleChapterChange = (e) => {
     setSelectedChapter(e.target.value);
     const chapter = chapters.find(ch => ch._id === e.target.value);
-    setSelectedPage(chapter.pages[0]); // Seleccionar la primera página por defecto
-    setDataToEdit(chapter.pages[0]); // Actualizar el campo dataToEdit con la primera página
+    setSelectedPage(chapter.pages[0]); 
+    setDataToEdit(chapter.pages[0]); 
   };
 
   const handlePageChange = (e) => {
     setSelectedPage(e.target.value);
-    setDataToEdit(e.target.value); // Actualizar el campo dataToEdit
+    setDataToEdit(e.target.value); 
   };
 
   return (
     <div className="flex w-full h-screen">
-      {/* Contenedor del formulario */}
+      
       <div className="flex justify-center p-8 items-center w-2/3  ">
         <div className="w-[100vw] md:w-full md:ml-[30%] lg:ml-[40%]">
           <h2 className="text-3xl text-center ml-[32%] flex ">Edit Chapter</h2>
           
           <form className="flex flex-col space-y-6 mt-12 ml-20"> 
-            {/* Campo Nombre del Manga */}
+            
             <div className="relative w-full">
               <input
                 id="mangaName"
@@ -98,7 +98,7 @@ const EditChapterForm = () => {
 </label>
 
             </div>
-            {/* Campo Select para elegir el Capítulo */}
+            
             <div className="relative w-full mb-6">
               <select
                 id="chapter"
@@ -114,7 +114,7 @@ const EditChapterForm = () => {
                 ))}
               </select>
             </div>
-            {/* Campo Select para elegir la Página */}
+            
             <div className="relative w-full mb-6">
               <select
                 id="page"
@@ -130,7 +130,7 @@ const EditChapterForm = () => {
                 ))}
               </select>
             </div>
-            {/* Campo para editar los datos */}
+            
             <div className="relative w-full mb-6">
               <input
                 id="dataToEdit"
@@ -147,9 +147,9 @@ const EditChapterForm = () => {
               
               </label>
             </div>
-            {/* Botones de acción */}
+            
             <div className="flex flex-col space-y-6 justify-center">
-            {/* Botones de acción */}
+            
 <div className="flex flex-col space-y-4 justify-center items-center">
   <button
     type="button"
@@ -172,7 +172,7 @@ const EditChapterForm = () => {
         </div>
       </div>
 
-      {/* Contenedor de la imagen con el título encima */}
+      
       <div className="relative flex justify-center items-center w-full mt-[30px]">
         <div className="w-full p-4 max-w-sm text-center hidden sm:block">
           <h2 className="text-lg text-center">{mangaName}</h2>

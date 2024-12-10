@@ -32,6 +32,7 @@ import NewChapterPage from "./Pages/NewChapterPage.jsx"
 import NewRoleFormTwo from "./Pages/RoleCompany.jsx";
 import NewRoleFormOne from "./Components/CreateRoleForm.jsx";
 import NewRole from "./Components/NewRoleForm.jsx";
+import FavouritesPage from "./Pages/FavouritesPage.jsx";
 
 const ProtectedRoute = ({ children }) => {
   const isOnline = useSelector((store) => store.userSignUpReducer.isOnline);
@@ -46,10 +47,10 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "home", element: <Home /> },
-      { path: "/*", element: <NotFound /> },
       { path: "/test", element: <Test /> },
     ],
   },
+  { path: "/*", element: <NotFound /> },
   {
     element: <CreateLayout />,
     children: [
@@ -81,6 +82,7 @@ const router = createBrowserRouter([
       { path: "/manager/:id", element: <Manager/> },
       { path: "/readmanga/:id", element: <ReadManga /> },
       { path: "/comments/:id", element: <Comments /> },
+      { path: "/favourites", element: <FavouritesPage /> },
     ],
   },
   {
@@ -111,6 +113,8 @@ function App() {
     const userIdFromURL = queryParams.get("userId");
     const UserEmailFromURL = queryParams.get("userEmail");
     const userPhotoFromURL = queryParams.get("userPhoto");
+    
+    console.log({ tokenFromURL, userIdFromURL, UserEmailFromURL, userPhotoFromURL });
 
     if (tokenFromURL && userIdFromURL) {
       localStorage.setItem("token", tokenFromURL);

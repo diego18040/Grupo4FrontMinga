@@ -1,4 +1,4 @@
-// src/store/features/chapters/chaptersReducer.js
+
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchChaptersByMangaId} from '../actions/chaptersActions.js';
 
