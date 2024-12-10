@@ -86,8 +86,8 @@ const signUp = createAsyncThunk("signUp", async ({ email, password, photo }) => 
     console.log("Iniciando registro de usuario");
     const newUser = {
       email: email,
-      password: password,
       photo: photo,
+      password: password,
     };
 
     const response = await axios.post("http://localhost:8080/api/users/register", newUser);
