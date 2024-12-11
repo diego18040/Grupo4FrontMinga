@@ -85,15 +85,15 @@ export default function CardsEdit() {
             {!loading && (error || mangas.length === 0) && (
                 <div className="container mx-auto bg-white rounded-xl lg:p-20 xl:p-40 md:p-0">
                     <div className="flex justify-center items-center">
-                        <div className="m-2 flex flex-col rounded-xl border shadow-lg p-8 items-center md:p-20 md:w-[60%]">
-                            <img src="https://steamuserimages-a.akamaihd.net/ugc/872995211537498517/8D23E6262B562DD56E459168830DDB3510D82242/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="No Mangas Found" className="w-32 h-32 mb-4 md:w-64 md:h-64" />
-                            <p className="text-xl font-bold">No Mangas Found</p>
+                        <div className="m-2 flex flex-col rounded-xl border shadow-xl  items-center md:h-full md:w-[100%] ">
+                            <img src="https://steamuserimages-a.akamaihd.net/ugc/872995211537498517/8D23E6262B562DD56E459168830DDB3510D82242/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="No Mangas Found" className="w-[200px] h-[200px] mt-2 mb-4 md:w-[500px] md:h-[400px] md:m-2 rounded-xl " />
+                            <p className="text-3xl font-bold text-center">No Mangas Found!</p>
                         </div>
                     </div>
                 </div>
             )}
             <div className="container mx-auto bg-white rounded-xl lg:p-20 xl:p-40 md:p-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {mangas.map((manga, index) => (
                         <div key={manga._id} className={`m-2 flex rounded-xl border shadow-lg transform transition-transform duration-200 hover:scale-110 cursor-pointer ${index === mangas.length - 1 && mangas.length % 2 !== 0 ? 'md:col-span-2 justify-self-center md:w-[410px]' : ''}`}>
                             <div className={`w-2 h-40 rounded-t-md ${manga.category_id && manga.category_id.name ? genreColors[manga.category_id.name.toLowerCase()] : 'bg-gray-500'}`}></div>
@@ -101,10 +101,11 @@ export default function CardsEdit() {
                                 <div className="w-[100%]">
                                     <div className="w-[50%] flex">
                                         <div className="p-2">
-                                            <button className=""><img src={edit} alt="edit" /></button>
+                                            
+                                        <NavLink to={`/editmanga/${manga._id}`}><img src={edit} alt="edit" /></NavLink>
                                         </div>
                                         <div className="p-2">
-                                            <button className="" onClick={() => handleDelete(manga._id)}><img src={del} alt="delete" /></button>
+                                            <NavLink className="" onClick={() => handleDelete(manga._id)}><img src={del} alt="delete" /></NavLink>
                                         </div>
                                     </div>
                                 </div>
@@ -134,3 +135,6 @@ export default function CardsEdit() {
         </div>
     );
 }
+
+
+
