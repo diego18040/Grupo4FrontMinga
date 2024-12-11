@@ -140,7 +140,7 @@ const EditManga = () => {
     return (
         <div className=" w-full h-screen  grid grid-cols-1 md:grid-cols-2 ">
             <div className="  flex justify-center items-center w-full">            
-                <div className="  w-full flex justify-center tems-center">
+                <div className="  w-full flex justify-center items-center">
                 <div className="w-full grid  flex-row justify-center max-w-sm">
                     <h2 className="text-3xl text-center p-10 flex">Edit Manga</h2>
                     <form className="flex flex-col space-y-6 mt-12">
