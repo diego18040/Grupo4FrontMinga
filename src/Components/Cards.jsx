@@ -67,10 +67,10 @@ export default function Cards() {
       )}
       {!loading && (error || mangas.length === 0) && (
         <div className="container mx-auto bg-white rounded-xl lg:p-20 xl:p-40 md:p-0">
-          <div className="flex justify-center items-center">
-            <div className="m-2 flex flex-col rounded-xl border shadow-lg p-8 items-center md:p-20 md:w-[60%]">
-              <img src="https://steamuserimages-a.akamaihd.net/ugc/872995211537498517/8D23E6262B562DD56E459168830DDB3510D82242/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="No Mangas Found" className="w-32 h-32 mb-4 md:w-64 md:h-64" />
-              <p className="text-xl font-bold">No Mangas Found</p>
+          <div className="flex justify-center items-center ">
+            <div className="m-2 flex flex-col rounded-xl border shadow-xl  items-center md:h-full md:w-[100%] ">
+              <img src="https://steamuserimages-a.akamaihd.net/ugc/872995211537498517/8D23E6262B562DD56E459168830DDB3510D82242/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="No Mangas Found" className="w-[200px] h-[200px] mt-2 mb-4 md:w-[500px] md:h-[400px] md:m-2 rounded-xl  " />
+              <p className="text-3xl font-bold text-center">No Mangas Found!</p>
             </div>
           </div>
         </div>

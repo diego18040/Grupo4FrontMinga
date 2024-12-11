@@ -84,6 +84,8 @@ const router = createBrowserRouter([
       { path: "/readmanga/:id", element: <ReadManga /> },
       { path: "/comments/:id", element: <Comments /> },
       { path: "/favourites", element: <FavouritesPage /> },
+      { path: "/profile/:id", element: <UserProfile /> },
+      { path: "/editauthor/:id", element: < EditAuthor /> },
     ],
   },
   {
@@ -105,8 +107,8 @@ const router = createBrowserRouter([
   {
     element: <ProfileLayout />,
     children: [
-      { path: "/profile/:id", element: <UserProfile /> },
-      { path: "/editauthor/:id", element: < EditAuthor /> },
+
+
    
     ],
   },
