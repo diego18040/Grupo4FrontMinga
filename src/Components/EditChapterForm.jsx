@@ -74,15 +74,15 @@ const EditChapterForm = () => {
 
   return (
     <div className="container w-[88%] h-screen  grid grid-cols-1 lg:grid-cols-2 ">
-      <div className=" border border-blue-300 ">
-        <div className=" border w-full flex justify-center items-center">
-          <div className=" border w-full  justify-center max-w-sm">
-            <div className="border ">
+      <div className="  border-blue-300 ">
+        <div className="  w-full flex justify-center items-center">
+          <div className="  w-full  justify-center max-w-sm">
+            <div className=" ">
               <h2 className="  text-3xl text-center ml-[32%] flex ">Edit Chapter</h2>
 
               <form className="flex flex-col space-y-6 mt-12 ml-20">
 
-                <div className="border relative w-full">
+                <div className=" relative w-full">
                   <input
                     id="mangaName"
                     type="text"
@@ -170,7 +170,7 @@ const EditChapterForm = () => {
       </div>
 
 
-      <div className="border border-red-600 relative flex justify-center items-center w-full ">
+      <div className=" relative flex justify-center items-center w-full ">
         <div className="w-full p-4 max-w-sm text-center ">
           <h2 className="text-lg text-center">{mangaName}</h2>
           <img
