@@ -119,7 +119,7 @@ export default function MangasId() {
             </button>
             <button
               onClick={() => setActiveTab("chapters")}
-              className={`px-8 py-3 rounded-full transition-colors ${
+              className={`px-8 py-3 rounded-full transition-colors  ${
                 activeTab === "chapters" 
                   ? "bg-pink-500 text-white" 
                   : "bg-gray-200 hover:bg-pink-400"
@@ -131,29 +131,29 @@ export default function MangasId() {
 
           {/* Content */}
           {activeTab === "manga" ? (
-            <div className="bg-white rounded-lg p-6 shadow-lg">
+            <div className="bg-white lg:text-3xl font-bold rounded-lg p-6 shadow-lg">
               <p className="text-gray-600 leading-relaxed">
                 {manga?.description || "No description available"}
               </p>
             </div>
           ) : (
             <div className="bg-white rounded-lg p-6 shadow-lg">
-              <h2 className="text-2xl font-bold mb-6">Chapters</h2>
+              <h2 className="text-2xl lg:text-6xl font-bold mb-6 ">Chapters</h2>
               <div className="space-y-4">
                 {Array.isArray(chapterList) &&
                   chapterList.map((chapter) => (
                     <div
                       key={chapter._id}
-                      className="flex flex-col md:flex-row items-center justify-between p-4 border rounded-lg hover:bg-gray-50 gap-4"
+                      className="flex flex-col lg:text-3xl md:flex-row  items-center justify-between p-4 border rounded-lg hover:bg-gray-50 gap-4"
                     >
-                      <div className="flex items-center gap-4 w-full md:w-auto">
+                      <div className="flex items-center gap-4 w-full  md:w-auto">
                         <img
                           src={chapter.pages[0] || manga?.cover_photo}
                           alt={`Chapter ${chapter.title}`}
-                          className="w-24 h-24 md:w-24 md:h-24 lg:w-32 lg:h-32 object-cover rounded shadow-md transition-transform hover:scale-105"
+                          className="w-24 h-24 md:w-32 md:h-32 lg:text-3xl lg:w-32 lg:h-32 object-cover rounded shadow-md transition-transform hover:scale-105"
                         />
                         <div className="flex-1">
-                          <p className="font-medium text-base md:text-lg lg:text-xl">
+                          <p className="font-medium text-2xl md:text-lg lg:text-3xl">
                             Chapter #{chapter.order}
                           </p>
                           <p className="text-sm md:text-base text-gray-500">
