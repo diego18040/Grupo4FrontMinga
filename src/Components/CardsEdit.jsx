@@ -34,7 +34,6 @@ export default function CardsEdit() {
         shojo: 'text-teal-400',
         kodomo: 'text-purple-400'
     };
-
     const handleDelete = async (mangaId) => {
         const token = localStorage.getItem('token'); 
         Swal.fire({
@@ -42,24 +41,29 @@ export default function CardsEdit() {
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonColor: '#000000',
+            cancelButtonColor: '#000000',
+            confirmButtonText: 'Yes, delete it!',
+            customClass: {
+                popup: 'bg-gradient-to-r from-pink-300 via-pink-400 to-pink-500',
+                confirmButton: '#000000',
+                cancelButton: '#000000'
+            }
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
                     const response = await axios.delete(`http://localhost:8080/api/mangas/deleteone/${mangaId}`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
-
+    
                     console.log("Response:", response.data);
-
+    
                     Swal.fire(
                         'Deleted!',
                         'Your manga has been deleted.',
                         'success'
                     );
-
+    
                     dispatch(fetchMangasEdit(id, selectedTitle, selectedGenre));
                 } catch (error) {
                     console.error("Error deleting manga:", error);
@@ -72,6 +76,8 @@ export default function CardsEdit() {
             }
         });
     };
+    
+    
 
     return (
         <div>
