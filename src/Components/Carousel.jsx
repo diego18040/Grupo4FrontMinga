@@ -68,10 +68,10 @@ const Carousel = () => {
 
           <div className="flex-1 flex flex-col justify-center p-4 ">
             <div className="w-[80%]">
-              <h2 className="text-white font-montserrat text-4xl font-semibold leading-6 text-left ">
+              <h2 className="text-white font-montserrat text-7xl font-semibold leading-6 text-left ">
                 {currentCategory.name}
               </h2>
-              <p className="text-white font-roboto text-base font-semibold leading-4 text-left mt-7">
+              <p className="text-white font-roboto text-2xl mb-4 font-semibold leading-6 text-left mt-10 ">
                 {currentCategory.description}
               </p>
             </div>

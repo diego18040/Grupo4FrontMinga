@@ -34,33 +34,33 @@ const Header = () => {
         <FavoritesModal />
       </div>
       <nav className="flex items-center justify-between relative">
-        <div className="flex flex-col items-center cursor-pointer space-y-1" onClick={toggleMenu}>
+        <div className="flex  flex-col items-center cursor-pointer space-y-1" onClick={toggleMenu}>
           <div className="w-8 h-0.5 bg-pink-400"></div>
           <div className="w-8 h-0.5 bg-pink-400"></div>
           <div className="w-8 h-0.5 bg-pink-400"></div>
         </div>
 
         <div>
-          <img src={logo} className="h-14" alt="Logo" />
+          <img src={logo} className="h-24" alt="Logo" />
         </div>
 
-        <div className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-white shadow-lg transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className={`fixed top-0 left-0 h-full w-96 bg-gradient-to-br font-bold from-pink-300 via-pink-400 to-pink-500 text-white shadow-lg transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
           <button className="text-right p-4 text-white" onClick={toggleMenu}>
             ✕
           </button>
 
           {token && (
-            <div className="p-4 flex flex-col items-center space-y-2 border-b border-white">
+            <div className="p-4 flex flex-col items-center h-48 space-y-2 border-b border-white">
               <img
                 src={userPhoto || "https://via.placeholder.com/150"}
                 alt="User avatar"
-                className="w-16 h-16 rounded-full object-cover"
+                className="w-28 h-28 rounded-full object-cover "
               />
-              <span className="text-white font-bold text-sm">{userEmail || "User"}</span>
+              <span className="text-white lg:text-xl p-6 font-bold text-sm">{userEmail || "User"}</span>
             </div>
           )}
 
-          <ul className="space-y-4 p-4 text-xs">
+          <ul className="space-y-4  p-4 text-lg">
             <li>
               <NavLink
                 to="/"

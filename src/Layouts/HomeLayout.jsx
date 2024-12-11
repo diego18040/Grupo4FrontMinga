@@ -11,7 +11,7 @@ export default function HomeLayout() {
       <div className="hidden md:block mt-24">
         <Carousel />
       </div>
-      <main className="mt-15 pt-6 rounded-xl">
+      <main className="mt-15 pt-6 rounded-xl mb-10">
         <Outlet />
       </main>
       <Footer />

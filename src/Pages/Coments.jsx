@@ -115,25 +115,28 @@ export default function Comments() {
           </div>
         ) : (
           comments.map((comment) => (
-            
             <div
               key={comment._id}
               className="bg-white p-4 rounded-lg shadow-sm w-full"
             >
               <div className="flex items-start gap-3">
-              <img
-  src={
-    comment.author_id?.photo || comment.company_id?.photo || "/default-avatar.png"
-  }
-  alt="Profile"
-  className="w-10 h-10 rounded-full object-cover"
-  onError={() => console.log("Error loading image")}
-  onLoad={() => console.log("Image loaded successfully")}
-  />
+                <img
+                  src={
+                    comment.author_id?.photo ||
+                    comment.company_id?.photo ||
+                    "/default-avatar.png"
+                  }
+                  alt="Profile"
+                  className="w-10 h-10 rounded-full object-cover"
+                  onError={() => console.log("Error loading image")}
+                  onLoad={() => console.log("Image loaded successfully")}
+                />
 
                 <div className="flex-1">
                   <p className="font-medium text-gray-900 text-lg">
-                    {comment.company_id?.name || comment.author_id?.name || "Anonymous"}
+                    {comment.company_id?.name ||
+                      comment.author_id?.name ||
+                      "Anonymous"}
                   </p>
                   {editingComment === comment._id ? (
                     <form

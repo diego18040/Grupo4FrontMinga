@@ -63,7 +63,7 @@ export default function MangasId() {
             <div className="p-6">
               <h1 className="text-2xl md:text-3xl font-bold mb-6">{manga?.title}</h1>
 
-              <div className="flex justify-center gap-6 mb-6">
+              <div className="flex justify-center gap-6 mb-6 ">
                 <button 
                   onClick={handleAddFavorite}
                   className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"

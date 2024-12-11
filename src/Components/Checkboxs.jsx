@@ -63,7 +63,7 @@ export default function Checkboxs() {
         <div className='flex '>
             <div className="flex text-xs md:text-sm gap-1 p-2  w-full">
                 <button
-                    className={`py-2 px-4 rounded-full font-roboto font-bold ${genreColors.all.bg} ${genreColors.all.text} ${genreColors.all.hover}`}
+                    className={`py-2 px-4 rounded-full text-base md:text-xl font-roboto font-bold ${genreColors.all.bg} ${genreColors.all.text} ${genreColors.all.hover}`}
                     onClick={handleAllClick}
                 >
                     All
@@ -71,7 +71,7 @@ export default function Checkboxs() {
                 {genres.map(genre => (
                     <button
                         key={genre._id}
-                        className={`py-2 px-4 rounded-full font-roboto font-bold ${genreColors[genre.name.toLowerCase()].bg || 'bg-gray-500'} ${genreColors[genre.name.toLowerCase()].text || 'text-white'} ${genreColors[genre.name.toLowerCase()].hover} ${activeGenres.includes(genre.name) ? 'bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-white' : ''}`}
+                        className={`py-2 px-4 text-base md:text-xl rounded-full font-roboto font-bold ${genreColors[genre.name.toLowerCase()].bg || 'bg-gray-500'} ${genreColors[genre.name.toLowerCase()].text || 'text-white'} ${genreColors[genre.name.toLowerCase()].hover} ${activeGenres.includes(genre.name) ? 'bg-gradient-to-br from-pink-300 via-pink-400 to-pink-500 text-white' : ''}`}
                         onClick={() => handleGenreClick(genre.name)}
                     >
                         {genre.name}

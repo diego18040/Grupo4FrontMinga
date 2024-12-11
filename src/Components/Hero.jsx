@@ -19,7 +19,7 @@ const Hero = ({ title, backgroundImage }) => {
           <img
             src={backgroundImage}
             alt="Imagen de fondo"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover "
           />
           
           
