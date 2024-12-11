@@ -5,9 +5,9 @@ import Swal from "sweetalert2";
 import 'tailwindcss/tailwind.css';
 
 const EditManga = () => {
-    const { id } = useParams(); 
-    const navigate = useNavigate(); 
-    const userId = localStorage.getItem("userId"); 
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const userId = localStorage.getItem("userId");
     const [mangaName, setMangaName] = useState("");
     const [description, setDescription] = useState("");
     const [photoUrl, setPhotoUrl] = useState("");
@@ -113,7 +113,7 @@ const EditManga = () => {
 
         if (result.isConfirmed) {
             try {
-                const token = localStorage.getItem('token'); 
+                const token = localStorage.getItem('token');
                 const response = await axios.delete(`http://localhost:8080/api/mangas/deleteone/${id}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -138,9 +138,10 @@ const EditManga = () => {
         }
     };
     return (
-        <div className="flex w-full h-screen">
-            <div className="flex justify-center ml-[90px] items-center w-2/3 p-6">
-                <div className="w-full max-w-sm">
+        <div className=" w-full h-screen  grid grid-cols-1 md:grid-cols-2 ">
+            <div className="  flex justify-center items-center w-full">            
+                <div className="  w-full flex justify-center tems-center">
+                <div className="w-full grid  flex-row justify-center max-w-sm">
                     <h2 className="text-3xl text-center p-10 flex">Edit Manga</h2>
                     <form className="flex flex-col space-y-6 mt-12">
                         <div className="relative w-full">
@@ -194,7 +195,7 @@ const EditManga = () => {
                                 <option value="">Select Category</option>
                                 {categories.map((cat) => (
                                     <option key={cat._id} value={cat.name}>
-                                        {cat.name} 
+                                        {cat.name}
                                     </option>
                                 ))}
                             </select>
@@ -228,8 +229,10 @@ const EditManga = () => {
                     </form>
                 </div>
             </div>
+            </div>
+
             <div className="relative flex justify-center items-center w-full mt-[30px]">
-                <div className="w-full p-4 max-w-sm text-center hidden sm:block">
+                <div className="w-full p-4 max-w-sm text-center">
                     <h2 className="text-lg text-center">{mangaName}</h2>
                     <img
                         src={imageUrl}
