@@ -138,12 +138,13 @@ const Header = () => {
                 </li>
                 <li>
                   <NavLink
-                    to={`/profile/${userId}`}
+                    to={`profile/${userId}}`}
                     className="block w-full text-center py-2 px-4 bg-white text-pink-400 rounded"
                     onClick={toggleMenu}
                   >
                     Profile
                   </NavLink>
+                  
                 </li>
                 <li>
                   <NavLink

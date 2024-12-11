@@ -65,7 +65,7 @@ const ProfilePanel = () => {
               'The author has been updated.',
               'success'
             ).then(() => {
-              navigate(`/profile/${userId}`); // Redirigir a la página /manager/${userId}
+              navigate(`/profile/${userId}`); // Redirigir a la pÃ¡gina /manager/${userId}
             });
           }
         }

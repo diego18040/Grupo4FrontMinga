@@ -14,6 +14,7 @@ export default function ReadManga() {
   const dispatch = useDispatch();
   const { chapterData: mangaData, loading, error } = useSelector(selectMangaState);
 
+
   useEffect(() => {
     if (id) {
       dispatch(fetchChapter(id));
@@ -46,8 +47,6 @@ export default function ReadManga() {
                     alt={`Página ${currentPage}`}
                     className="w-full h-auto"
                   />
-
-                  {/* Flechas laterales móvil */}
                   <div className="absolute inset-y-0 left-0 right-0 flex justify-between items-center px-2">
                     <button
                       onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
@@ -99,7 +98,7 @@ export default function ReadManga() {
             </div>
           </>
         ) : (
-          // Modo Scroll para ambas vistas
+          //scroll
           <div className="max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto px-4">
             {mangaData && mangaData.pages && mangaData.pages.map((url, index) => (
               <div key={index} className="mb-2 bg-gray-900 flex items-center justify-center">
@@ -117,7 +116,7 @@ export default function ReadManga() {
         <button
           onClick={() => setShowComments(!showComments)}
           className={`fixed right-4 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition-all z-[9999] ${readingMode === 'scroll'
-              ? 'block bottom-4' // Visible en ambos (móvil y desktop) en modo scroll
+              ? 'block bottom-4' // visible móvil y desktop en modo scroll
               : 'hidden md:flex bottom-24 md:bottom-20' // Solo desktop en modo normal
             }`}
         >
@@ -144,12 +143,9 @@ export default function ReadManga() {
           </div>
         </div>
       </div>
-
-      {/* Footer - Solo desktop */}
       {readingMode === 'normal' && (
         <footer className="fixed bottom-0 w-full bg-white/90 backdrop-blur-sm shadow-up z-50">
           <div className="max-w-7xl mx-auto px-4 py-3">
-            {/* Vista Mobile - Solo selector y comentarios */}
             <div className="md:hidden flex justify-center items-center gap-2">
               <select
                 value={currentPage}
